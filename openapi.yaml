@@ -1,0 +1,3690 @@
+openapi: 3.1.0
+info:
+  title: Ecommerce Platform API
+  version: 1.0.0
+  description: Machine-generated contract from the verified Next.js route inventory.
+servers:
+  - url: https://ec-swart.vercel.app
+    description: Production deployment
+tags:
+  - name: generated
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    betterAuthCookie:
+      type: apiKey
+      in: cookie
+      name: better-auth.session_token
+  schemas:
+    ApiData:
+      description: Backend response data; endpoint-specific typed Dart decoders are preferred.
+      nullable: true
+      oneOf:
+        - type: object
+          additionalProperties: true
+        - type: array
+          items: {}
+        - type: string
+        - type: number
+        - type: boolean
+    ApiError:
+      type: object
+      properties:
+        success: {type: boolean, const: false}
+        error:
+          type: object
+          properties:
+            code: {type: string}
+            message: {type: string}
+            details: {}
+          required: [code, message]
+    ApiSuccess:
+      type: object
+      properties:
+        success: {type: boolean, const: true}
+        data: {$ref: "#/components/schemas/ApiData"}
+        meta: {type: object, additionalProperties: true}
+        pagination: {type: object, additionalProperties: true}
+      required: [success]
+paths:
+  "/api/auth/{auth}":
+    get:
+      operationId: getApiAuthCatchAll
+      summary: "GET /api/auth/{...auth}"
+      description: "Source route file: app/api/auth/[...auth]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiAuthCatchAll
+      summary: "POST /api/auth/{...auth}"
+      description: "Source route file: app/api/auth/[...auth]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/health":
+    get:
+      operationId: getApiHealth
+      summary: "GET /api/health"
+      description: "Source route file: app/api/health/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/health/ready":
+    get:
+      operationId: getApiHealthReady
+      summary: "GET /api/health/ready"
+      description: "Source route file: app/api/health/ready/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/orders/{id}":
+    get:
+      operationId: getApiV1AccountOrdersId
+      summary: "GET /api/v1/account/orders/{id}"
+      description: "Source route file: app/api/v1/account/orders/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AccountOrdersId
+      summary: "POST /api/v1/account/orders/{id}"
+      description: "Source route file: app/api/v1/account/orders/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/orders/{id}/cancel":
+    post:
+      operationId: postApiV1AccountOrdersIdCancel
+      summary: "POST /api/v1/account/orders/{id}/cancel"
+      description: "Source route file: app/api/v1/account/orders/[id]/cancel/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/profile":
+    get:
+      operationId: getApiV1AccountProfile
+      summary: "GET /api/v1/account/profile"
+      description: "Source route file: app/api/v1/account/profile/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AccountProfile
+      summary: "PATCH /api/v1/account/profile"
+      description: "Source route file: app/api/v1/account/profile/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/reviews":
+    get:
+      operationId: getApiV1AccountReviews
+      summary: "GET /api/v1/account/reviews"
+      description: "Source route file: app/api/v1/account/reviews/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AccountReviews
+      summary: "POST /api/v1/account/reviews"
+      description: "Source route file: app/api/v1/account/reviews/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/reviews/{id}":
+    delete:
+      operationId: deleteApiV1AccountReviewsId
+      summary: "DELETE /api/v1/account/reviews/{id}"
+      description: "Source route file: app/api/v1/account/reviews/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1AccountReviewsId
+      summary: "GET /api/v1/account/reviews/{id}"
+      description: "Source route file: app/api/v1/account/reviews/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/security":
+    post:
+      operationId: postApiV1AccountSecurity
+      summary: "POST /api/v1/account/security"
+      description: "Source route file: app/api/v1/account/security/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/sessions":
+    delete:
+      operationId: deleteApiV1AccountSessions
+      summary: "DELETE /api/v1/account/sessions"
+      description: "Source route file: app/api/v1/account/sessions/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1AccountSessions
+      summary: "GET /api/v1/account/sessions"
+      description: "Source route file: app/api/v1/account/sessions/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/account/settings":
+    get:
+      operationId: getApiV1AccountSettings
+      summary: "GET /api/v1/account/settings"
+      description: "Source route file: app/api/v1/account/settings/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AccountSettings
+      summary: "PATCH /api/v1/account/settings"
+      description: "Source route file: app/api/v1/account/settings/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/addresses":
+    delete:
+      operationId: deleteApiV1Addresses
+      summary: "DELETE /api/v1/addresses"
+      description: "Source route file: app/api/v1/addresses/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1Addresses
+      summary: "GET /api/v1/addresses"
+      description: "Source route file: app/api/v1/addresses/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1Addresses
+      summary: "POST /api/v1/addresses"
+      description: "Source route file: app/api/v1/addresses/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/addresses/{id}":
+    delete:
+      operationId: deleteApiV1AddressesId
+      summary: "DELETE /api/v1/addresses/{id}"
+      description: "Source route file: app/api/v1/addresses/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AddressesId
+      summary: "PATCH /api/v1/addresses/{id}"
+      description: "Source route file: app/api/v1/addresses/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/addresses/{id}/default":
+    put:
+      operationId: putApiV1AddressesIdDefault
+      summary: "PUT /api/v1/addresses/{id}/default"
+      description: "Source route file: app/api/v1/addresses/[id]/default/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/audit-logs":
+    get:
+      operationId: getApiV1AdminAuditLogs
+      summary: "GET /api/v1/admin/audit-logs"
+      description: "Source route file: app/api/v1/admin/audit-logs/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/brands":
+    get:
+      operationId: getApiV1AdminBrands
+      summary: "GET /api/v1/admin/brands"
+      description: "Source route file: app/api/v1/admin/brands/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminBrands
+      summary: "POST /api/v1/admin/brands"
+      description: "Source route file: app/api/v1/admin/brands/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/brands/{id}":
+    delete:
+      operationId: deleteApiV1AdminBrandsId
+      summary: "DELETE /api/v1/admin/brands/{id}"
+      description: "Source route file: app/api/v1/admin/brands/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminBrandsId
+      summary: "PATCH /api/v1/admin/brands/{id}"
+      description: "Source route file: app/api/v1/admin/brands/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/categories":
+    get:
+      operationId: getApiV1AdminCategories
+      summary: "GET /api/v1/admin/categories"
+      description: "Source route file: app/api/v1/admin/categories/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminCategories
+      summary: "POST /api/v1/admin/categories"
+      description: "Source route file: app/api/v1/admin/categories/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/categories/{id}":
+    delete:
+      operationId: deleteApiV1AdminCategoriesId
+      summary: "DELETE /api/v1/admin/categories/{id}"
+      description: "Source route file: app/api/v1/admin/categories/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminCategoriesId
+      summary: "PATCH /api/v1/admin/categories/{id}"
+      description: "Source route file: app/api/v1/admin/categories/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/contact":
+    get:
+      operationId: getApiV1AdminContact
+      summary: "GET /api/v1/admin/contact"
+      description: "Source route file: app/api/v1/admin/contact/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/contact/{id}":
+    patch:
+      operationId: patchApiV1AdminContactId
+      summary: "PATCH /api/v1/admin/contact/{id}"
+      description: "Source route file: app/api/v1/admin/contact/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/coupons":
+    get:
+      operationId: getApiV1AdminCoupons
+      summary: "GET /api/v1/admin/coupons"
+      description: "Source route file: app/api/v1/admin/coupons/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminCoupons
+      summary: "POST /api/v1/admin/coupons"
+      description: "Source route file: app/api/v1/admin/coupons/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/coupons/{id}":
+    delete:
+      operationId: deleteApiV1AdminCouponsId
+      summary: "DELETE /api/v1/admin/coupons/{id}"
+      description: "Source route file: app/api/v1/admin/coupons/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminCouponsId
+      summary: "PATCH /api/v1/admin/coupons/{id}"
+      description: "Source route file: app/api/v1/admin/coupons/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/coupons/{id}/reset":
+    post:
+      operationId: postApiV1AdminCouponsIdReset
+      summary: "POST /api/v1/admin/coupons/{id}/reset"
+      description: "Source route file: app/api/v1/admin/coupons/[id]/reset/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/customers":
+    get:
+      operationId: getApiV1AdminCustomers
+      summary: "GET /api/v1/admin/customers"
+      description: "Source route file: app/api/v1/admin/customers/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/dashboard":
+    get:
+      operationId: getApiV1AdminDashboard
+      summary: "GET /api/v1/admin/dashboard"
+      description: "Source route file: app/api/v1/admin/dashboard/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/hero-slides":
+    get:
+      operationId: getApiV1AdminHeroSlides
+      summary: "GET /api/v1/admin/hero-slides"
+      description: "Source route file: app/api/v1/admin/hero-slides/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminHeroSlides
+      summary: "POST /api/v1/admin/hero-slides"
+      description: "Source route file: app/api/v1/admin/hero-slides/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/hero-slides/reorder":
+    patch:
+      operationId: patchApiV1AdminHeroSlidesReorder
+      summary: "PATCH /api/v1/admin/hero-slides/reorder"
+      description: "Source route file: app/api/v1/admin/hero-slides/reorder/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/hero-slides/{id}":
+    delete:
+      operationId: deleteApiV1AdminHeroSlidesId
+      summary: "DELETE /api/v1/admin/hero-slides/{id}"
+      description: "Source route file: app/api/v1/admin/hero-slides/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1AdminHeroSlidesId
+      summary: "GET /api/v1/admin/hero-slides/{id}"
+      description: "Source route file: app/api/v1/admin/hero-slides/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminHeroSlidesId
+      summary: "PATCH /api/v1/admin/hero-slides/{id}"
+      description: "Source route file: app/api/v1/admin/hero-slides/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/hero-slides/{id}/duplicate":
+    post:
+      operationId: postApiV1AdminHeroSlidesIdDuplicate
+      summary: "POST /api/v1/admin/hero-slides/{id}/duplicate"
+      description: "Source route file: app/api/v1/admin/hero-slides/[id]/duplicate/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/inventory":
+    get:
+      operationId: getApiV1AdminInventory
+      summary: "GET /api/v1/admin/inventory"
+      description: "Source route file: app/api/v1/admin/inventory/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminInventory
+      summary: "PATCH /api/v1/admin/inventory"
+      description: "Source route file: app/api/v1/admin/inventory/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/orders":
+    get:
+      operationId: getApiV1AdminOrders
+      summary: "GET /api/v1/admin/orders"
+      description: "Source route file: app/api/v1/admin/orders/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminOrders
+      summary: "PATCH /api/v1/admin/orders"
+      description: "Source route file: app/api/v1/admin/orders/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/orders/{id}":
+    get:
+      operationId: getApiV1AdminOrdersId
+      summary: "GET /api/v1/admin/orders/{id}"
+      description: "Source route file: app/api/v1/admin/orders/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminOrdersId
+      summary: "PATCH /api/v1/admin/orders/{id}"
+      description: "Source route file: app/api/v1/admin/orders/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/payment-providers":
+    get:
+      operationId: getApiV1AdminPaymentProviders
+      summary: "GET /api/v1/admin/payment-providers"
+      description: "Source route file: app/api/v1/admin/payment-providers/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminPaymentProviders
+      summary: "POST /api/v1/admin/payment-providers"
+      description: "Source route file: app/api/v1/admin/payment-providers/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/payment-providers/{provider}":
+    patch:
+      operationId: patchApiV1AdminPaymentProvidersProvider
+      summary: "PATCH /api/v1/admin/payment-providers/{provider}"
+      description: "Source route file: app/api/v1/admin/payment-providers/[provider]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/payment-providers/{provider}/test":
+    post:
+      operationId: postApiV1AdminPaymentProvidersProviderTest
+      summary: "POST /api/v1/admin/payment-providers/{provider}/test"
+      description: "Source route file: app/api/v1/admin/payment-providers/[provider]/test/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/payments":
+    get:
+      operationId: getApiV1AdminPayments
+      summary: "GET /api/v1/admin/payments"
+      description: "Source route file: app/api/v1/admin/payments/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/price-lists":
+    get:
+      operationId: getApiV1AdminPriceLists
+      summary: "GET /api/v1/admin/price-lists"
+      description: "Source route file: app/api/v1/admin/price-lists/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminPriceLists
+      summary: "POST /api/v1/admin/price-lists"
+      description: "Source route file: app/api/v1/admin/price-lists/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/price-lists/{id}":
+    delete:
+      operationId: deleteApiV1AdminPriceListsId
+      summary: "DELETE /api/v1/admin/price-lists/{id}"
+      description: "Source route file: app/api/v1/admin/price-lists/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminPriceListsId
+      summary: "PATCH /api/v1/admin/price-lists/{id}"
+      description: "Source route file: app/api/v1/admin/price-lists/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/products":
+    delete:
+      operationId: deleteApiV1AdminProducts
+      summary: "DELETE /api/v1/admin/products"
+      description: "Source route file: app/api/v1/admin/products/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1AdminProducts
+      summary: "GET /api/v1/admin/products"
+      description: "Source route file: app/api/v1/admin/products/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminProducts
+      summary: "PATCH /api/v1/admin/products"
+      description: "Source route file: app/api/v1/admin/products/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminProducts
+      summary: "POST /api/v1/admin/products"
+      description: "Source route file: app/api/v1/admin/products/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/reviews":
+    get:
+      operationId: getApiV1AdminReviews
+      summary: "GET /api/v1/admin/reviews"
+      description: "Source route file: app/api/v1/admin/reviews/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminReviews
+      summary: "PATCH /api/v1/admin/reviews"
+      description: "Source route file: app/api/v1/admin/reviews/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/reviews/{id}":
+    delete:
+      operationId: deleteApiV1AdminReviewsId
+      summary: "DELETE /api/v1/admin/reviews/{id}"
+      description: "Source route file: app/api/v1/admin/reviews/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminReviewsId
+      summary: "PATCH /api/v1/admin/reviews/{id}"
+      description: "Source route file: app/api/v1/admin/reviews/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/roles":
+    get:
+      operationId: getApiV1AdminRoles
+      summary: "GET /api/v1/admin/roles"
+      description: "Source route file: app/api/v1/admin/roles/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminRoles
+      summary: "POST /api/v1/admin/roles"
+      description: "Source route file: app/api/v1/admin/roles/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/settings":
+    get:
+      operationId: getApiV1AdminSettings
+      summary: "GET /api/v1/admin/settings"
+      description: "Source route file: app/api/v1/admin/settings/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminSettings
+      summary: "POST /api/v1/admin/settings"
+      description: "Source route file: app/api/v1/admin/settings/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping":
+    get:
+      operationId: getApiV1AdminShipping
+      summary: "GET /api/v1/admin/shipping"
+      description: "Source route file: app/api/v1/admin/shipping/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminShipping
+      summary: "POST /api/v1/admin/shipping"
+      description: "Source route file: app/api/v1/admin/shipping/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping-countries":
+    get:
+      operationId: getApiV1AdminShippingCountries
+      summary: "GET /api/v1/admin/shipping-countries"
+      description: "Source route file: app/api/v1/admin/shipping-countries/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminShippingCountries
+      summary: "POST /api/v1/admin/shipping-countries"
+      description: "Source route file: app/api/v1/admin/shipping-countries/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping-countries/{id}":
+    delete:
+      operationId: deleteApiV1AdminShippingCountriesId
+      summary: "DELETE /api/v1/admin/shipping-countries/{id}"
+      description: "Source route file: app/api/v1/admin/shipping-countries/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminShippingCountriesId
+      summary: "PATCH /api/v1/admin/shipping-countries/{id}"
+      description: "Source route file: app/api/v1/admin/shipping-countries/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping-governorates":
+    get:
+      operationId: getApiV1AdminShippingGovernorates
+      summary: "GET /api/v1/admin/shipping-governorates"
+      description: "Source route file: app/api/v1/admin/shipping-governorates/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminShippingGovernorates
+      summary: "POST /api/v1/admin/shipping-governorates"
+      description: "Source route file: app/api/v1/admin/shipping-governorates/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping-governorates/{id}":
+    delete:
+      operationId: deleteApiV1AdminShippingGovernoratesId
+      summary: "DELETE /api/v1/admin/shipping-governorates/{id}"
+      description: "Source route file: app/api/v1/admin/shipping-governorates/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminShippingGovernoratesId
+      summary: "PATCH /api/v1/admin/shipping-governorates/{id}"
+      description: "Source route file: app/api/v1/admin/shipping-governorates/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/shipping/{id}":
+    delete:
+      operationId: deleteApiV1AdminShippingId
+      summary: "DELETE /api/v1/admin/shipping/{id}"
+      description: "Source route file: app/api/v1/admin/shipping/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminShippingId
+      summary: "PATCH /api/v1/admin/shipping/{id}"
+      description: "Source route file: app/api/v1/admin/shipping/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/tags":
+    get:
+      operationId: getApiV1AdminTags
+      summary: "GET /api/v1/admin/tags"
+      description: "Source route file: app/api/v1/admin/tags/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminTags
+      summary: "POST /api/v1/admin/tags"
+      description: "Source route file: app/api/v1/admin/tags/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/tags/{id}":
+    delete:
+      operationId: deleteApiV1AdminTagsId
+      summary: "DELETE /api/v1/admin/tags/{id}"
+      description: "Source route file: app/api/v1/admin/tags/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminTagsId
+      summary: "PATCH /api/v1/admin/tags/{id}"
+      description: "Source route file: app/api/v1/admin/tags/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/users":
+    get:
+      operationId: getApiV1AdminUsers
+      summary: "GET /api/v1/admin/users"
+      description: "Source route file: app/api/v1/admin/users/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/users/{id}":
+    get:
+      operationId: getApiV1AdminUsersId
+      summary: "GET /api/v1/admin/users/{id}"
+      description: "Source route file: app/api/v1/admin/users/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminUsersId
+      summary: "PATCH /api/v1/admin/users/{id}"
+      description: "Source route file: app/api/v1/admin/users/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/wallets":
+    get:
+      operationId: getApiV1AdminWallets
+      summary: "GET /api/v1/admin/wallets"
+      description: "Source route file: app/api/v1/admin/wallets/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AdminWallets
+      summary: "POST /api/v1/admin/wallets"
+      description: "Source route file: app/api/v1/admin/wallets/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/admin/wallets/{id}":
+    delete:
+      operationId: deleteApiV1AdminWalletsId
+      summary: "DELETE /api/v1/admin/wallets/{id}"
+      description: "Source route file: app/api/v1/admin/wallets/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1AdminWalletsId
+      summary: "PATCH /api/v1/admin/wallets/{id}"
+      description: "Source route file: app/api/v1/admin/wallets/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/auth/{auth}":
+    get:
+      operationId: getApiV1AuthCatchAll
+      summary: "GET /api/v1/auth/{...auth}"
+      description: "Source route file: app/api/v1/auth/[...auth]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1AuthCatchAll
+      summary: "POST /api/v1/auth/{...auth}"
+      description: "Source route file: app/api/v1/auth/[...auth]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/brands":
+    get:
+      operationId: getApiV1Brands
+      summary: "GET /api/v1/brands"
+      description: "Source route file: app/api/v1/brands/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/cart":
+    delete:
+      operationId: deleteApiV1Cart
+      summary: "DELETE /api/v1/cart"
+      description: "Source route file: app/api/v1/cart/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1Cart
+      summary: "GET /api/v1/cart"
+      description: "Source route file: app/api/v1/cart/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    patch:
+      operationId: patchApiV1Cart
+      summary: "PATCH /api/v1/cart"
+      description: "Source route file: app/api/v1/cart/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1Cart
+      summary: "POST /api/v1/cart"
+      description: "Source route file: app/api/v1/cart/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/cart/merge":
+    post:
+      operationId: postApiV1CartMerge
+      summary: "POST /api/v1/cart/merge"
+      description: "Source route file: app/api/v1/cart/merge/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/categories":
+    get:
+      operationId: getApiV1Categories
+      summary: "GET /api/v1/categories"
+      description: "Source route file: app/api/v1/categories/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/checkout":
+    post:
+      operationId: postApiV1Checkout
+      summary: "POST /api/v1/checkout"
+      description: "Source route file: app/api/v1/checkout/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/checkout/quote":
+    post:
+      operationId: postApiV1CheckoutQuote
+      summary: "POST /api/v1/checkout/quote"
+      description: "Source route file: app/api/v1/checkout/quote/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/commerce/country":
+    get:
+      operationId: getApiV1CommerceCountry
+      summary: "GET /api/v1/commerce/country"
+      description: "Source route file: app/api/v1/commerce/country/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1CommerceCountry
+      summary: "POST /api/v1/commerce/country"
+      description: "Source route file: app/api/v1/commerce/country/route.ts"
+      tags: [generated]
+      security: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/contact":
+    post:
+      operationId: postApiV1Contact
+      summary: "POST /api/v1/contact"
+      description: "Source route file: app/api/v1/contact/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/hero":
+    get:
+      operationId: getApiV1Hero
+      summary: "GET /api/v1/hero"
+      description: "Source route file: app/api/v1/hero/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/locale":
+    post:
+      operationId: postApiV1Locale
+      summary: "POST /api/v1/locale"
+      description: "Source route file: app/api/v1/locale/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/media/delete":
+    post:
+      operationId: postApiV1MediaDelete
+      summary: "POST /api/v1/media/delete"
+      description: "Source route file: app/api/v1/media/delete/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/media/upload":
+    post:
+      operationId: postApiV1MediaUpload
+      summary: "POST /api/v1/media/upload"
+      description: "Source route file: app/api/v1/media/upload/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/orders":
+    get:
+      operationId: getApiV1Orders
+      summary: "GET /api/v1/orders"
+      description: "Source route file: app/api/v1/orders/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1Orders
+      summary: "POST /api/v1/orders"
+      description: "Source route file: app/api/v1/orders/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/orders/{id}":
+    get:
+      operationId: getApiV1OrdersId
+      summary: "GET /api/v1/orders/{id}"
+      description: "Source route file: app/api/v1/orders/[id]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/payments/paymob/create":
+    post:
+      operationId: postApiV1PaymentsPaymobCreate
+      summary: "POST /api/v1/payments/paymob/create"
+      description: "Source route file: app/api/v1/payments/paymob/create/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/payments/paymob/{paymentId}":
+    get:
+      operationId: getApiV1PaymentsPaymobPaymentId
+      summary: "GET /api/v1/payments/paymob/{paymentId}"
+      description: "Source route file: app/api/v1/payments/paymob/[paymentId]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/products":
+    get:
+      operationId: getApiV1Products
+      summary: "GET /api/v1/products"
+      description: "Source route file: app/api/v1/products/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/products/{id}":
+    get:
+      operationId: getApiV1ProductsId
+      summary: "GET /api/v1/products/{id}"
+      description: "Source route file: app/api/v1/products/[id]/route.ts"
+      tags: [generated]
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/products/{id}/reviews":
+    get:
+      operationId: getApiV1ProductsIdReviews
+      summary: "GET /api/v1/products/{id}/reviews"
+      description: "Source route file: app/api/v1/products/[id]/reviews/route.ts"
+      tags: [generated]
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1ProductsIdReviews
+      summary: "POST /api/v1/products/{id}/reviews"
+      description: "Source route file: app/api/v1/products/[id]/reviews/route.ts"
+      tags: [generated]
+      security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/shipping/countries":
+    get:
+      operationId: getApiV1ShippingCountries
+      summary: "GET /api/v1/shipping/countries"
+      description: "Source route file: app/api/v1/shipping/countries/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/shipping/countries/{code}/payment-methods":
+    get:
+      operationId: getApiV1ShippingCountriesCodePaymentMethods
+      summary: "GET /api/v1/shipping/countries/{code}/payment-methods"
+      description: "Source route file: app/api/v1/shipping/countries/[code]/payment-methods/route.ts"
+      tags: [generated]
+      security: []
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/shipping/governorates":
+    get:
+      operationId: getApiV1ShippingGovernorates
+      summary: "GET /api/v1/shipping/governorates"
+      description: "Source route file: app/api/v1/shipping/governorates/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/shipping/regions":
+    get:
+      operationId: getApiV1ShippingRegions
+      summary: "GET /api/v1/shipping/regions"
+      description: "Source route file: app/api/v1/shipping/regions/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/wallets":
+    get:
+      operationId: getApiV1Wallets
+      summary: "GET /api/v1/wallets"
+      description: "Source route file: app/api/v1/wallets/route.ts"
+      tags: [generated]
+      security: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/webhooks/{provider}":
+    post:
+      operationId: postApiV1WebhooksProvider
+      summary: "POST /api/v1/webhooks/{provider}"
+      description: "Source route file: app/api/v1/webhooks/[provider]/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+  "/api/v1/wishlist":
+    delete:
+      operationId: deleteApiV1Wishlist
+      summary: "DELETE /api/v1/wishlist"
+      description: "Source route file: app/api/v1/wishlist/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    get:
+      operationId: getApiV1Wishlist
+      summary: "GET /api/v1/wishlist"
+      description: "Source route file: app/api/v1/wishlist/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}
+    post:
+      operationId: postApiV1Wishlist
+      summary: "POST /api/v1/wishlist"
+      description: "Source route file: app/api/v1/wishlist/route.ts"
+      tags: [generated]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid input}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "404": {description: Not found}
+        "409": {description: Conflict}
+        "500": {description: Internal server error}

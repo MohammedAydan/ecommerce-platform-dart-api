@@ -1,6 +1,6 @@
 name: ecommerce_platform_api
 description: Typed Dart client for the Ecommerce Platform backend APIs.
-version: 0.1.1
+version: 0.2.0
 publish_to: none
 repository: https://github.com/MohammedAydan/ecommerce-platform
 homepage: https://github.com/MohammedAydan/ecommerce-platform

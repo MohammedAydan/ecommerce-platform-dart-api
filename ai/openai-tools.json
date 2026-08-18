@@ -1,0 +1,230 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "catalog_list_products",
+        "description": "Search and paginate the public catalog.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "locale": {
+              "type": "string",
+              "enum": [
+                "en",
+                "ar"
+              ]
+            },
+            "category": {
+              "type": "string"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "minPrice": {
+              "type": "number",
+              "minimum": 0
+            },
+            "maxPrice": {
+              "type": "number",
+              "minimum": 0
+            },
+            "inStockOnly": {
+              "type": "boolean"
+            },
+            "search": {
+              "type": "string"
+            },
+            "sort": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "catalog_get_product",
+        "description": "Get one public product by ID or slug.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "idOrSlug": {
+              "type": "string",
+              "minLength": 1
+            },
+            "locale": {
+              "type": "string",
+              "enum": [
+                "en",
+                "ar"
+              ]
+            }
+          },
+          "required": [
+            "idOrSlug"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "catalog_list_categories",
+        "description": "List public categories.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "locale": {
+              "type": "string",
+              "enum": [
+                "en",
+                "ar"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "catalog_list_brands",
+        "description": "List public brands.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "locale": {
+              "type": "string",
+              "enum": [
+                "en",
+                "ar"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shipping_list_countries",
+        "description": "List supported shipping countries.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shipping_list_governorates",
+        "description": "List governorates for a country.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2
+            }
+          },
+          "required": [
+            "country"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "checkout_quote",
+        "description": "Calculate a non-mutating checkout quote.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "variantId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100
+                  }
+                },
+                "required": [
+                  "productId",
+                  "quantity"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "items"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cart_get",
+        "description": "Read the current cart without changing it.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "account_get_profile",
+        "description": "Read the authenticated account profile.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'models.dart';
 import 'types.dart';
 
 typedef JsonDecoder<T> = T Function(dynamic value);
@@ -13,6 +14,7 @@ class EcommerceApiClient {
     this.authTokenProvider,
     Map<String, String>? defaultHeaders,
     this.cookie,
+    this.cookieStore,
     this.throwOnApiError = true,
     this.requestTimeout = const Duration(seconds: 30),
     this.maxRetries = 2,
@@ -27,6 +29,7 @@ class EcommerceApiClient {
   final AuthTokenProvider? authTokenProvider;
   final Map<String, String> _defaultHeaders;
   final String? cookie;
+  final CookieStore? cookieStore;
   final bool throwOnApiError;
   final Duration requestTimeout;
   final int maxRetries;
@@ -39,15 +42,21 @@ class EcommerceApiClient {
     String method,
     String path, {
     Map<String, dynamic>? query,
+    QueryModel? queryModel,
     dynamic body,
     Map<String, String>? headers,
     JsonDecoder<T>? decoder,
     bool authenticated = true,
     String? idempotencyKey,
   }) async {
-    final uri = _buildUri(path, query);
+    queryModel?.validateOrThrow();
+    final mergedQuery = <String, dynamic>{
+      ...?query,
+      ...?queryModel?.toQuery(),
+    };
+    final uri = _buildUri(path, mergedQuery.isEmpty ? null : mergedQuery);
     final normalizedMethod = method.toUpperCase();
-    final encodedBody = body == null ? null : jsonEncode(body);
+    final encodedBody = _encodeBody(body);
     Object? lastNetworkError;
 
     for (var attempt = 0; attempt <= maxRetries; attempt++) {
@@ -68,6 +77,7 @@ class EcommerceApiClient {
           await _waitBeforeRetry(attempt);
           continue;
         }
+        await _saveResponseCookies(response.headers);
         final bytes = await response.stream.toBytes();
         return _parseResponse<T>(
           method: normalizedMethod,
@@ -75,6 +85,7 @@ class EcommerceApiClient {
           statusCode: response.statusCode,
           bytes: bytes,
           contentType: response.headers['content-type'],
+          headers: response.headers,
           decoder: decoder,
         );
       } catch (error) {
@@ -96,11 +107,17 @@ class EcommerceApiClient {
     required List<MultipartPart> files,
     Map<String, String>? fields,
     Map<String, dynamic>? query,
+    QueryModel? queryModel,
     Map<String, String>? headers,
     JsonDecoder<T>? decoder,
     bool authenticated = true,
   }) async {
-    final uri = _buildUri(path, query);
+    queryModel?.validateOrThrow();
+    final mergedQuery = <String, dynamic>{
+      ...?query,
+      ...?queryModel?.toQuery(),
+    };
+    final uri = _buildUri(path, mergedQuery.isEmpty ? null : mergedQuery);
     final request = http.MultipartRequest('POST', uri);
     request.headers.addAll(await _headers(
       headers,
@@ -118,6 +135,7 @@ class EcommerceApiClient {
 
     try {
       final response = await _httpClient.send(request).timeout(requestTimeout);
+      await _saveResponseCookies(response.headers);
       final bytes = await response.stream.toBytes();
       return _parseResponse<T>(
         method: 'POST',
@@ -125,6 +143,7 @@ class EcommerceApiClient {
         statusCode: response.statusCode,
         bytes: bytes,
         contentType: response.headers['content-type'],
+        headers: response.headers,
         decoder: decoder,
       );
     } catch (error) {
@@ -135,6 +154,15 @@ class EcommerceApiClient {
         cause: error,
       );
     }
+  }
+
+  String? _encodeBody(dynamic body) {
+    if (body == null) return null;
+    if (body is JsonModel) {
+      body.validateOrThrow();
+      return jsonEncode(body.toJson());
+    }
+    return jsonEncode(body);
   }
 
   Uri _buildUri(String path, Map<String, dynamic>? query) {
@@ -162,8 +190,10 @@ class EcommerceApiClient {
     };
     if (hasJsonBody)
       result.putIfAbsent('Content-Type', () => 'application/json');
-    if (cookie != null && cookie!.isNotEmpty) {
-      result.putIfAbsent('Cookie', () => cookie!);
+    final storedCookie = await cookieStore?.read();
+    final requestCookie = cookie ?? storedCookie;
+    if (requestCookie != null && requestCookie.isNotEmpty) {
+      result.putIfAbsent('Cookie', () => requestCookie);
     }
     if (authenticated && !result.containsKey('Authorization')) {
       final token = await authTokenProvider?.readToken();
@@ -175,6 +205,13 @@ class EcommerceApiClient {
       result['idempotency-key'] = idempotencyKey;
     }
     return result;
+  }
+
+  Future<void> _saveResponseCookies(Map<String, String> headers) async {
+    final raw = headers['set-cookie'];
+    if (raw == null || raw.isEmpty) return;
+    await cookieStore
+        ?.writeSetCookieHeaders(raw.split(RegExp(r',\s*(?=[^;=,]+=[^;=,]+)')));
   }
 
   bool _shouldRetry(String method, int statusCode, int attempt) {
@@ -204,6 +241,7 @@ class EcommerceApiClient {
     required int statusCode,
     required List<int> bytes,
     required String? contentType,
+    required Map<String, String> headers,
     required JsonDecoder<T>? decoder,
   }) {
     final text = utf8.decode(bytes, allowMalformed: true);
@@ -236,6 +274,7 @@ class EcommerceApiClient {
           : null,
       raw: raw,
       statusCode: statusCode,
+      headers: headers,
     );
   }
 }

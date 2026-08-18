@@ -1,0 +1,28 @@
+# Ecommerce Platform Dart SDK
+
+> A typed Dart SDK for the Ecommerce Platform backend. The package exposes all 135 verified HTTP operations and ergonomic domain clients that eliminate manually constructed field maps.
+
+## Primary resources
+
+- `README.md`: installation and typed Dart usage.
+- `openapi.yaml`: complete OpenAPI 3.1 route contract generated from the backend route inventory.
+- `ai/agent-tools.json`: all operations with exact paths, methods, parameters, auth requirements, mutation flags, and Dart method names.
+- `ai/system-prompt.md`: safe operating instructions for LLMs and agents.
+- `ai/README.md`: integration guide for tool-calling hosts.
+- `lib/ecommerce_platform_api.dart`: public exports and `EcommercePlatformClient` facade.
+
+## Typed client surface
+
+Use `client.auth` for Better Auth email sign-in, sign-up, session, and sign-out. Use `client.publicApi` for catalog, hero, country, shipping, and reviews. Use `client.checkout` for authoritative checkout quotes. Use `client.cart`, `client.account`, `client.addresses`, and `client.orders` for authenticated or guest workflows. Use `client.admin` for typed administrative operations. Use `client.api` only when an operation is not represented by a higher-level convenience method.
+
+## Authentication
+
+The backend accepts Better Auth cookies and bearer authorization. Inject credentials through `AuthTokenProvider` or `CookieStore`; never pass secrets as model/tool arguments. The SDK persists `Set-Cookie` headers through `MemoryCookieStore` or an application-provided `CookieStore`.
+
+## Safety
+
+GET, HEAD, and OPTIONS operations are read-only by default. POST, PUT, PATCH, and DELETE operations require human confirmation in an agent host. Orders, payments, media uploads, admin changes, and session revocation must not be executed from an autonomous tool loop without confirmation.
+
+## Source of truth
+
+The route and API contract was verified against backend commit `ca7306ec4faae13979af256cd818723e897b02e4`. The production origin used for smoke validation is `https://ec-swart.vercel.app`.

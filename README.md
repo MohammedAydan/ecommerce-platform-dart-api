@@ -1,51 +1,117 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed client للتعامل مع جميع واجهات Ecommerce Platform backend. تم توليد طبقة العمليات من `api_route_inventory.json` في commit المصدر `ca7306ec4faae13979af256cd818723e897b02e4`، وتغطي **135 عملية HTTP** على **83 route files**.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **135 عملية HTTP** على **83 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `ca7306ec4faae13979af256cd818723e897b02e4`.
+
+## الفكرة الأساسية
+
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 135، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
-
-أضف الحزمة إلى `pubspec.yaml`:
 
 ```yaml
 dependencies:
   ecommerce_platform_api:
-    path: ../path/to/ecommerce_platform/dart/ecommerce_platform_api
+    git:
+      url: https://github.com/MohammedAydan/ecommerce-platform-dart-api.git
+      ref: main
 ```
 
 ثم نفّذ `dart pub get`.
 
-## إنشاء العميل
+## إنشاء العميل وAuth
+
+يدعم backend Better Auth عبر bearer token أو cookies. لا تضع token أو cookie في model prompt أو tool arguments. في تطبيقات Dart server/mobile استخدم provider أو cookie store مناسبًا:
 
 ```dart
 import 'package:ecommerce_platform_api/ecommerce_platform_api.dart';
 
+final cookieStore = MemoryCookieStore();
 final client = EcommercePlatformClient(
-  baseUrl: 'https://your-domain.example',
-  authTokenProvider: StaticAuthTokenProvider(accessToken),
+  baseUrl: 'https://ec-swart.vercel.app',
+  cookieStore: cookieStore,
+  requestTimeout: const Duration(seconds: 30),
+  maxRetries: 2,
 );
+
+final signedIn = await client.auth.signIn(
+  const SignInRequest(
+    email: 'customer@example.com',
+    password: 'strong-password',
+  ),
+);
+
+final currentSession = await client.auth.session();
 ```
 
-العميل يرسل تلقائيًا `Accept: application/json`، ويضيف `Content-Type: application/json` عند وجود body، ويضيف `Authorization: Bearer <token>` عندما يعيد `AuthTokenProvider` token صالحًا. يمكن تمرير Better Auth cookie عبر `cookie` أو عبر `defaultHeaders`. النقل يطبق timeout افتراضيًا قدره 30 ثانية، ويعيد المحاولة تلقائيًا حتى مرتين لطلبات GET/HEAD/OPTIONS عند أخطاء الشبكة أو `408/425/429/5xx`. يمكن ضبط `requestTimeout`, `maxRetries`, `retryDelay`, أو تفعيل `retryUnsafeRequests` عند الحاجة.
+يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage.
 
-## استدعاء endpoints
+## Typed domain clients
 
-كل العمليات المتحققة موجودة داخل `client.api`. أسماء العمليات تتبع method + path بصيغة lowerCamelCase، مثل `getApiV1Products` و`postApiV1Orders` و`patchApiV1AdminProducts` و`getApiV1ShippingCountriesCodePaymentMethods`. توجد أيضًا `ecommercePlatformOperations` و`backendSourceCommit` لاكتشاف كل العمليات والنسخة المصدرية من داخل التطبيق.
+| Client | الاستخدام |
+|---|---|
+| `client.auth` | sign-in، sign-up، session، sign-out. |
+| `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews. |
+| `client.checkout` | quote authoritative للتسعير والخصومات والشحن والضرائب. |
+| `client.cart` | قراءة وإضافة وتعديل ومسح ودمج guest/authenticated cart. |
+| `client.account` | profile، settings، security، sessions، account orders، account reviews. |
+| `client.addresses` | list/create/update/delete/set-default. |
+| `client.orders` | create/list/get مع idempotency key. |
+| `client.admin` | typed product/taxonomy/coupon/wallet/tag/order/review/user/role/payment/shipping/hero operations. |
+| `client.api` | طبقة raw المولدة لكل العمليات الـ 135 عند الحاجة إلى route غير موجود في facade. |
+
+## أمثلة typed بدون Map يدوي
+
+### Catalog
 
 ```dart
-final products = await client.api.getApiV1Products(
-  authenticated: false,
-  query: {
-    'locale': 'en',
-    'page': 1,
-    'limit': 20,
-    'inStockOnly': true,
-  },
+final products = await client.publicApi.listProducts(
+  query: const CatalogQuery(
+    locale: AppLocale.en,
+    search: 'wireless mouse',
+    inStockOnly: true,
+    page: 1,
+    limit: 20,
+  ),
 );
 
-final order = await client.api.postApiV1Orders(
-  body: OrderInput(
-    items: [CartItemInput(productId: 'product-id', quantity: 2)],
-    shippingAddress: ShippingAddressInput(
+final product = await client.publicApi.getProduct('test-product');
+```
+
+### Checkout quote
+
+`CheckoutQuoteRequest` يتحقق محليًا من وجود item واحد على الأقل، ومن حدود الكمية، ومن product/variant identifiers. لا تحسب الإجماليات في التطبيق؛ استخدم quote الناتج من backend لأنه authoritative للتسعير والعملة والضريبة والشحن.
+
+```dart
+final quote = await client.checkout.quote(
+  CheckoutQuoteRequest(
+    items: [
+      const CartItemInput(productId: 'product-id', quantity: 2),
+    ],
+    shippingAddress: const ShippingAddressInput(
+      fullName: 'Customer Name',
+      phone: '+201000000000',
+      addressLine1: 'Street 1',
+      city: 'Cairo',
+      country: 'EG',
+    ),
+    commerceContext: const CommerceContextInput(
+      countryCode: 'EG',
+      currency: 'EGP',
+    ),
+  ),
+);
+
+final total = quote.data?.total;
+final currency = quote.data?.currency;
+```
+
+### Orders
+
+```dart
+final order = await client.orders.create(
+  OrderInput(
+    items: [const CartItemInput(productId: 'product-id', quantity: 1)],
+    shippingAddress: const ShippingAddressInput(
       fullName: 'Customer Name',
       phone: '+201000000000',
       addressLine1: 'Street 1',
@@ -58,63 +124,71 @@ final order = await client.api.postApiV1Orders(
 );
 ```
 
-المسارات التي تحتوي parameters تستخدم named arguments:
+### Admin product
 
 ```dart
-final details = await client.api.getApiV1ProductsId(
-  id: 'product-id',
-  query: {'locale': 'ar'},
-  authenticated: false,
-);
-
-final updated = await client.api.patchApiV1AdminProducts(
-  body: {
-    'id': 'product-id',
-    'name': 'Updated product name',
-    'basePrice': 100,
-  },
+final product = await client.admin.createProduct(
+  const AdminProductCreateRequest(
+    name: 'Wireless Mouse',
+    sku: 'WM-001',
+    basePrice: 500,
+    categoryId: 'category-id',
+    status: ProductStatus.draft,
+    inventoryQuantity: 10,
+  ),
 );
 ```
 
-## النماذج والـ responses
+النماذج الإدارية تشمل كذلك `TaxonomyCreateRequest`, `CouponRequest`, `WalletRequest`, `TagRequest`, `InventoryAdjustment`, `OrderTransitionRequest`, `ReviewModerationRequest`, `PaymentProviderSettingsRequest`, `ShippingZoneRequest`, `ShippingCountryCreateRequest`, `ShippingGovernorateCreateRequest`, `HeroSlideCreateRequest`, و`HeroSlideReorderRequest`.
 
-توجد نماذج request شائعة مثل `OrderInput`, `CartItemInput`, `ShippingAddressInput`, `Address`, `ReviewInput`, `CheckoutQuoteInput`, `ProfilePatch`, `PaymentProviderConfig`, `InventoryAdjustment`, `HeroSlideInput`, و`ShippingCountryInput`. يمكن أيضًا تمرير `Map<String, dynamic>` مباشرة لأي endpoint؛ هذا يحافظ على التوافق مع DTOs التي يرجعها backend أو الخدمات المفوضة.
+## Response وerrors
 
-كل request يرجع `ApiResponse<T>` ويحتوي على `success`, `data`, `meta`, `pagination`, و`raw`. لأن بعض backend DTOs مفوضة إلى services أو Better Auth، يتم الاحتفاظ بالـ response كاملًا داخل `raw` بدل إسقاط حقول غير معروفة.
-
-## الأخطاء
-
-عند `throwOnApiError: true`، أي HTTP status خارج 2xx أو standard envelope يحتوي `success: false` يرمي `ApiException` مع:
+كل method typed يرجع `ApiResponse<T>` مع `success`, `data`, `statusCode`, `headers`, `meta`, `pagination`, و`raw`. عند تفعيل `throwOnApiError`، يرمي SDK `ApiException` تحتوي على `statusCode`, `code`, `message`, و`details` عند HTTP errors أو standard error envelope.
 
 ```dart
 try {
-  await client.api.getApiV1ProductsId(id: 'missing-id', authenticated: false);
+  await client.publicApi.getProduct('missing-product');
 } on ApiException catch (error) {
-  print(error.statusCode);
-  print(error.code); // PRODUCT_NOT_FOUND
-  print(error.message);
-  print(error.error.details);
+  print('${error.statusCode}: ${error.code} ${error.message}');
 }
 ```
 
-يمكن تعطيل الرمي وقراءة `ApiResponse.success` و`ApiResponse.raw` مباشرة عبر `throwOnApiError: false`.
+يتم تشغيل `validateOrThrow()` تلقائيًا لأي `JsonModel` قبل الإرسال. ويمكن تشغيل `request.validate()` يدويًا لاكتشاف كل `ValidationIssue` قبل تنفيذ العملية.
 
-## الملفات الأساسية
+## Reliability وheaders
+
+يضيف transport تلقائيًا `Accept: application/json` و`Content-Type` عند JSON bodies و`Authorization: Bearer` عند توفر token، ويحفظ cookies، ويدعم `idempotency-key`، ويعيد المحاولة bounded للطلبات read-only عند أخطاء الشبكة و`408/425/429/5xx`. عمليات POST/PUT/PATCH/DELETE لا تُعاد تلقائيًا إلا عند تفعيل `retryUnsafeRequests` صراحةً.
+
+## كل routes موجودة
+
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 135 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1.
+
+## LLM وAI-agent integration
+
+المجلد `ai/` يضم `agent-tools.json` لكل العمليات، و`safe-tools.json` و`openai-tools.json` للأدوات الآمنة، و`system-prompt.md`، و`README.md`. توجد كذلك `llms.txt` في جذر الحزمة للاكتشاف الآلي. السياسة الافتراضية هي أن GET/HEAD/OPTIONS read-only، وأن كل POST/PUT/PATCH/DELETE يحتاج human confirmation، مع إبقاء secrets خارج arguments.
+
+## الاختبار والتوثيق
+
+```bash
+dart analyze
+dart test
+dart run tool/production_smoke.dart
+dart pub publish --dry-run
+```
+
+`tool/production_smoke.dart` يختبر deployment الحقيقي بعمليات آمنة، و`PRODUCTION_VALIDATION.md` يسجل آخر نتائج الإنتاج وحدود ما تم اختباره. لا ينفذ smoke test إنشاء order أو دفعًا أو تعديلًا إداريًا.
+
+## أهم الملفات
 
 | الملف | المسؤولية |
 |---|---|
-| `lib/src/api_client.dart` | HTTP transport، auth، cookies، headers، JSON، multipart، errors. |
-| `lib/src/generated_api.dart` | جميع العمليات الـ 135 المولدة من route inventory. |
-| `lib/src/models.dart` | typed request models وقراءة النماذج الشائعة. |
-| `lib/src/types.dart` | envelopes، pagination، errors، auth provider، multipart parts. |
-| `lib/ecommerce_platform_api.dart` | public package exports وfacade الرئيسي. |
-
-## اختبار الإنتاج
-
-يوجد smoke test آمن للقراءة فقط في `tool/production_smoke.dart`. شغّله من جذر الحزمة عبر `dart run tool/production_smoke.dart` لاختبار health/readiness/catalog/shipping/payment-methods/guest-cart/auth-guard/reviews وcheckout quote ضد deployment الفعلي. الاختبار لا ينشئ order ولا يغير بيانات الإدارة.
-
-## ملاحظات مهمة
-
-المكتبة لا تنفّذ auth provider داخليًا؛ Better Auth يظل مسؤولًا عن شكل عمليات sign-in/sign-up تحت catch-all routes. مرر token أو cookie الذي حصلت عليه من auth flow إلى العميل. كما أن `POST /api/v1/media/upload` يحتاج `MultipartPart` ويستخدم `client.transport.upload` مباشرة، لأن generated route methods تغطي عمليات JSON بينما upload يحتاج multipart body.
+| `lib/ecommerce_platform_api.dart` | public exports وfacade. |
+| `lib/src/typed_clients.dart` | domain clients والـ typed convenience methods. |
+| `lib/src/models.dart` | models العامة، catalog، cart، checkout، auth، account، orders. |
+| `lib/src/admin_models.dart` | models الإدارية الصارمة. |
+| `lib/src/api_client.dart` | HTTP، auth، cookies، retries، headers، decoders، errors. |
+| `lib/src/generated_api.dart` | جميع العمليات الـ 135. |
+| `openapi.yaml` | contract كامل للـ API. |
+| `ai/` و`llms.txt` | تكامل LLMs وAI agents. |
 
 استخدم `client.close()` عند انتهاء عمر التطبيق أو عند التخلص من dependency scope.

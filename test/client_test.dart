@@ -131,4 +131,124 @@ void main() {
       'paymentMethod': 'cod',
     });
   });
+
+  test('validates checkout requests before sending them', () async {
+    var requests = 0;
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((_) async {
+        requests++;
+        return http.Response('{}', 200);
+      }),
+    );
+
+    expect(
+      () => transport.request<dynamic>(
+        'POST',
+        '/api/v1/checkout/quote',
+        body: const CheckoutQuoteRequest(items: []),
+      ),
+      throwsA(isA<ModelValidationException>()),
+    );
+    expect(requests, 0);
+    transport.close();
+  });
+
+  test('persists Better Auth set-cookie and sends it on the next request',
+      () async {
+    final cookieStore = MemoryCookieStore();
+    var call = 0;
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      cookieStore: cookieStore,
+      httpClient: MockClient((request) async {
+        call++;
+        if (call == 1) {
+          return http.Response(
+            jsonEncode({'success': true, 'data': {}}),
+            200,
+            headers: {
+              'content-type': 'application/json',
+              'set-cookie': 'better-auth.session_token=abc123; Path=/; HttpOnly'
+            },
+          );
+        }
+        expect(request.headers['cookie'], 'better-auth.session_token=abc123');
+        return http.Response(jsonEncode({'success': true, 'data': {}}), 200,
+            headers: {'content-type': 'application/json'});
+      }),
+    );
+
+    await transport.request<dynamic>('POST', '/api/auth/sign-in/email',
+        body: const JsonBody({'email': 'a@b.com', 'password': 'password'}));
+    await transport.request<dynamic>('GET', '/api/auth/get-session');
+    expect(call, 2);
+    transport.close();
+  });
+
+  test('typed public client decodes catalog products', () async {
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((request) async {
+        expect(request.url.path, '/api/v1/products');
+        expect(request.url.queryParameters['page'], '1');
+        return http.Response(
+            jsonEncode({
+              'success': true,
+              'data': [
+                {
+                  'id': 'p-1',
+                  'name': 'Mouse',
+                  'slug': 'mouse',
+                  'price': 10,
+                  'images': [],
+                  'tags': [],
+                  'variants': []
+                }
+              ]
+            }),
+            200,
+            headers: {'content-type': 'application/json'});
+      }),
+    );
+    final client = PublicApiClient(transport);
+    final response = await client.listProducts(
+        query: const CatalogQuery(page: 1, limit: 10));
+    expect(response.data?.single.id, 'p-1');
+    expect(response.data?.single.name, 'Mouse');
+    transport.close();
+  });
+
+  test('auth facade uses Better Auth email endpoint and typed body', () async {
+    late http.Request captured;
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((request) async {
+        captured = request;
+        return http.Response(
+            jsonEncode({
+              'user': {'id': 'u-1', 'email': 'a@b.com'}
+            }),
+            200,
+            headers: {'content-type': 'application/json'});
+      }),
+    );
+    final response = await AuthApiClient(transport)
+        .signIn(const SignInRequest(email: 'a@b.com', password: 'password'));
+    expect(response.success, isTrue);
+    expect(captured.url.path, '/api/auth/sign-in/email');
+    expect(jsonDecode(captured.body),
+        {'email': 'a@b.com', 'password': 'password'});
+    transport.close();
+  });
+
+  test('manifest and agent tool catalogs are complete and safe by default', () {
+    expect(ecommercePlatformOperations.length, 135);
+    expect(EcommerceAgentTools.safe.length, 9);
+    expect(EcommerceAgentTools.safe.every((tool) => tool.readOnly), isTrue);
+    expect(
+        EcommerceAgentTools.safe
+            .every((tool) => tool.inputSchema['additionalProperties'] == false),
+        isTrue);
+  });
 }

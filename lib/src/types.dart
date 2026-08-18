@@ -3,6 +3,41 @@ import 'dart:typed_data';
 typedef JsonMap = Map<String, dynamic>;
 typedef JsonList = List<dynamic>;
 
+abstract class QueryModel {
+  const QueryModel();
+
+  JsonMap toQuery();
+
+  List<ValidationIssue> validate() => const <ValidationIssue>[];
+
+  void validateOrThrow() {
+    final issues = validate();
+    if (issues.isNotEmpty) {
+      throw ModelValidationException(runtimeType.toString(), issues);
+    }
+  }
+}
+
+class ValidationIssue {
+  const ValidationIssue({required this.field, required this.message});
+
+  final String field;
+  final String message;
+
+  @override
+  String toString() => '$field: $message';
+}
+
+class ModelValidationException implements Exception {
+  const ModelValidationException(this.modelName, this.issues);
+
+  final String modelName;
+  final List<ValidationIssue> issues;
+
+  @override
+  String toString() => '$modelName is invalid: ${issues.join('; ')}';
+}
+
 class ApiPagination {
   const ApiPagination({
     this.page,
@@ -71,6 +106,7 @@ class ApiResponse<T> {
     this.pagination,
     this.raw = const <String, dynamic>{},
     this.statusCode,
+    this.headers = const <String, String>{},
   });
 
   final bool success;
@@ -79,8 +115,10 @@ class ApiResponse<T> {
   final ApiPagination? pagination;
   final JsonMap raw;
   final int? statusCode;
+  final Map<String, String> headers;
 
   bool get isSuccess => success;
+  bool get isFailure => !success;
 
   ApiResponse<R> map<R>(R Function(T value) transform) {
     return ApiResponse<R>(
@@ -90,6 +128,7 @@ class ApiResponse<T> {
       pagination: pagination,
       raw: raw,
       statusCode: statusCode,
+      headers: headers,
     );
   }
 }
@@ -170,6 +209,43 @@ class StaticAuthTokenProvider implements AuthTokenProvider {
 
   @override
   Future<String?> readToken() async => token;
+}
+
+abstract interface class CookieStore {
+  Future<String?> read();
+  Future<void> writeSetCookieHeaders(Iterable<String> headers);
+  Future<void> clear();
+}
+
+class MemoryCookieStore implements CookieStore {
+  final Map<String, String> _cookies = <String, String>{};
+
+  @override
+  Future<String?> read() async {
+    if (_cookies.isEmpty) return null;
+    return _cookies.entries
+        .map((entry) => '${entry.key}=${entry.value}')
+        .join('; ');
+  }
+
+  @override
+  Future<void> writeSetCookieHeaders(Iterable<String> headers) async {
+    for (final rawHeader in headers) {
+      final firstPart = rawHeader.split(';').first.trim();
+      final separator = firstPart.indexOf('=');
+      if (separator <= 0) continue;
+      final name = firstPart.substring(0, separator).trim();
+      final value = firstPart.substring(separator + 1).trim();
+      if (value.isEmpty) {
+        _cookies.remove(name);
+      } else {
+        _cookies[name] = value;
+      }
+    }
+  }
+
+  @override
+  Future<void> clear() async => _cookies.clear();
 }
 
 class MultipartPart {

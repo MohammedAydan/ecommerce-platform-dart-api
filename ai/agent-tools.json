@@ -1,0 +1,2119 @@
+{
+  "schemaVersion": "1.0.0",
+  "service": "Ecommerce Platform",
+  "baseUrl": "https://ec-swart.vercel.app",
+  "sourceCommit": "ca7306ec4faae13979af256cd818723e897b02e4",
+  "executionPolicy": {
+    "defaultReadOnly": true,
+    "mutationsRequireHumanConfirmation": true,
+    "neverExposeSecretsToModels": true
+  },
+  "operations": [
+    {
+      "name": "getApiAuthCatchAll",
+      "description": "GET /api/auth/{...auth}. Source: app/api/auth/[...auth]/route.ts",
+      "method": "GET",
+      "path": "/api/auth/{...auth}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiAuthCatchAll"
+    },
+    {
+      "name": "postApiAuthCatchAll",
+      "description": "POST /api/auth/{...auth}. Source: app/api/auth/[...auth]/route.ts",
+      "method": "POST",
+      "path": "/api/auth/{...auth}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiAuthCatchAll"
+    },
+    {
+      "name": "getApiHealthReady",
+      "description": "GET /api/health/ready. Source: app/api/health/ready/route.ts",
+      "method": "GET",
+      "path": "/api/health/ready",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": false,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiHealthReady"
+    },
+    {
+      "name": "getApiHealth",
+      "description": "GET /api/health. Source: app/api/health/route.ts",
+      "method": "GET",
+      "path": "/api/health",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": false,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiHealth"
+    },
+    {
+      "name": "postApiV1AccountOrdersIdCancel",
+      "description": "POST /api/v1/account/orders/{id}/cancel. Source: app/api/v1/account/orders/[id]/cancel/route.ts",
+      "method": "POST",
+      "path": "/api/v1/account/orders/{id}/cancel",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AccountOrdersIdCancel"
+    },
+    {
+      "name": "getApiV1AccountOrdersId",
+      "description": "GET /api/v1/account/orders/{id}. Source: app/api/v1/account/orders/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/orders/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountOrdersId"
+    },
+    {
+      "name": "postApiV1AccountOrdersId",
+      "description": "POST /api/v1/account/orders/{id}. Source: app/api/v1/account/orders/[id]/route.ts",
+      "method": "POST",
+      "path": "/api/v1/account/orders/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AccountOrdersId"
+    },
+    {
+      "name": "getApiV1AccountProfile",
+      "description": "GET /api/v1/account/profile. Source: app/api/v1/account/profile/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/profile",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountProfile"
+    },
+    {
+      "name": "patchApiV1AccountProfile",
+      "description": "PATCH /api/v1/account/profile. Source: app/api/v1/account/profile/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/account/profile",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AccountProfile"
+    },
+    {
+      "name": "getApiV1AccountReviewsId",
+      "description": "GET /api/v1/account/reviews/{id}. Source: app/api/v1/account/reviews/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/reviews/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountReviewsId"
+    },
+    {
+      "name": "deleteApiV1AccountReviewsId",
+      "description": "DELETE /api/v1/account/reviews/{id}. Source: app/api/v1/account/reviews/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/account/reviews/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AccountReviewsId"
+    },
+    {
+      "name": "getApiV1AccountReviews",
+      "description": "GET /api/v1/account/reviews. Source: app/api/v1/account/reviews/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/reviews",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountReviews"
+    },
+    {
+      "name": "postApiV1AccountReviews",
+      "description": "POST /api/v1/account/reviews. Source: app/api/v1/account/reviews/route.ts",
+      "method": "POST",
+      "path": "/api/v1/account/reviews",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AccountReviews"
+    },
+    {
+      "name": "postApiV1AccountSecurity",
+      "description": "POST /api/v1/account/security. Source: app/api/v1/account/security/route.ts",
+      "method": "POST",
+      "path": "/api/v1/account/security",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AccountSecurity"
+    },
+    {
+      "name": "getApiV1AccountSessions",
+      "description": "GET /api/v1/account/sessions. Source: app/api/v1/account/sessions/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/sessions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountSessions"
+    },
+    {
+      "name": "deleteApiV1AccountSessions",
+      "description": "DELETE /api/v1/account/sessions. Source: app/api/v1/account/sessions/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/account/sessions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AccountSessions"
+    },
+    {
+      "name": "getApiV1AccountSettings",
+      "description": "GET /api/v1/account/settings. Source: app/api/v1/account/settings/route.ts",
+      "method": "GET",
+      "path": "/api/v1/account/settings",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AccountSettings"
+    },
+    {
+      "name": "patchApiV1AccountSettings",
+      "description": "PATCH /api/v1/account/settings. Source: app/api/v1/account/settings/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/account/settings",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AccountSettings"
+    },
+    {
+      "name": "putApiV1AddressesIdDefault",
+      "description": "PUT /api/v1/addresses/{id}/default. Source: app/api/v1/addresses/[id]/default/route.ts",
+      "method": "PUT",
+      "path": "/api/v1/addresses/{id}/default",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "putApiV1AddressesIdDefault"
+    },
+    {
+      "name": "patchApiV1AddressesId",
+      "description": "PATCH /api/v1/addresses/{id}. Source: app/api/v1/addresses/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/addresses/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AddressesId"
+    },
+    {
+      "name": "deleteApiV1AddressesId",
+      "description": "DELETE /api/v1/addresses/{id}. Source: app/api/v1/addresses/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/addresses/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AddressesId"
+    },
+    {
+      "name": "getApiV1Addresses",
+      "description": "GET /api/v1/addresses. Source: app/api/v1/addresses/route.ts",
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Addresses"
+    },
+    {
+      "name": "postApiV1Addresses",
+      "description": "POST /api/v1/addresses. Source: app/api/v1/addresses/route.ts",
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Addresses"
+    },
+    {
+      "name": "deleteApiV1Addresses",
+      "description": "DELETE /api/v1/addresses. Source: app/api/v1/addresses/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/addresses",
+      "pathParameters": [],
+      "queryParameters": [
+        "id"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1Addresses"
+    },
+    {
+      "name": "getApiV1AdminAuditLogs",
+      "description": "GET /api/v1/admin/audit-logs. Source: app/api/v1/admin/audit-logs/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "pathParameters": [],
+      "queryParameters": [
+        "action",
+        "limit",
+        "page",
+        "q"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminAuditLogs"
+    },
+    {
+      "name": "patchApiV1AdminBrandsId",
+      "description": "PATCH /api/v1/admin/brands/{id}. Source: app/api/v1/admin/brands/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/brands/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminBrandsId"
+    },
+    {
+      "name": "deleteApiV1AdminBrandsId",
+      "description": "DELETE /api/v1/admin/brands/{id}. Source: app/api/v1/admin/brands/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/brands/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminBrandsId"
+    },
+    {
+      "name": "getApiV1AdminBrands",
+      "description": "GET /api/v1/admin/brands. Source: app/api/v1/admin/brands/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/brands",
+      "pathParameters": [],
+      "queryParameters": [
+        "includeTranslations",
+        "limit",
+        "page",
+        "q"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminBrands"
+    },
+    {
+      "name": "postApiV1AdminBrands",
+      "description": "POST /api/v1/admin/brands. Source: app/api/v1/admin/brands/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/brands",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminBrands"
+    },
+    {
+      "name": "patchApiV1AdminCategoriesId",
+      "description": "PATCH /api/v1/admin/categories/{id}. Source: app/api/v1/admin/categories/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/categories/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminCategoriesId"
+    },
+    {
+      "name": "deleteApiV1AdminCategoriesId",
+      "description": "DELETE /api/v1/admin/categories/{id}. Source: app/api/v1/admin/categories/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/categories/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminCategoriesId"
+    },
+    {
+      "name": "getApiV1AdminCategories",
+      "description": "GET /api/v1/admin/categories. Source: app/api/v1/admin/categories/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/categories",
+      "pathParameters": [],
+      "queryParameters": [
+        "includeTranslations",
+        "limit",
+        "page",
+        "search"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminCategories"
+    },
+    {
+      "name": "postApiV1AdminCategories",
+      "description": "POST /api/v1/admin/categories. Source: app/api/v1/admin/categories/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/categories",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminCategories"
+    },
+    {
+      "name": "patchApiV1AdminContactId",
+      "description": "PATCH /api/v1/admin/contact/{id}. Source: app/api/v1/admin/contact/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/contact/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminContactId"
+    },
+    {
+      "name": "getApiV1AdminContact",
+      "description": "GET /api/v1/admin/contact. Source: app/api/v1/admin/contact/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/contact",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "search",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminContact"
+    },
+    {
+      "name": "postApiV1AdminCouponsIdReset",
+      "description": "POST /api/v1/admin/coupons/{id}/reset. Source: app/api/v1/admin/coupons/[id]/reset/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/coupons/{id}/reset",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminCouponsIdReset"
+    },
+    {
+      "name": "patchApiV1AdminCouponsId",
+      "description": "PATCH /api/v1/admin/coupons/{id}. Source: app/api/v1/admin/coupons/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/coupons/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminCouponsId"
+    },
+    {
+      "name": "deleteApiV1AdminCouponsId",
+      "description": "DELETE /api/v1/admin/coupons/{id}. Source: app/api/v1/admin/coupons/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/coupons/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminCouponsId"
+    },
+    {
+      "name": "getApiV1AdminCoupons",
+      "description": "GET /api/v1/admin/coupons. Source: app/api/v1/admin/coupons/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/coupons",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "search",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminCoupons"
+    },
+    {
+      "name": "postApiV1AdminCoupons",
+      "description": "POST /api/v1/admin/coupons. Source: app/api/v1/admin/coupons/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/coupons",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminCoupons"
+    },
+    {
+      "name": "getApiV1AdminCustomers",
+      "description": "GET /api/v1/admin/customers. Source: app/api/v1/admin/customers/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/customers",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "q"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminCustomers"
+    },
+    {
+      "name": "getApiV1AdminDashboard",
+      "description": "GET /api/v1/admin/dashboard. Source: app/api/v1/admin/dashboard/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminDashboard"
+    },
+    {
+      "name": "postApiV1AdminHeroSlidesIdDuplicate",
+      "description": "POST /api/v1/admin/hero-slides/{id}/duplicate. Source: app/api/v1/admin/hero-slides/[id]/duplicate/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/hero-slides/{id}/duplicate",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminHeroSlidesIdDuplicate"
+    },
+    {
+      "name": "getApiV1AdminHeroSlidesId",
+      "description": "GET /api/v1/admin/hero-slides/{id}. Source: app/api/v1/admin/hero-slides/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/hero-slides/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminHeroSlidesId"
+    },
+    {
+      "name": "patchApiV1AdminHeroSlidesId",
+      "description": "PATCH /api/v1/admin/hero-slides/{id}. Source: app/api/v1/admin/hero-slides/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/hero-slides/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminHeroSlidesId"
+    },
+    {
+      "name": "deleteApiV1AdminHeroSlidesId",
+      "description": "DELETE /api/v1/admin/hero-slides/{id}. Source: app/api/v1/admin/hero-slides/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/hero-slides/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminHeroSlidesId"
+    },
+    {
+      "name": "patchApiV1AdminHeroSlidesReorder",
+      "description": "PATCH /api/v1/admin/hero-slides/reorder. Source: app/api/v1/admin/hero-slides/reorder/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/hero-slides/reorder",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminHeroSlidesReorder"
+    },
+    {
+      "name": "getApiV1AdminHeroSlides",
+      "description": "GET /api/v1/admin/hero-slides. Source: app/api/v1/admin/hero-slides/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/hero-slides",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminHeroSlides"
+    },
+    {
+      "name": "postApiV1AdminHeroSlides",
+      "description": "POST /api/v1/admin/hero-slides. Source: app/api/v1/admin/hero-slides/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/hero-slides",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminHeroSlides"
+    },
+    {
+      "name": "getApiV1AdminInventory",
+      "description": "GET /api/v1/admin/inventory. Source: app/api/v1/admin/inventory/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/inventory",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "search"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminInventory"
+    },
+    {
+      "name": "patchApiV1AdminInventory",
+      "description": "PATCH /api/v1/admin/inventory. Source: app/api/v1/admin/inventory/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/inventory",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminInventory"
+    },
+    {
+      "name": "getApiV1AdminOrdersId",
+      "description": "GET /api/v1/admin/orders/{id}. Source: app/api/v1/admin/orders/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminOrdersId"
+    },
+    {
+      "name": "patchApiV1AdminOrdersId",
+      "description": "PATCH /api/v1/admin/orders/{id}. Source: app/api/v1/admin/orders/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/orders/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminOrdersId"
+    },
+    {
+      "name": "getApiV1AdminOrders",
+      "description": "GET /api/v1/admin/orders. Source: app/api/v1/admin/orders/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminOrders"
+    },
+    {
+      "name": "patchApiV1AdminOrders",
+      "description": "PATCH /api/v1/admin/orders. Source: app/api/v1/admin/orders/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/orders",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminOrders"
+    },
+    {
+      "name": "patchApiV1AdminPaymentProvidersProvider",
+      "description": "PATCH /api/v1/admin/payment-providers/{provider}. Source: app/api/v1/admin/payment-providers/[provider]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/payment-providers/{provider}",
+      "pathParameters": [
+        "provider"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminPaymentProvidersProvider"
+    },
+    {
+      "name": "postApiV1AdminPaymentProvidersProviderTest",
+      "description": "POST /api/v1/admin/payment-providers/{provider}/test. Source: app/api/v1/admin/payment-providers/[provider]/test/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/payment-providers/{provider}/test",
+      "pathParameters": [
+        "provider"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminPaymentProvidersProviderTest"
+    },
+    {
+      "name": "getApiV1AdminPaymentProviders",
+      "description": "GET /api/v1/admin/payment-providers. Source: app/api/v1/admin/payment-providers/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/payment-providers",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminPaymentProviders"
+    },
+    {
+      "name": "postApiV1AdminPaymentProviders",
+      "description": "POST /api/v1/admin/payment-providers. Source: app/api/v1/admin/payment-providers/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/payment-providers",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminPaymentProviders"
+    },
+    {
+      "name": "getApiV1AdminPayments",
+      "description": "GET /api/v1/admin/payments. Source: app/api/v1/admin/payments/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/payments",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminPayments"
+    },
+    {
+      "name": "patchApiV1AdminPriceListsId",
+      "description": "PATCH /api/v1/admin/price-lists/{id}. Source: app/api/v1/admin/price-lists/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/price-lists/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminPriceListsId"
+    },
+    {
+      "name": "deleteApiV1AdminPriceListsId",
+      "description": "DELETE /api/v1/admin/price-lists/{id}. Source: app/api/v1/admin/price-lists/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/price-lists/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminPriceListsId"
+    },
+    {
+      "name": "getApiV1AdminPriceLists",
+      "description": "GET /api/v1/admin/price-lists. Source: app/api/v1/admin/price-lists/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/price-lists",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminPriceLists"
+    },
+    {
+      "name": "postApiV1AdminPriceLists",
+      "description": "POST /api/v1/admin/price-lists. Source: app/api/v1/admin/price-lists/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/price-lists",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminPriceLists"
+    },
+    {
+      "name": "getApiV1AdminProducts",
+      "description": "GET /api/v1/admin/products. Source: app/api/v1/admin/products/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/products",
+      "pathParameters": [],
+      "queryParameters": [
+        "categoryId",
+        "includeTranslations",
+        "limit",
+        "page",
+        "q",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminProducts"
+    },
+    {
+      "name": "postApiV1AdminProducts",
+      "description": "POST /api/v1/admin/products. Source: app/api/v1/admin/products/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/products",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminProducts"
+    },
+    {
+      "name": "patchApiV1AdminProducts",
+      "description": "PATCH /api/v1/admin/products. Source: app/api/v1/admin/products/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/products",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminProducts"
+    },
+    {
+      "name": "deleteApiV1AdminProducts",
+      "description": "DELETE /api/v1/admin/products. Source: app/api/v1/admin/products/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/products",
+      "pathParameters": [],
+      "queryParameters": [
+        "id"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminProducts"
+    },
+    {
+      "name": "patchApiV1AdminReviewsId",
+      "description": "PATCH /api/v1/admin/reviews/{id}. Source: app/api/v1/admin/reviews/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/reviews/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminReviewsId"
+    },
+    {
+      "name": "deleteApiV1AdminReviewsId",
+      "description": "DELETE /api/v1/admin/reviews/{id}. Source: app/api/v1/admin/reviews/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/reviews/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminReviewsId"
+    },
+    {
+      "name": "getApiV1AdminReviews",
+      "description": "GET /api/v1/admin/reviews. Source: app/api/v1/admin/reviews/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/reviews",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "q",
+        "status"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminReviews"
+    },
+    {
+      "name": "patchApiV1AdminReviews",
+      "description": "PATCH /api/v1/admin/reviews. Source: app/api/v1/admin/reviews/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/reviews",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminReviews"
+    },
+    {
+      "name": "getApiV1AdminRoles",
+      "description": "GET /api/v1/admin/roles. Source: app/api/v1/admin/roles/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminRoles"
+    },
+    {
+      "name": "postApiV1AdminRoles",
+      "description": "POST /api/v1/admin/roles. Source: app/api/v1/admin/roles/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/roles",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminRoles"
+    },
+    {
+      "name": "getApiV1AdminSettings",
+      "description": "GET /api/v1/admin/settings. Source: app/api/v1/admin/settings/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/settings",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminSettings"
+    },
+    {
+      "name": "postApiV1AdminSettings",
+      "description": "POST /api/v1/admin/settings. Source: app/api/v1/admin/settings/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/settings",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [
+        "user-agent",
+        "x-forwarded-for"
+      ],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminSettings"
+    },
+    {
+      "name": "patchApiV1AdminShippingId",
+      "description": "PATCH /api/v1/admin/shipping/{id}. Source: app/api/v1/admin/shipping/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/shipping/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminShippingId"
+    },
+    {
+      "name": "deleteApiV1AdminShippingId",
+      "description": "DELETE /api/v1/admin/shipping/{id}. Source: app/api/v1/admin/shipping/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/shipping/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminShippingId"
+    },
+    {
+      "name": "getApiV1AdminShipping",
+      "description": "GET /api/v1/admin/shipping. Source: app/api/v1/admin/shipping/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/shipping",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminShipping"
+    },
+    {
+      "name": "postApiV1AdminShipping",
+      "description": "POST /api/v1/admin/shipping. Source: app/api/v1/admin/shipping/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/shipping",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminShipping"
+    },
+    {
+      "name": "patchApiV1AdminShippingCountriesId",
+      "description": "PATCH /api/v1/admin/shipping-countries/{id}. Source: app/api/v1/admin/shipping-countries/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/shipping-countries/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminShippingCountriesId"
+    },
+    {
+      "name": "deleteApiV1AdminShippingCountriesId",
+      "description": "DELETE /api/v1/admin/shipping-countries/{id}. Source: app/api/v1/admin/shipping-countries/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/shipping-countries/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminShippingCountriesId"
+    },
+    {
+      "name": "getApiV1AdminShippingCountries",
+      "description": "GET /api/v1/admin/shipping-countries. Source: app/api/v1/admin/shipping-countries/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/shipping-countries",
+      "pathParameters": [],
+      "queryParameters": [
+        "active",
+        "limit",
+        "page",
+        "search"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminShippingCountries"
+    },
+    {
+      "name": "postApiV1AdminShippingCountries",
+      "description": "POST /api/v1/admin/shipping-countries. Source: app/api/v1/admin/shipping-countries/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/shipping-countries",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [
+        "user-agent",
+        "x-forwarded-for"
+      ],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminShippingCountries"
+    },
+    {
+      "name": "patchApiV1AdminShippingGovernoratesId",
+      "description": "PATCH /api/v1/admin/shipping-governorates/{id}. Source: app/api/v1/admin/shipping-governorates/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/shipping-governorates/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminShippingGovernoratesId"
+    },
+    {
+      "name": "deleteApiV1AdminShippingGovernoratesId",
+      "description": "DELETE /api/v1/admin/shipping-governorates/{id}. Source: app/api/v1/admin/shipping-governorates/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/shipping-governorates/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminShippingGovernoratesId"
+    },
+    {
+      "name": "getApiV1AdminShippingGovernorates",
+      "description": "GET /api/v1/admin/shipping-governorates. Source: app/api/v1/admin/shipping-governorates/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/shipping-governorates",
+      "pathParameters": [],
+      "queryParameters": [
+        "active",
+        "country",
+        "limit",
+        "page",
+        "search"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminShippingGovernorates"
+    },
+    {
+      "name": "postApiV1AdminShippingGovernorates",
+      "description": "POST /api/v1/admin/shipping-governorates. Source: app/api/v1/admin/shipping-governorates/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/shipping-governorates",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminShippingGovernorates"
+    },
+    {
+      "name": "patchApiV1AdminTagsId",
+      "description": "PATCH /api/v1/admin/tags/{id}. Source: app/api/v1/admin/tags/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/tags/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminTagsId"
+    },
+    {
+      "name": "deleteApiV1AdminTagsId",
+      "description": "DELETE /api/v1/admin/tags/{id}. Source: app/api/v1/admin/tags/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/tags/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminTagsId"
+    },
+    {
+      "name": "getApiV1AdminTags",
+      "description": "GET /api/v1/admin/tags. Source: app/api/v1/admin/tags/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/tags",
+      "pathParameters": [],
+      "queryParameters": [
+        "active",
+        "limit",
+        "page",
+        "q"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminTags"
+    },
+    {
+      "name": "postApiV1AdminTags",
+      "description": "POST /api/v1/admin/tags. Source: app/api/v1/admin/tags/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/tags",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminTags"
+    },
+    {
+      "name": "getApiV1AdminUsersId",
+      "description": "GET /api/v1/admin/users/{id}. Source: app/api/v1/admin/users/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/users/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminUsersId"
+    },
+    {
+      "name": "patchApiV1AdminUsersId",
+      "description": "PATCH /api/v1/admin/users/{id}. Source: app/api/v1/admin/users/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/users/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminUsersId"
+    },
+    {
+      "name": "getApiV1AdminUsers",
+      "description": "GET /api/v1/admin/users. Source: app/api/v1/admin/users/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/users",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page",
+        "q"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminUsers"
+    },
+    {
+      "name": "patchApiV1AdminWalletsId",
+      "description": "PATCH /api/v1/admin/wallets/{id}. Source: app/api/v1/admin/wallets/[id]/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/admin/wallets/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1AdminWalletsId"
+    },
+    {
+      "name": "deleteApiV1AdminWalletsId",
+      "description": "DELETE /api/v1/admin/wallets/{id}. Source: app/api/v1/admin/wallets/[id]/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/admin/wallets/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1AdminWalletsId"
+    },
+    {
+      "name": "getApiV1AdminWallets",
+      "description": "GET /api/v1/admin/wallets. Source: app/api/v1/admin/wallets/route.ts",
+      "method": "GET",
+      "path": "/api/v1/admin/wallets",
+      "pathParameters": [],
+      "queryParameters": [
+        "active",
+        "limit",
+        "page",
+        "search"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AdminWallets"
+    },
+    {
+      "name": "postApiV1AdminWallets",
+      "description": "POST /api/v1/admin/wallets. Source: app/api/v1/admin/wallets/route.ts",
+      "method": "POST",
+      "path": "/api/v1/admin/wallets",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AdminWallets"
+    },
+    {
+      "name": "getApiV1AuthCatchAll",
+      "description": "GET /api/v1/auth/{...auth}. Source: app/api/v1/auth/[...auth]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/auth/{...auth}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1AuthCatchAll"
+    },
+    {
+      "name": "postApiV1AuthCatchAll",
+      "description": "POST /api/v1/auth/{...auth}. Source: app/api/v1/auth/[...auth]/route.ts",
+      "method": "POST",
+      "path": "/api/v1/auth/{...auth}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1AuthCatchAll"
+    },
+    {
+      "name": "getApiV1Brands",
+      "description": "GET /api/v1/brands. Source: app/api/v1/brands/route.ts",
+      "method": "GET",
+      "path": "/api/v1/brands",
+      "pathParameters": [],
+      "queryParameters": [
+        "locale"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Brands"
+    },
+    {
+      "name": "postApiV1CartMerge",
+      "description": "POST /api/v1/cart/merge. Source: app/api/v1/cart/merge/route.ts",
+      "method": "POST",
+      "path": "/api/v1/cart/merge",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [
+        "cart_id"
+      ],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1CartMerge"
+    },
+    {
+      "name": "getApiV1Cart",
+      "description": "GET /api/v1/cart. Source: app/api/v1/cart/route.ts",
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Cart"
+    },
+    {
+      "name": "postApiV1Cart",
+      "description": "POST /api/v1/cart. Source: app/api/v1/cart/route.ts",
+      "method": "POST",
+      "path": "/api/v1/cart",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Cart"
+    },
+    {
+      "name": "patchApiV1Cart",
+      "description": "PATCH /api/v1/cart. Source: app/api/v1/cart/route.ts",
+      "method": "PATCH",
+      "path": "/api/v1/cart",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "patchApiV1Cart"
+    },
+    {
+      "name": "deleteApiV1Cart",
+      "description": "DELETE /api/v1/cart. Source: app/api/v1/cart/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/cart",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1Cart"
+    },
+    {
+      "name": "getApiV1Categories",
+      "description": "GET /api/v1/categories. Source: app/api/v1/categories/route.ts",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "pathParameters": [],
+      "queryParameters": [
+        "locale"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Categories"
+    },
+    {
+      "name": "postApiV1CheckoutQuote",
+      "description": "POST /api/v1/checkout/quote. Source: app/api/v1/checkout/quote/route.ts",
+      "method": "POST",
+      "path": "/api/v1/checkout/quote",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1CheckoutQuote"
+    },
+    {
+      "name": "postApiV1Checkout",
+      "description": "POST /api/v1/checkout. Source: app/api/v1/checkout/route.ts",
+      "method": "POST",
+      "path": "/api/v1/checkout",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Checkout"
+    },
+    {
+      "name": "getApiV1CommerceCountry",
+      "description": "GET /api/v1/commerce/country. Source: app/api/v1/commerce/country/route.ts",
+      "method": "GET",
+      "path": "/api/v1/commerce/country",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1CommerceCountry"
+    },
+    {
+      "name": "postApiV1CommerceCountry",
+      "description": "POST /api/v1/commerce/country. Source: app/api/v1/commerce/country/route.ts",
+      "method": "POST",
+      "path": "/api/v1/commerce/country",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1CommerceCountry"
+    },
+    {
+      "name": "postApiV1Contact",
+      "description": "POST /api/v1/contact. Source: app/api/v1/contact/route.ts",
+      "method": "POST",
+      "path": "/api/v1/contact",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [
+        "user-agent"
+      ],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Contact"
+    },
+    {
+      "name": "getApiV1Hero",
+      "description": "GET /api/v1/hero. Source: app/api/v1/hero/route.ts",
+      "method": "GET",
+      "path": "/api/v1/hero",
+      "pathParameters": [],
+      "queryParameters": [
+        "locale"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Hero"
+    },
+    {
+      "name": "postApiV1Locale",
+      "description": "POST /api/v1/locale. Source: app/api/v1/locale/route.ts",
+      "method": "POST",
+      "path": "/api/v1/locale",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Locale"
+    },
+    {
+      "name": "postApiV1MediaDelete",
+      "description": "POST /api/v1/media/delete. Source: app/api/v1/media/delete/route.ts",
+      "method": "POST",
+      "path": "/api/v1/media/delete",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1MediaDelete"
+    },
+    {
+      "name": "postApiV1MediaUpload",
+      "description": "POST /api/v1/media/upload. Source: app/api/v1/media/upload/route.ts",
+      "method": "POST",
+      "path": "/api/v1/media/upload",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1MediaUpload"
+    },
+    {
+      "name": "getApiV1OrdersId",
+      "description": "GET /api/v1/orders/{id}. Source: app/api/v1/orders/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/orders/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1OrdersId"
+    },
+    {
+      "name": "postApiV1Orders",
+      "description": "POST /api/v1/orders. Source: app/api/v1/orders/route.ts",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [
+        "Idempotency-Key",
+        "idempotency-key"
+      ],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Orders"
+    },
+    {
+      "name": "getApiV1Orders",
+      "description": "GET /api/v1/orders. Source: app/api/v1/orders/route.ts",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "pathParameters": [],
+      "queryParameters": [
+        "limit",
+        "page"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Orders"
+    },
+    {
+      "name": "getApiV1PaymentsPaymobPaymentId",
+      "description": "GET /api/v1/payments/paymob/{paymentId}. Source: app/api/v1/payments/paymob/[paymentId]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/payments/paymob/{paymentId}",
+      "pathParameters": [
+        "paymentId"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1PaymentsPaymobPaymentId"
+    },
+    {
+      "name": "postApiV1PaymentsPaymobCreate",
+      "description": "POST /api/v1/payments/paymob/create. Source: app/api/v1/payments/paymob/create/route.ts",
+      "method": "POST",
+      "path": "/api/v1/payments/paymob/create",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1PaymentsPaymobCreate"
+    },
+    {
+      "name": "getApiV1ProductsIdReviews",
+      "description": "GET /api/v1/products/{id}/reviews. Source: app/api/v1/products/[id]/reviews/route.ts",
+      "method": "GET",
+      "path": "/api/v1/products/{id}/reviews",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ProductsIdReviews"
+    },
+    {
+      "name": "postApiV1ProductsIdReviews",
+      "description": "POST /api/v1/products/{id}/reviews. Source: app/api/v1/products/[id]/reviews/route.ts",
+      "method": "POST",
+      "path": "/api/v1/products/{id}/reviews",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1ProductsIdReviews"
+    },
+    {
+      "name": "getApiV1ProductsId",
+      "description": "GET /api/v1/products/{id}. Source: app/api/v1/products/[id]/route.ts",
+      "method": "GET",
+      "path": "/api/v1/products/{id}",
+      "pathParameters": [
+        "id"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ProductsId"
+    },
+    {
+      "name": "getApiV1Products",
+      "description": "GET /api/v1/products. Source: app/api/v1/products/route.ts",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "pathParameters": [],
+      "queryParameters": [
+        "brand",
+        "category",
+        "inStockOnly",
+        "limit",
+        "locale",
+        "maxPrice",
+        "minPrice",
+        "page",
+        "search",
+        "sort"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Products"
+    },
+    {
+      "name": "getApiV1ShippingCountriesCodePaymentMethods",
+      "description": "GET /api/v1/shipping/countries/{code}/payment-methods. Source: app/api/v1/shipping/countries/[code]/payment-methods/route.ts",
+      "method": "GET",
+      "path": "/api/v1/shipping/countries/{code}/payment-methods",
+      "pathParameters": [
+        "code"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ShippingCountriesCodePaymentMethods"
+    },
+    {
+      "name": "getApiV1ShippingCountries",
+      "description": "GET /api/v1/shipping/countries. Source: app/api/v1/shipping/countries/route.ts",
+      "method": "GET",
+      "path": "/api/v1/shipping/countries",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ShippingCountries"
+    },
+    {
+      "name": "getApiV1ShippingGovernorates",
+      "description": "GET /api/v1/shipping/governorates. Source: app/api/v1/shipping/governorates/route.ts",
+      "method": "GET",
+      "path": "/api/v1/shipping/governorates",
+      "pathParameters": [],
+      "queryParameters": [
+        "country"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ShippingGovernorates"
+    },
+    {
+      "name": "getApiV1ShippingRegions",
+      "description": "GET /api/v1/shipping/regions. Source: app/api/v1/shipping/regions/route.ts",
+      "method": "GET",
+      "path": "/api/v1/shipping/regions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1ShippingRegions"
+    },
+    {
+      "name": "getApiV1Wallets",
+      "description": "GET /api/v1/wallets. Source: app/api/v1/wallets/route.ts",
+      "method": "GET",
+      "path": "/api/v1/wallets",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Wallets"
+    },
+    {
+      "name": "postApiV1WebhooksProvider",
+      "description": "POST /api/v1/webhooks/{provider}. Source: app/api/v1/webhooks/[provider]/route.ts",
+      "method": "POST",
+      "path": "/api/v1/webhooks/{provider}",
+      "pathParameters": [
+        "provider"
+      ],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1WebhooksProvider"
+    },
+    {
+      "name": "getApiV1Wishlist",
+      "description": "GET /api/v1/wishlist. Source: app/api/v1/wishlist/route.ts",
+      "method": "GET",
+      "path": "/api/v1/wishlist",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": true,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": false,
+      "dartMethod": "getApiV1Wishlist"
+    },
+    {
+      "name": "postApiV1Wishlist",
+      "description": "POST /api/v1/wishlist. Source: app/api/v1/wishlist/route.ts",
+      "method": "POST",
+      "path": "/api/v1/wishlist",
+      "pathParameters": [],
+      "queryParameters": [],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "postApiV1Wishlist"
+    },
+    {
+      "name": "deleteApiV1Wishlist",
+      "description": "DELETE /api/v1/wishlist. Source: app/api/v1/wishlist/route.ts",
+      "method": "DELETE",
+      "path": "/api/v1/wishlist",
+      "pathParameters": [],
+      "queryParameters": [
+        "productId"
+      ],
+      "headerParameters": [],
+      "cookieParameters": [],
+      "readOnly": false,
+      "requiresAuthentication": true,
+      "requiresHumanConfirmation": true,
+      "dartMethod": "deleteApiV1Wishlist"
+    }
+  ]
+}

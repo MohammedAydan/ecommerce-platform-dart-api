@@ -55,3 +55,9 @@
 ## حدود الادعاء
 
 تم التحقق فعليًا من كل العمليات العامة المناسبة للاختبار دون حساب مستخدم، ومن سلوك authorization guards، ومن checkout quote. لم يتم اختبار operations التي تتطلب login حقيقي أو صلاحيات admin أو تغيّر بيانات مثل إنشاء الطلب، تعديل المنتجات، رفع الملفات، الدفع، أو webhooks؛ تنفيذ هذه العمليات يحتاج credentials وبيانات اختبار وموافقة صريحة قبل إرسالها إلى production.
+
+## Typed SDK verification
+
+بعد ترقية المكتبة إلى version `0.2.0` تم تشغيل `tool/typed_production_smoke.dart` باستخدام `client.publicApi`, `client.cart`, `client.account`, و`client.checkout` بدل raw route methods. نجحت **11/11** checks: products، categories، brands، shipping countries، governorates، payment methods، commerce country، guest cart، account authorization guard، product reviews، وcheckout quote.
+
+كما نجح `dart analyze` و`dart test` بعد إضافة strict models وcookie persistence وagent tools. عملية checkout quote بقيت non-mutating، ولم يتم تنفيذ order أو payment أو admin mutation على production.
