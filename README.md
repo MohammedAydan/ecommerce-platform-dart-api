@@ -45,6 +45,10 @@ final currentSession = await client.auth.session();
 
 يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage.
 
+## Transport security
+
+يفرض transport استخدام `https://` افتراضيًا، ويرفض credentials أو fragments داخل `baseUrl`. لا تستخدم `allowInsecureHttp: true` إلا مع endpoint محلي تحت سيطرة المطور أثناء debug؛ هذا الخيار غير مناسب للإنتاج لأن bearer tokens وcookies ستنتقل عبر اتصال غير مشفر. لا تطبع request headers أو tokens أو cookie values في logs، ولا تضع الأسرار داخل arguments الخاصة بأدوات AI.
+
 ## Typed domain clients
 
 | Client | الاستخدام |
