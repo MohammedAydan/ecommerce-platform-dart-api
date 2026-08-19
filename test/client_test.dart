@@ -219,6 +219,33 @@ void main() {
     transport.close();
   });
 
+  test('public payment methods decode the country response object', () async {
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((request) async {
+        expect(request.url.path, '/api/v1/shipping/countries/EG/payment-methods');
+        return http.Response(
+          jsonEncode({
+            'success': true,
+            'data': {
+              'country': 'EG',
+              'methods': [
+                {'type': 'PAYMOB', 'name': 'Card'},
+                {'type': 'COD', 'name': 'Cash on delivery'},
+              ],
+            },
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }),
+    );
+    final response = await PublicApiClient(transport).paymentMethods(countryCode: 'EG');
+    expect(response.data?['country'], 'EG');
+    expect((response.data?['methods'] as List).length, 2);
+    transport.close();
+  });
+
   test('auth facade uses Better Auth email endpoint and typed body', () async {
     late http.Request captured;
     final transport = EcommerceApiClient(

@@ -76,11 +76,11 @@ class PublicApiClient {
           query: {'country': country},
           authenticated: false,
           decoder: (data) => _decodeMaps(data));
-  Future<ApiResponse<List<JsonMap>>> paymentMethods(
+  Future<ApiResponse<JsonMap>> paymentMethods(
           {required String countryCode}) =>
-      _client.request<List<JsonMap>>(
+      _client.request<JsonMap>(
           'GET', '/api/v1/shipping/countries/$countryCode/payment-methods',
-          authenticated: false, decoder: (data) => _decodeMaps(data));
+          authenticated: false, decoder: _decodeMap);
   Future<ApiResponse<List<Review>>> productReviews(String productId,
           {ProductReviewsQuery query = const ProductReviewsQuery()}) =>
       _client.request<List<Review>>(
