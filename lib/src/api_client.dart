@@ -20,7 +20,8 @@ class EcommerceApiClient {
     this.maxRetries = 2,
     this.retryDelay = const Duration(milliseconds: 250),
     this.retryUnsafeRequests = false,
-  })  : baseUrl = baseUrl.replaceFirst(RegExp(r'/+$'), ''),
+    this.allowInsecureHttp = false,
+  })  : baseUrl = _validateBaseUrl(baseUrl, allowInsecureHttp: allowInsecureHttp),
         _httpClient = httpClient ?? http.Client(),
         _defaultHeaders = Map.unmodifiable(defaultHeaders ?? const {});
 
@@ -35,6 +36,41 @@ class EcommerceApiClient {
   final int maxRetries;
   final Duration retryDelay;
   final bool retryUnsafeRequests;
+  /// Allows cleartext HTTP only for explicitly controlled local development.
+  /// Keep this false for production clients because bearer tokens and cookies
+  /// must never cross an unencrypted connection.
+  final bool allowInsecureHttp;
+
+  static String _validateBaseUrl(
+    String value, {
+    required bool allowInsecureHttp,
+  }) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) {
+      throw ArgumentError.value(value, 'baseUrl', 'must not be empty');
+    }
+    final uri = Uri.tryParse(trimmed);
+    if (uri == null || uri.host.isEmpty) {
+      throw ArgumentError.value(value, 'baseUrl', 'must be an absolute URL');
+    }
+    if (uri.userInfo.isNotEmpty) {
+      throw ArgumentError.value(value, 'baseUrl', 'must not contain embedded credentials');
+    }
+    if (uri.fragment.isNotEmpty) {
+      throw ArgumentError.value(value, 'baseUrl', 'must not contain a fragment');
+    }
+    final scheme = uri.scheme.toLowerCase();
+    final isHttps = scheme == 'https';
+    final isHttp = scheme == 'http';
+    if (!isHttps && !(allowInsecureHttp && isHttp)) {
+      throw ArgumentError.value(
+        value,
+        'baseUrl',
+        'must use HTTPS; set allowInsecureHttp only for local development',
+      );
+    }
+    return trimmed.replaceFirst(RegExp(r'/+$'), '');
+  }
 
   void close() => _httpClient.close();
 

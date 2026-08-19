@@ -31,6 +31,7 @@ class EcommercePlatformClient {
     int maxRetries = 2,
     Duration retryDelay = const Duration(milliseconds: 250),
     bool retryUnsafeRequests = false,
+    bool allowInsecureHttp = false,
   }) : transport = EcommerceApiClient(
           baseUrl: baseUrl,
           authTokenProvider: authTokenProvider,
@@ -42,6 +43,7 @@ class EcommercePlatformClient {
           maxRetries: maxRetries,
           retryDelay: retryDelay,
           retryUnsafeRequests: retryUnsafeRequests,
+          allowInsecureHttp: allowInsecureHttp,
         ) {
     api = EcommercePlatformApi(transport);
     auth = AuthApiClient(transport);

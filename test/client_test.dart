@@ -6,6 +6,26 @@ import 'package:http/testing.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('requires HTTPS base URLs by default', () {
+    expect(
+      () => EcommerceApiClient(baseUrl: 'http://api.example.test'),
+      throwsA(isA<ArgumentError>()),
+    );
+    expect(
+      () => EcommercePlatformClient(baseUrl: 'https://user:pass@api.example.test'),
+      throwsA(isA<ArgumentError>()),
+    );
+  });
+
+  test('allows explicitly configured insecure HTTP for local development', () {
+    final transport = EcommerceApiClient(
+      baseUrl: 'http://127.0.0.1:3000/',
+      allowInsecureHttp: true,
+    );
+    expect(transport.baseUrl, 'http://127.0.0.1:3000');
+    transport.close();
+  });
+
   test('adds bearer and idempotency headers and parses success envelope',
       () async {
     late http.Request captured;
