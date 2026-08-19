@@ -242,6 +242,26 @@ void main() {
     transport.close();
   });
 
+  test('typed cart client sends guest cart id on GET', () async {
+    late http.Request captured;
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((request) async {
+        captured = request;
+        return http.Response(
+          jsonEncode({'success': true, 'data': {'id': 'guest-1', 'items': []}}),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }),
+    );
+
+    final response = await CartApiClient(transport).get(cartId: 'guest-1');
+    expect(response.data?.id, 'guest-1');
+    expect(captured.headers['x-cart-id'], 'guest-1');
+    transport.close();
+  });
+
   test('manifest and agent tool catalogs are complete and safe by default', () {
     expect(ecommercePlatformOperations.length, 135);
     expect(EcommerceAgentTools.safe.length, 9);

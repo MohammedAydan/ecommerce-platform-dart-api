@@ -120,8 +120,12 @@ class CartApiClient {
   const CartApiClient(this._client);
   final EcommerceApiClient _client;
 
-  Future<ApiResponse<CartModel>> get() => _client
-      .request<CartModel>('GET', '/api/v1/cart', decoder: CartModel.fromJson);
+  Future<ApiResponse<CartModel>> get({String? cartId}) => _client.request<CartModel>(
+        'GET',
+        '/api/v1/cart',
+        headers: {if (cartId != null) 'x-cart-id': cartId},
+        decoder: CartModel.fromJson,
+      );
   Future<ApiResponse<CartModel>> add(CartItemInput request, {String? cartId}) =>
       _client.request<CartModel>('POST', '/api/v1/cart',
           body: request,
