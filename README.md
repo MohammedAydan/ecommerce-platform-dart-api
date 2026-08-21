@@ -1,6 +1,6 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **137 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `a2a201bfc3fffec9ba754fbbfe37996a911e5332`.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **137 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `b54db56f66ea6e3db2adcf08cf9e8c512f211801`.
 
 ## الفكرة الأساسية
 
@@ -188,7 +188,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 137 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 137 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1. تم التحقق من التغطية مقابل 85 ملف route في backend عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`، مع تطبيع wildcard الخاص بمسارات Better Auth إلى `{...auth}`. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
