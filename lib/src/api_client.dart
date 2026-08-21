@@ -21,7 +21,10 @@ class EcommerceApiClient {
     this.retryDelay = const Duration(milliseconds: 250),
     this.retryUnsafeRequests = false,
     this.allowInsecureHttp = false,
-  })  : baseUrl = _validateBaseUrl(baseUrl, allowInsecureHttp: allowInsecureHttp),
+  })  : baseUrl = _validateBaseUrl(
+          baseUrl,
+          allowInsecureHttp: allowInsecureHttp,
+        ),
         _httpClient = httpClient ?? http.Client(),
         _defaultHeaders = Map.unmodifiable(defaultHeaders ?? const {});
 
@@ -36,6 +39,7 @@ class EcommerceApiClient {
   final int maxRetries;
   final Duration retryDelay;
   final bool retryUnsafeRequests;
+
   /// Allows cleartext HTTP only for explicitly controlled local development.
   /// Keep this false for production clients because bearer tokens and cookies
   /// must never cross an unencrypted connection.
@@ -54,10 +58,18 @@ class EcommerceApiClient {
       throw ArgumentError.value(value, 'baseUrl', 'must be an absolute URL');
     }
     if (uri.userInfo.isNotEmpty) {
-      throw ArgumentError.value(value, 'baseUrl', 'must not contain embedded credentials');
+      throw ArgumentError.value(
+        value,
+        'baseUrl',
+        'must not contain embedded credentials',
+      );
     }
     if (uri.fragment.isNotEmpty) {
-      throw ArgumentError.value(value, 'baseUrl', 'must not contain a fragment');
+      throw ArgumentError.value(
+        value,
+        'baseUrl',
+        'must not contain a fragment',
+      );
     }
     final scheme = uri.scheme.toLowerCase();
     final isHttps = scheme == 'https';
@@ -86,10 +98,7 @@ class EcommerceApiClient {
     String? idempotencyKey,
   }) async {
     queryModel?.validateOrThrow();
-    final mergedQuery = <String, dynamic>{
-      ...?query,
-      ...?queryModel?.toQuery(),
-    };
+    final mergedQuery = <String, dynamic>{...?query, ...?queryModel?.toQuery()};
     final uri = _buildUri(path, mergedQuery.isEmpty ? null : mergedQuery);
     final normalizedMethod = method.toUpperCase();
     final encodedBody = _encodeBody(body);
@@ -97,12 +106,14 @@ class EcommerceApiClient {
 
     for (var attempt = 0; attempt <= maxRetries; attempt++) {
       final request = http.Request(normalizedMethod, uri);
-      request.headers.addAll(await _headers(
-        headers,
-        authenticated: authenticated,
-        hasJsonBody: encodedBody != null,
-        idempotencyKey: idempotencyKey,
-      ));
+      request.headers.addAll(
+        await _headers(
+          headers,
+          authenticated: authenticated,
+          hasJsonBody: encodedBody != null,
+          idempotencyKey: idempotencyKey,
+        ),
+      );
       if (encodedBody != null) request.body = encodedBody;
 
       try {
@@ -149,24 +160,21 @@ class EcommerceApiClient {
     bool authenticated = true,
   }) async {
     queryModel?.validateOrThrow();
-    final mergedQuery = <String, dynamic>{
-      ...?query,
-      ...?queryModel?.toQuery(),
-    };
+    final mergedQuery = <String, dynamic>{...?query, ...?queryModel?.toQuery()};
     final uri = _buildUri(path, mergedQuery.isEmpty ? null : mergedQuery);
     final request = http.MultipartRequest('POST', uri);
-    request.headers.addAll(await _headers(
-      headers,
-      authenticated: authenticated,
-      hasJsonBody: false,
-    ));
+    request.headers.addAll(
+      await _headers(headers, authenticated: authenticated, hasJsonBody: false),
+    );
     request.fields.addAll(fields ?? const {});
     for (final file in files) {
-      request.files.add(http.MultipartFile.fromBytes(
-        file.field,
-        file.bytes,
-        filename: file.filename,
-      ));
+      request.files.add(
+        http.MultipartFile.fromBytes(
+          file.field,
+          file.bytes,
+          filename: file.filename,
+        ),
+      );
     }
 
     try {
@@ -246,8 +254,9 @@ class EcommerceApiClient {
   Future<void> _saveResponseCookies(Map<String, String> headers) async {
     final raw = headers['set-cookie'];
     if (raw == null || raw.isEmpty) return;
-    await cookieStore
-        ?.writeSetCookieHeaders(raw.split(RegExp(r',\s*(?=[^;=,]+=[^;=,]+)')));
+    await cookieStore?.writeSetCookieHeaders(
+      raw.split(RegExp(r',\s*(?=[^;=,]+=[^;=,]+)')),
+    );
   }
 
   bool _shouldRetry(String method, int statusCode, int attempt) {

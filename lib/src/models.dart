@@ -99,8 +99,11 @@ class ProfilePatch extends JsonModel {
 }
 
 class AccountSettingsPatch extends JsonModel {
-  const AccountSettingsPatch(
-      {this.emailNotifications, this.smsNotifications, this.language});
+  const AccountSettingsPatch({
+    this.emailNotifications,
+    this.smsNotifications,
+    this.language,
+  });
 
   final bool? emailNotifications;
   final bool? smsNotifications;
@@ -116,8 +119,12 @@ class AccountSettingsPatch extends JsonModel {
 }
 
 class ReviewInput extends JsonModel {
-  const ReviewInput(
-      {required this.rating, this.title, this.comment, this.productId});
+  const ReviewInput({
+    required this.rating,
+    this.title,
+    this.comment,
+    this.productId,
+  });
 
   final num rating;
   final String? title;
@@ -134,8 +141,11 @@ class ReviewInput extends JsonModel {
 }
 
 class CartItemInput extends JsonModel {
-  const CartItemInput(
-      {required this.productId, required this.quantity, this.variantId});
+  const CartItemInput({
+    required this.productId,
+    required this.quantity,
+    this.variantId,
+  });
 
   final String productId;
   final num quantity;
@@ -218,11 +228,12 @@ class OrderInput extends JsonModel {
 }
 
 class CheckoutQuoteInput extends JsonModel {
-  const CheckoutQuoteInput(
-      {required this.items,
-      this.shippingAddress,
-      this.shippingMethodId,
-      this.couponCode});
+  const CheckoutQuoteInput({
+    required this.items,
+    this.shippingAddress,
+    this.shippingMethodId,
+    this.couponCode,
+  });
 
   final List<CartItemInput> items;
   final ShippingAddressInput? shippingAddress;
@@ -240,13 +251,14 @@ class CheckoutQuoteInput extends JsonModel {
 }
 
 class Product extends JsonModel {
-  const Product(
-      {this.id,
-      this.slug,
-      this.name,
-      this.price,
-      this.currency,
-      this.extra = const {}});
+  const Product({
+    this.id,
+    this.slug,
+    this.name,
+    this.price,
+    this.currency,
+    this.extra = const {},
+  });
 
   final String? id;
   final String? slug;
@@ -276,19 +288,20 @@ class Product extends JsonModel {
         if (slug != null) 'slug': slug,
         if (name != null) 'name': name,
         if (price != null) 'price': price,
-        if (currency != null) 'currency': currency
+        if (currency != null) 'currency': currency,
       };
 }
 
 class Review extends JsonModel {
-  const Review(
-      {this.id,
-      this.productId,
-      this.rating,
-      this.title,
-      this.comment,
-      this.status,
-      this.extra = const {}});
+  const Review({
+    this.id,
+    this.productId,
+    this.rating,
+    this.title,
+    this.comment,
+    this.status,
+    this.extra = const {},
+  });
 
   final String? id;
   final String? productId;
@@ -360,11 +373,12 @@ class PaymentProviderConfig extends JsonModel {
 }
 
 class InventoryAdjustment extends JsonModel {
-  const InventoryAdjustment(
-      {required this.inventoryItemId,
-      required this.adjustmentQty,
-      this.reason,
-      this.locationId});
+  const InventoryAdjustment({
+    required this.inventoryItemId,
+    required this.adjustmentQty,
+    this.reason,
+    this.locationId,
+  });
 
   final String inventoryItemId;
   final num adjustmentQty;
@@ -517,7 +531,7 @@ enum PaymentStatus {
   failed,
   cancelled,
   refunded,
-  partiallyRefunded
+  partiallyRefunded,
 }
 
 enum OrderStatus {
@@ -527,7 +541,7 @@ enum OrderStatus {
   shipped,
   delivered,
   cancelled,
-  returned
+  returned,
 }
 
 enum CouponType { percentage, fixed }
@@ -602,7 +616,9 @@ class CatalogQuery extends QueryModel {
           const ValidationIssue(field: 'page', message: 'Must be at least 1'),
         if (limit < 1 || limit > 100)
           const ValidationIssue(
-              field: 'limit', message: 'Must be between 1 and 100'),
+            field: 'limit',
+            message: 'Must be between 1 and 100',
+          ),
         if (minPrice != null && minPrice! < 0)
           const ValidationIssue(
               field: 'minPrice', message: 'Cannot be negative'),
@@ -611,20 +627,23 @@ class CatalogQuery extends QueryModel {
               field: 'maxPrice', message: 'Cannot be negative'),
         if (minPrice != null && maxPrice != null && minPrice! > maxPrice!)
           const ValidationIssue(
-              field: 'price', message: 'minPrice cannot exceed maxPrice'),
+            field: 'price',
+            message: 'minPrice cannot exceed maxPrice',
+          ),
       ];
 }
 
 class AdminPageQuery extends QueryModel {
-  const AdminPageQuery(
-      {this.page = 1,
-      this.limit = 20,
-      this.search,
-      this.query,
-      this.active,
-      this.status,
-      this.country,
-      this.includeTranslations = false});
+  const AdminPageQuery({
+    this.page = 1,
+    this.limit = 20,
+    this.search,
+    this.query,
+    this.active,
+    this.status,
+    this.country,
+    this.includeTranslations = false,
+  });
 
   final int page;
   final int limit;
@@ -652,21 +671,24 @@ class AdminPageQuery extends QueryModel {
           const ValidationIssue(field: 'page', message: 'Must be at least 1'),
         if (limit < 1 || limit > 100)
           const ValidationIssue(
-              field: 'limit', message: 'Must be between 1 and 100'),
+            field: 'limit',
+            message: 'Must be between 1 and 100',
+          ),
       ];
 }
 
 class ProductVariantModel extends JsonModel {
-  const ProductVariantModel(
-      {this.id,
-      this.sku,
-      this.name,
-      this.price,
-      this.compareAtPrice,
-      this.currency,
-      this.priceSource,
-      this.stock,
-      this.attributes = const {}});
+  const ProductVariantModel({
+    this.id,
+    this.sku,
+    this.name,
+    this.price,
+    this.compareAtPrice,
+    this.currency,
+    this.priceSource,
+    this.stock,
+    this.attributes = const {},
+  });
 
   final String? id;
   final String? sku;
@@ -709,26 +731,27 @@ class ProductVariantModel extends JsonModel {
 }
 
 class CatalogProduct extends JsonModel {
-  const CatalogProduct(
-      {this.id,
-      this.name,
-      this.slug,
-      this.description,
-      this.price,
-      this.compareAtPrice,
-      this.currency,
-      this.priceSource,
-      this.category,
-      this.brand,
-      this.images = const [],
-      this.tags = const [],
-      this.variants = const [],
-      this.stock,
-      this.isAvailable,
-      this.rating,
-      this.reviewCount,
-      this.createdAt,
-      this.extra = const {}});
+  const CatalogProduct({
+    this.id,
+    this.name,
+    this.slug,
+    this.description,
+    this.price,
+    this.compareAtPrice,
+    this.currency,
+    this.priceSource,
+    this.category,
+    this.brand,
+    this.images = const [],
+    this.tags = const [],
+    this.variants = const [],
+    this.stock,
+    this.isAvailable,
+    this.rating,
+    this.reviewCount,
+    this.createdAt,
+    this.extra = const {},
+  });
 
   final String? id;
   final String? name;
@@ -805,13 +828,14 @@ class CatalogProduct extends JsonModel {
 }
 
 class CatalogTaxonomy extends JsonModel {
-  const CatalogTaxonomy(
-      {this.id,
-      this.name,
-      this.slug,
-      this.imageUrl,
-      this.logoUrl,
-      this.productCount});
+  const CatalogTaxonomy({
+    this.id,
+    this.name,
+    this.slug,
+    this.imageUrl,
+    this.logoUrl,
+    this.productCount,
+  });
 
   final String? id;
   final String? name;
@@ -847,11 +871,12 @@ class CatalogTaxonomy extends JsonModel {
 }
 
 class CommerceContextInput extends JsonModel {
-  const CommerceContextInput(
-      {required this.countryCode,
-      required this.currency,
-      this.locale,
-      this.taxInclusive});
+  const CommerceContextInput({
+    required this.countryCode,
+    required this.currency,
+    this.locale,
+    this.taxInclusive,
+  });
 
   final String countryCode;
   final String currency;
@@ -870,21 +895,23 @@ class CommerceContextInput extends JsonModel {
   List<ValidationIssue> validate() => [
         if (countryCode.trim().length != 2)
           const ValidationIssue(
-              field: 'countryCode',
-              message: 'Must be a two-letter country code'),
+            field: 'countryCode',
+            message: 'Must be a two-letter country code',
+          ),
         if (currency.trim().isEmpty)
           const ValidationIssue(field: 'currency', message: 'Cannot be empty'),
       ];
 }
 
 class CheckoutQuoteRequest extends JsonModel {
-  const CheckoutQuoteRequest(
-      {required this.items,
-      this.couponCode,
-      this.userId,
-      this.shippingAddress,
-      this.shippingMethodId,
-      this.commerceContext});
+  const CheckoutQuoteRequest({
+    required this.items,
+    this.couponCode,
+    this.userId,
+    this.shippingAddress,
+    this.shippingMethodId,
+    this.commerceContext,
+  });
 
   final List<CartItemInput> items;
   final String? couponCode;
@@ -909,31 +936,46 @@ class CheckoutQuoteRequest extends JsonModel {
   List<ValidationIssue> validate() => [
         if (items.isEmpty || items.length > 100)
           const ValidationIssue(
-              field: 'items', message: 'Must contain between 1 and 100 items'),
+            field: 'items',
+            message: 'Must contain between 1 and 100 items',
+          ),
         ...items.expand((item) => item.validate()),
       ];
 }
 
 class CheckoutQuoteItem extends JsonModel {
-  const CheckoutQuoteItem(
-      {this.productId,
-      this.variantId,
-      this.categoryId,
-      this.unitPrice,
-      this.quantity,
-      this.name,
-      this.variantTitle,
-      this.sku,
-      this.price,
-      this.total,
-      this.image,
-      this.currency,
-      this.priceSource});
+  const CheckoutQuoteItem({
+    this.productId,
+    this.variantId,
+    this.categoryId,
+    this.unitPrice,
+    this.originalUnitPrice,
+    this.productDiscountType,
+    this.productDiscountValue,
+    this.productDiscountAmount,
+    this.couponDiscountAmount,
+    this.unitCost,
+    this.quantity,
+    this.name,
+    this.variantTitle,
+    this.sku,
+    this.price,
+    this.total,
+    this.image,
+    this.currency,
+    this.priceSource,
+  });
 
   final String? productId;
   final String? variantId;
   final String? categoryId;
   final num? unitPrice;
+  final num? originalUnitPrice;
+  final String? productDiscountType;
+  final num? productDiscountValue;
+  final num? productDiscountAmount;
+  final num? couponDiscountAmount;
+  final num? unitCost;
   final int? quantity;
   final String? name;
   final String? variantTitle;
@@ -951,6 +993,12 @@ class CheckoutQuoteItem extends JsonModel {
       variantId: _string(json['variantId']),
       categoryId: _string(json['categoryId']),
       unitPrice: json['unitPrice'] as num?,
+      originalUnitPrice: json['originalUnitPrice'] as num?,
+      productDiscountType: _string(json['productDiscountType']),
+      productDiscountValue: json['productDiscountValue'] as num?,
+      productDiscountAmount: json['productDiscountAmount'] as num?,
+      couponDiscountAmount: json['couponDiscountAmount'] as num?,
+      unitCost: json['unitCost'] as num?,
       quantity:
           json['quantity'] is num ? (json['quantity'] as num).toInt() : null,
       name: _string(json['name']),
@@ -970,6 +1018,16 @@ class CheckoutQuoteItem extends JsonModel {
         if (variantId != null) 'variantId': variantId,
         if (categoryId != null) 'categoryId': categoryId,
         if (unitPrice != null) 'unitPrice': unitPrice,
+        if (originalUnitPrice != null) 'originalUnitPrice': originalUnitPrice,
+        if (productDiscountType != null)
+          'productDiscountType': productDiscountType,
+        if (productDiscountValue != null)
+          'productDiscountValue': productDiscountValue,
+        if (productDiscountAmount != null)
+          'productDiscountAmount': productDiscountAmount,
+        if (couponDiscountAmount != null)
+          'couponDiscountAmount': couponDiscountAmount,
+        if (unitCost != null) 'unitCost': unitCost,
         if (quantity != null) 'quantity': quantity,
         if (name != null) 'name': name,
         if (variantTitle != null) 'variantTitle': variantTitle,
@@ -983,14 +1041,15 @@ class CheckoutQuoteItem extends JsonModel {
 }
 
 class ShippingOptionModel extends JsonModel {
-  const ShippingOptionModel(
-      {this.id,
-      this.name,
-      this.cost,
-      this.minDeliveryDays,
-      this.maxDeliveryDays,
-      this.isCodAllowed,
-      this.currency});
+  const ShippingOptionModel({
+    this.id,
+    this.name,
+    this.cost,
+    this.minDeliveryDays,
+    this.maxDeliveryDays,
+    this.isCodAllowed,
+    this.currency,
+  });
 
   final String? id;
   final String? name;
@@ -1030,25 +1089,26 @@ class ShippingOptionModel extends JsonModel {
 }
 
 class CheckoutQuote extends JsonModel {
-  const CheckoutQuote(
-      {this.items = const [],
-      this.subtotal,
-      this.shipping,
-      this.discount,
-      this.tax,
-      this.taxRate,
-      this.total,
-      this.currency,
-      this.countryCode,
-      this.isFreeShipping,
-      this.couponDiscount,
-      this.couponError,
-      this.shippingMethodId,
-      this.shippingMethodName,
-      this.deliveryMinDays,
-      this.deliveryMaxDays,
-      this.shippingIsCodAllowed,
-      this.availableShippingMethods = const []});
+  const CheckoutQuote({
+    this.items = const [],
+    this.subtotal,
+    this.shipping,
+    this.discount,
+    this.tax,
+    this.taxRate,
+    this.total,
+    this.currency,
+    this.countryCode,
+    this.isFreeShipping,
+    this.couponDiscount,
+    this.couponError,
+    this.shippingMethodId,
+    this.shippingMethodName,
+    this.deliveryMinDays,
+    this.deliveryMaxDays,
+    this.shippingIsCodAllowed,
+    this.availableShippingMethods = const [],
+  });
 
   final List<CheckoutQuoteItem> items;
   final num? subtotal;
@@ -1142,11 +1202,12 @@ class SignInRequest extends JsonModel {
 }
 
 class SignUpRequest extends JsonModel {
-  const SignUpRequest(
-      {required this.email,
-      required this.password,
-      required this.firstName,
-      required this.lastName});
+  const SignUpRequest({
+    required this.email,
+    required this.password,
+    required this.firstName,
+    required this.lastName,
+  });
   final String email;
   final String password;
   final String firstName;
@@ -1155,7 +1216,7 @@ class SignUpRequest extends JsonModel {
   JsonMap toJson() => {
         'email': email,
         'password': password,
-        'name': '${firstName.trim()} ${lastName.trim()}'.trim()
+        'name': '${firstName.trim()} ${lastName.trim()}'.trim(),
       };
   @override
   List<ValidationIssue> validate() => [
@@ -1164,7 +1225,9 @@ class SignUpRequest extends JsonModel {
               field: 'email', message: 'Must be a valid email'),
         if (password.length < 8)
           const ValidationIssue(
-              field: 'password', message: 'Must contain at least 8 characters'),
+            field: 'password',
+            message: 'Must contain at least 8 characters',
+          ),
         if (firstName.trim().isEmpty)
           const ValidationIssue(field: 'firstName', message: 'Cannot be empty'),
         if (lastName.trim().isEmpty)
@@ -1173,15 +1236,16 @@ class SignUpRequest extends JsonModel {
 }
 
 class AuthUser extends JsonModel {
-  const AuthUser(
-      {this.id,
-      this.name,
-      this.email,
-      this.image,
-      this.role,
-      this.status,
-      this.firstName,
-      this.lastName});
+  const AuthUser({
+    this.id,
+    this.name,
+    this.email,
+    this.image,
+    this.role,
+    this.status,
+    this.firstName,
+    this.lastName,
+  });
   final String? id;
   final String? name;
   final String? email;
@@ -1193,13 +1257,14 @@ class AuthUser extends JsonModel {
   factory AuthUser.fromJson(dynamic value) {
     final json = _map(value);
     return AuthUser(
-        id: _string(json['id']),
-        name: _string(json['name']),
-        email: _string(json['email']),
-        image: _string(json['image']),
-        status: _string(json['status']),
-        firstName: _string(json['firstName']),
-        lastName: _string(json['lastName']));
+      id: _string(json['id']),
+      name: _string(json['name']),
+      email: _string(json['email']),
+      image: _string(json['image']),
+      status: _string(json['status']),
+      firstName: _string(json['firstName']),
+      lastName: _string(json['lastName']),
+    );
   }
   @override
   JsonMap toJson() => {
@@ -1209,7 +1274,7 @@ class AuthUser extends JsonModel {
         if (image != null) 'image': image,
         if (status != null) 'status': status,
         if (firstName != null) 'firstName': firstName,
-        if (lastName != null) 'lastName': lastName
+        if (lastName != null) 'lastName': lastName,
       };
 }
 
@@ -1221,31 +1286,33 @@ class AuthSession extends JsonModel {
   factory AuthSession.fromJson(dynamic value) {
     final json = _map(value);
     return AuthSession(
-        user: json['user'] == null ? null : AuthUser.fromJson(json['user']),
-        session: json['session'] == null
-            ? null
-            : SessionSummary.fromJson(json['session']),
-        token: _string(json['token']));
+      user: json['user'] == null ? null : AuthUser.fromJson(json['user']),
+      session: json['session'] == null
+          ? null
+          : SessionSummary.fromJson(json['session']),
+      token: _string(json['token']),
+    );
   }
   @override
   JsonMap toJson() => {
         if (user != null) 'user': user!.toJson(),
         if (session != null) 'session': session!.toJson(),
-        if (token != null) 'token': token
+        if (token != null) 'token': token,
       };
 }
 
 class SessionSummary extends JsonModel {
-  const SessionSummary(
-      {this.id,
-      this.createdAt,
-      this.expiresAt,
-      this.ipAddress,
-      this.userAgent,
-      this.browser,
-      this.os,
-      this.device,
-      this.isCurrent});
+  const SessionSummary({
+    this.id,
+    this.createdAt,
+    this.expiresAt,
+    this.ipAddress,
+    this.userAgent,
+    this.browser,
+    this.os,
+    this.device,
+    this.isCurrent,
+  });
   final String? id;
   final DateTime? createdAt;
   final DateTime? expiresAt;
@@ -1258,15 +1325,16 @@ class SessionSummary extends JsonModel {
   factory SessionSummary.fromJson(dynamic value) {
     final json = _map(value);
     return SessionSummary(
-        id: _string(json['id']),
-        createdAt: _date(json['createdAt']),
-        expiresAt: _date(json['expiresAt']),
-        ipAddress: _string(json['ipAddress']),
-        userAgent: _string(json['userAgent']),
-        browser: _string(json['browser']),
-        os: _string(json['os']),
-        device: _string(json['device']),
-        isCurrent: json['isCurrent'] as bool?);
+      id: _string(json['id']),
+      createdAt: _date(json['createdAt']),
+      expiresAt: _date(json['expiresAt']),
+      ipAddress: _string(json['ipAddress']),
+      userAgent: _string(json['userAgent']),
+      browser: _string(json['browser']),
+      os: _string(json['os']),
+      device: _string(json['device']),
+      isCurrent: json['isCurrent'] as bool?,
+    );
   }
   @override
   JsonMap toJson() => {
@@ -1278,23 +1346,24 @@ class SessionSummary extends JsonModel {
         if (browser != null) 'browser': browser,
         if (os != null) 'os': os,
         if (device != null) 'device': device,
-        if (isCurrent != null) 'isCurrent': isCurrent
+        if (isCurrent != null) 'isCurrent': isCurrent,
       };
 }
 
 class AddressCreateRequest extends JsonModel {
-  const AddressCreateRequest(
-      {required this.fullName,
-      required this.phone,
-      required this.addressLine1,
-      required this.city,
-      required this.country,
-      this.addressLine2,
-      this.state,
-      this.postalCode,
-      this.label,
-      this.isDefaultShipping,
-      this.isDefaultBilling});
+  const AddressCreateRequest({
+    required this.fullName,
+    required this.phone,
+    required this.addressLine1,
+    required this.city,
+    required this.country,
+    this.addressLine2,
+    this.state,
+    this.postalCode,
+    this.label,
+    this.isDefaultShipping,
+    this.isDefaultBilling,
+  });
   final String fullName;
   final String phone;
   final String addressLine1;
@@ -1318,7 +1387,7 @@ class AddressCreateRequest extends JsonModel {
         'country': country,
         if (label != null) 'label': label,
         if (isDefaultShipping != null) 'isDefaultShipping': isDefaultShipping,
-        if (isDefaultBilling != null) 'isDefaultBilling': isDefaultBilling
+        if (isDefaultBilling != null) 'isDefaultBilling': isDefaultBilling,
       };
   @override
   List<ValidationIssue> validate() => [
@@ -1337,18 +1406,19 @@ class AddressCreateRequest extends JsonModel {
 }
 
 class AddressUpdateRequest extends JsonModel {
-  const AddressUpdateRequest(
-      {this.fullName,
-      this.phone,
-      this.addressLine1,
-      this.addressLine2,
-      this.city,
-      this.state,
-      this.postalCode,
-      this.country,
-      this.label,
-      this.isDefaultShipping,
-      this.isDefaultBilling});
+  const AddressUpdateRequest({
+    this.fullName,
+    this.phone,
+    this.addressLine1,
+    this.addressLine2,
+    this.city,
+    this.state,
+    this.postalCode,
+    this.country,
+    this.label,
+    this.isDefaultShipping,
+    this.isDefaultBilling,
+  });
 
   final String? fullName;
   final String? phone;
@@ -1374,7 +1444,7 @@ class AddressUpdateRequest extends JsonModel {
         if (country != null) 'country': country,
         if (label != null) 'label': label,
         if (isDefaultShipping != null) 'isDefaultShipping': isDefaultShipping,
-        if (isDefaultBilling != null) 'isDefaultBilling': isDefaultBilling
+        if (isDefaultBilling != null) 'isDefaultBilling': isDefaultBilling,
       };
 }
 
@@ -1386,8 +1456,14 @@ List<String> _stringList(dynamic value) =>
     _list(value).whereType<String>().toList();
 
 class CartProductSnapshot extends JsonModel {
-  const CartProductSnapshot(
-      {this.id, this.slug, this.name, this.image, this.price, this.stock});
+  const CartProductSnapshot({
+    this.id,
+    this.slug,
+    this.name,
+    this.image,
+    this.price,
+    this.stock,
+  });
   final String? id;
   final String? slug;
   final String? name;
@@ -1397,12 +1473,13 @@ class CartProductSnapshot extends JsonModel {
   factory CartProductSnapshot.fromJson(dynamic value) {
     final json = _map(value);
     return CartProductSnapshot(
-        id: _string(json['id']),
-        slug: _string(json['slug']),
-        name: _string(json['name']),
-        image: _string(json['image']),
-        price: json['price'] as num?,
-        stock: json['stock'] is num ? (json['stock'] as num).toInt() : null);
+      id: _string(json['id']),
+      slug: _string(json['slug']),
+      name: _string(json['name']),
+      image: _string(json['image']),
+      price: json['price'] as num?,
+      stock: json['stock'] is num ? (json['stock'] as num).toInt() : null,
+    );
   }
   @override
   JsonMap toJson() => {
@@ -1411,20 +1488,21 @@ class CartProductSnapshot extends JsonModel {
         if (name != null) 'name': name,
         if (image != null) 'image': image,
         if (price != null) 'price': price,
-        if (stock != null) 'stock': stock
+        if (stock != null) 'stock': stock,
       };
 }
 
 class CartLine extends JsonModel {
-  const CartLine(
-      {this.productId,
-      this.variantId,
-      this.quantity,
-      this.price,
-      this.currency,
-      this.priceAvailable,
-      this.variantTitle,
-      this.product});
+  const CartLine({
+    this.productId,
+    this.variantId,
+    this.quantity,
+    this.price,
+    this.currency,
+    this.priceAvailable,
+    this.variantTitle,
+    this.product,
+  });
   final String? productId;
   final String? variantId;
   final int? quantity;
@@ -1436,17 +1514,18 @@ class CartLine extends JsonModel {
   factory CartLine.fromJson(dynamic value) {
     final json = _map(value);
     return CartLine(
-        productId: _string(json['productId']),
-        variantId: _string(json['variantId']),
-        quantity:
-            json['quantity'] is num ? (json['quantity'] as num).toInt() : null,
-        price: json['price'] as num?,
-        currency: _string(json['currency']),
-        priceAvailable: json['priceAvailable'] as bool?,
-        variantTitle: _string(json['variantTitle']),
-        product: json['product'] == null
-            ? null
-            : CartProductSnapshot.fromJson(json['product']));
+      productId: _string(json['productId']),
+      variantId: _string(json['variantId']),
+      quantity:
+          json['quantity'] is num ? (json['quantity'] as num).toInt() : null,
+      price: json['price'] as num?,
+      currency: _string(json['currency']),
+      priceAvailable: json['priceAvailable'] as bool?,
+      variantTitle: _string(json['variantTitle']),
+      product: json['product'] == null
+          ? null
+          : CartProductSnapshot.fromJson(json['product']),
+    );
   }
   @override
   JsonMap toJson() => {
@@ -1457,13 +1536,17 @@ class CartLine extends JsonModel {
         if (currency != null) 'currency': currency,
         if (priceAvailable != null) 'priceAvailable': priceAvailable,
         if (variantTitle != null) 'variantTitle': variantTitle,
-        if (product != null) 'product': product!.toJson()
+        if (product != null) 'product': product!.toJson(),
       };
 }
 
 class CartModel extends JsonModel {
-  const CartModel(
-      {this.id, this.items = const [], this.subtotal, this.updatedAt});
+  const CartModel({
+    this.id,
+    this.items = const [],
+    this.subtotal,
+    this.updatedAt,
+  });
   final String? id;
   final List<CartLine> items;
   final num? subtotal;
@@ -1471,40 +1554,57 @@ class CartModel extends JsonModel {
   factory CartModel.fromJson(dynamic value) {
     final json = _map(value);
     return CartModel(
-        id: _string(json['id']),
-        items: _list(json['items']).map(CartLine.fromJson).toList(),
-        subtotal: json['subtotal'] as num?,
-        updatedAt: _date(json['updatedAt']));
+      id: _string(json['id']),
+      items: _list(json['items']).map(CartLine.fromJson).toList(),
+      subtotal: json['subtotal'] as num?,
+      updatedAt: _date(json['updatedAt']),
+    );
   }
   @override
   JsonMap toJson() => {
         if (id != null) 'id': id,
         'items': items.map((item) => item.toJson()).toList(),
         if (subtotal != null) 'subtotal': subtotal,
-        if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String()
+        if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),
       };
 }
 
 class OrderModel extends JsonModel {
-  const OrderModel(
-      {this.id,
-      this.orderNumber,
-      this.status,
-      this.paymentStatus,
-      this.paymentMethod,
-      this.total,
-      this.subtotal,
-      this.shipping,
-      this.tax,
-      this.discount,
-      this.currency,
-      this.customerName,
-      this.customerEmail,
-      this.items = const [],
-      this.createdAt,
-      this.updatedAt,
-      this.cancellationReason,
-      this.extra = const {}});
+  const OrderModel({
+    this.id,
+    this.orderNumber,
+    this.status,
+    this.paymentStatus,
+    this.paymentMethod,
+    this.total,
+    this.subtotal,
+    this.shipping,
+    this.tax,
+    this.discount,
+    this.productDiscountTotal,
+    this.couponDiscountTotal,
+    this.otherDiscountTotal,
+    this.shippingDiscount,
+    this.taxRate,
+    this.grandTotal,
+    this.recognizedRevenue,
+    this.paidAmount,
+    this.collectedAmount,
+    this.refundedAmount,
+    this.outstandingAmount,
+    this.totalCogs,
+    this.totalGrossProfit,
+    this.currency,
+    this.customerName,
+    this.customerEmail,
+    this.items = const [],
+    this.createdAt,
+    this.updatedAt,
+    this.cancellationReason,
+    this.paymentRecognizedAt,
+    this.deliveredAt,
+    this.extra = const {},
+  });
   final String? id;
   final String? orderNumber;
   final OrderStatus? status;
@@ -1515,6 +1615,19 @@ class OrderModel extends JsonModel {
   final num? shipping;
   final num? tax;
   final num? discount;
+  final num? productDiscountTotal;
+  final num? couponDiscountTotal;
+  final num? otherDiscountTotal;
+  final num? shippingDiscount;
+  final num? taxRate;
+  final num? grandTotal;
+  final num? recognizedRevenue;
+  final num? paidAmount;
+  final num? collectedAmount;
+  final num? refundedAmount;
+  final num? outstandingAmount;
+  final num? totalCogs;
+  final num? totalGrossProfit;
   final String? currency;
   final String? customerName;
   final String? customerEmail;
@@ -1522,35 +1635,58 @@ class OrderModel extends JsonModel {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final String? cancellationReason;
+  final DateTime? paymentRecognizedAt;
+  final DateTime? deliveredAt;
   final JsonMap extra;
 
   factory OrderModel.fromJson(dynamic value) {
     final json = _map(value);
     return OrderModel(
-        id: _string(json['id']),
-        orderNumber: _string(json['orderNumber']),
-        status:
-            _parseEnum(json['status'], OrderStatus.values, _orderStatusValue),
-        paymentStatus: _parseEnum(
-            json['paymentStatus'], PaymentStatus.values, _paymentStatusValue),
-        paymentMethod: _parseEnum(json['paymentMethod'],
-            PaymentMethodCode.values, _paymentMethodValue),
-        total: json['total'] as num?,
-        subtotal: json['subtotal'] as num?,
-        shipping: json['shipping'] as num? ?? json['shippingFee'] as num?,
-        tax: json['tax'] as num?,
-        discount: json['discount'] as num?,
-        currency: _string(json['currency']),
-        customerName: _string(json['customerName']),
-        customerEmail: _string(json['customerEmail']),
-        items: _list(json['items'])
-            .whereType<Map>()
-            .map((item) => Map<String, dynamic>.from(item))
-            .toList(),
-        createdAt: _date(json['createdAt']),
-        updatedAt: _date(json['updatedAt']),
-        cancellationReason: _string(json['cancellationReason']),
-        extra: json);
+      id: _string(json['id']),
+      orderNumber: _string(json['orderNumber']),
+      status: _parseEnum(json['status'], OrderStatus.values, _orderStatusValue),
+      paymentStatus: _parseEnum(
+        json['paymentStatus'],
+        PaymentStatus.values,
+        _paymentStatusValue,
+      ),
+      paymentMethod: _parseEnum(
+        json['paymentMethod'],
+        PaymentMethodCode.values,
+        _paymentMethodValue,
+      ),
+      total: json['total'] as num?,
+      subtotal: json['subtotal'] as num?,
+      shipping: json['shipping'] as num? ?? json['shippingFee'] as num?,
+      tax: json['tax'] as num?,
+      discount: json['discount'] as num?,
+      productDiscountTotal: json['productDiscountTotal'] as num?,
+      couponDiscountTotal: json['couponDiscountTotal'] as num?,
+      otherDiscountTotal: json['otherDiscountTotal'] as num?,
+      shippingDiscount: json['shippingDiscount'] as num?,
+      taxRate: json['taxRate'] as num?,
+      grandTotal: json['grandTotal'] as num?,
+      recognizedRevenue: json['recognizedRevenue'] as num?,
+      paidAmount: json['paidAmount'] as num?,
+      collectedAmount: json['collectedAmount'] as num?,
+      refundedAmount: json['refundedAmount'] as num?,
+      outstandingAmount: json['outstandingAmount'] as num?,
+      totalCogs: json['totalCogs'] as num?,
+      totalGrossProfit: json['totalGrossProfit'] as num?,
+      currency: _string(json['currency']),
+      customerName: _string(json['customerName']),
+      customerEmail: _string(json['customerEmail']),
+      items: _list(json['items'])
+          .whereType<Map>()
+          .map((item) => Map<String, dynamic>.from(item))
+          .toList(),
+      createdAt: _date(json['createdAt']),
+      updatedAt: _date(json['updatedAt']),
+      cancellationReason: _string(json['cancellationReason']),
+      paymentRecognizedAt: _date(json['paymentRecognizedAt']),
+      deliveredAt: _date(json['deliveredAt']),
+      extra: json,
+    );
   }
 
   @override
@@ -1568,13 +1704,33 @@ class OrderModel extends JsonModel {
         if (shipping != null) 'shipping': shipping,
         if (tax != null) 'tax': tax,
         if (discount != null) 'discount': discount,
+        if (productDiscountTotal != null)
+          'productDiscountTotal': productDiscountTotal,
+        if (couponDiscountTotal != null)
+          'couponDiscountTotal': couponDiscountTotal,
+        if (otherDiscountTotal != null)
+          'otherDiscountTotal': otherDiscountTotal,
+        if (shippingDiscount != null) 'shippingDiscount': shippingDiscount,
+        if (taxRate != null) 'taxRate': taxRate,
+        if (grandTotal != null) 'grandTotal': grandTotal,
+        if (recognizedRevenue != null) 'recognizedRevenue': recognizedRevenue,
+        if (paidAmount != null) 'paidAmount': paidAmount,
+        if (collectedAmount != null) 'collectedAmount': collectedAmount,
+        if (refundedAmount != null) 'refundedAmount': refundedAmount,
+        if (outstandingAmount != null) 'outstandingAmount': outstandingAmount,
+        if (totalCogs != null) 'totalCogs': totalCogs,
+        if (totalGrossProfit != null) 'totalGrossProfit': totalGrossProfit,
         if (currency != null) 'currency': currency,
         if (customerName != null) 'customerName': customerName,
         if (customerEmail != null) 'customerEmail': customerEmail,
         'items': items,
         if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
         if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),
-        if (cancellationReason != null) 'cancellationReason': cancellationReason
+        if (cancellationReason != null)
+          'cancellationReason': cancellationReason,
+        if (paymentRecognizedAt != null)
+          'paymentRecognizedAt': paymentRecognizedAt!.toIso8601String(),
+        if (deliveredAt != null) 'deliveredAt': deliveredAt!.toIso8601String(),
       };
 }
 
@@ -1588,13 +1744,15 @@ T? _parseEnum<T>(dynamic value, List<T> values, String Function(T) wire) {
 }
 
 class DefaultAddressRequest extends JsonModel {
-  const DefaultAddressRequest(
-      {this.isDefaultShipping = true, this.isDefaultBilling = true});
+  const DefaultAddressRequest({
+    this.isDefaultShipping = true,
+    this.isDefaultBilling = true,
+  });
   final bool isDefaultShipping;
   final bool isDefaultBilling;
   @override
   JsonMap toJson() => {
         'isDefaultShipping': isDefaultShipping,
-        'isDefaultBilling': isDefaultBilling
+        'isDefaultBilling': isDefaultBilling,
       };
 }

@@ -1,10 +1,10 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **135 عملية HTTP** على **83 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `ca7306ec4faae13979af256cd818723e897b02e4`.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **137 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `a2a201bfc3fffec9ba754fbbfe37996a911e5332`.
 
 ## الفكرة الأساسية
 
-المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 135، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 137، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
 
@@ -60,8 +60,8 @@ final currentSession = await client.auth.session();
 | `client.account` | profile، settings، security، sessions، account orders، account reviews. |
 | `client.addresses` | list/create/update/delete/set-default. |
 | `client.orders` | create/list/get مع idempotency key. |
-| `client.admin` | typed product/taxonomy/coupon/wallet/tag/order/review/user/role/payment/shipping/hero operations. |
-| `client.api` | طبقة raw المولدة لكل العمليات الـ 135 عند الحاجة إلى route غير موجود في facade. |
+| `client.admin` | typed product/taxonomy/coupon/wallet/tag/order/review/user/role/payment/shipping/hero operations، إضافة إلى returns/refunds وfinancial reconciliation. |
+| `client.api` | طبقة raw المولدة لكل العمليات الـ 137 عند الحاجة إلى route غير موجود في facade. |
 
 ## أمثلة typed بدون Map يدوي
 
@@ -98,6 +98,8 @@ final quote = await client.checkout.quote(
       city: 'Cairo',
       country: 'EG',
     ),
+    // لا يظهر سعر الشحن قبل اختيار طريقة متاحة للعنوان.
+    shippingMethodId: 'selected-shipping-method-id',
     commerceContext: const CommerceContextInput(
       countryCode: 'EG',
       currency: 'EGP',
@@ -108,6 +110,8 @@ final quote = await client.checkout.quote(
 final total = quote.data?.total;
 final currency = quote.data?.currency;
 ```
+
+استخدم `availableShippingMethods` من الـ quote نفسه لعرض طرق الشحن المؤهلة، ثم أعد طلب quote مع `shippingMethodId` الذي اختاره العميل. لا تحسب شحنًا مجانيًا أو رسومًا افتراضية داخل التطبيق.
 
 ### Orders
 
@@ -143,7 +147,26 @@ final product = await client.admin.createProduct(
 );
 ```
 
-النماذج الإدارية تشمل كذلك `TaxonomyCreateRequest`, `CouponRequest`, `WalletRequest`, `TagRequest`, `InventoryAdjustment`, `OrderTransitionRequest`, `ReviewModerationRequest`, `PaymentProviderSettingsRequest`, `ShippingZoneRequest`, `ShippingCountryCreateRequest`, `ShippingGovernorateCreateRequest`, `HeroSlideCreateRequest`, و`HeroSlideReorderRequest`.
+النماذج الإدارية تشمل كذلك `TaxonomyCreateRequest`, `CouponRequest`, `WalletRequest`, `TagRequest`, `InventoryAdjustment`, `OrderTransitionRequest`, `ReturnLineRequest`, `ReturnRefundRequest`, `ReviewModerationRequest`, `PaymentProviderSettingsRequest`, `ShippingZoneRequest`, `ShippingCountryCreateRequest`, `ShippingGovernorateCreateRequest`, `HeroSlideCreateRequest`, و`HeroSlideReorderRequest`.
+
+### Admin returns, refunds, and reconciliation
+
+عمليات الاسترجاع تستعمل order-item snapshots الموجودة في الخادم. لا تعيد حساب السعر أو التكلفة من catalog الحالي. أرسل فقط الكميات المقبولة لكل line مع idempotency key فريد، ثم استخدم تقرير reconciliation لمراجعة إسقاطات الدفع والإيراد وCOGS.
+
+```dart
+final refund = await client.admin.createReturnAndRefund(
+  'order-id',
+  const ReturnRefundRequest(
+    items: [ReturnLineRequest(orderItemId: 'order-item-id', quantity: 1)],
+    reason: 'Damaged on delivery',
+    idempotencyKey: 'return-2026-00000001',
+  ),
+);
+
+final reconciliation = await client.admin.reconcileCommerce(
+  orderId: 'order-id',
+);
+```
 
 ## Response وerrors
 
@@ -165,7 +188,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 135 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 137 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1.
 
 ## LLM وAI-agent integration
 
@@ -191,7 +214,7 @@ dart pub publish --dry-run
 | `lib/src/models.dart` | models العامة، catalog، cart، checkout، auth، account، orders. |
 | `lib/src/admin_models.dart` | models الإدارية الصارمة. |
 | `lib/src/api_client.dart` | HTTP، auth، cookies، retries، headers، decoders، errors. |
-| `lib/src/generated_api.dart` | جميع العمليات الـ 135. |
+| `lib/src/generated_api.dart` | جميع العمليات الـ 137. |
 | `openapi.yaml` | contract كامل للـ API. |
 | `ai/` و`llms.txt` | تكامل LLMs وAI agents. |
 

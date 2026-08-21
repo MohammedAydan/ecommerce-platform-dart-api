@@ -86,16 +86,10 @@ class ApiMeta {
     if (json is! JsonMap) return const ApiMeta();
     final copy = Map<String, dynamic>.from(json);
     final message = copy.remove('message');
-    return ApiMeta(
-      message: message is String ? message : null,
-      values: copy,
-    );
+    return ApiMeta(message: message is String ? message : null, values: copy);
   }
 
-  JsonMap toJson() => {
-        ...values,
-        if (message != null) 'message': message,
-      };
+  JsonMap toJson() => {...values, if (message != null) 'message': message};
 }
 
 class ApiResponse<T> {
