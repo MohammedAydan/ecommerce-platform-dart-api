@@ -1,5 +1,9 @@
 ## 0.2.0 - 2026-08-19
 
+## Unreleased
+
+Synchronized the backend source reference to commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. Verified all **137 HTTP operations across 85 route files** against the generated SDK OpenAPI contract and operation manifest, added the complete `API_COVERAGE.md` reference, and documented the Better Auth wildcard normalization used during contract comparison.
+
 ## 0.3.0 - 2026-08-21
 
 Updated the SDK contract to the latest commerce backend revision. Added typed admin return/refund requests and the finance reconciliation facade; added raw/OpenAPI coverage for `POST /api/v1/admin/orders/{id}/returns` and `GET /api/v1/admin/commerce/reconciliation`; and expanded quote/order models with immutable financial snapshot fields. Updated checkout guidance so shipping is selected from server-returned methods after an address is provided, with no client-side free-shipping threshold.

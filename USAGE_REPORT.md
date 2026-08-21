@@ -1,7 +1,7 @@
 # تقرير استخدام Ecommerce Platform Dart SDK وNative APIs
 
 **الإصدار الموثق:** `0.3.0`  
-**مرجع العقد:** backend commit `a2a201bfc3fffec9ba754fbbfe37996a911e5332`  
+**مرجع العقد:** backend commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`
 **نطاق التقرير:** Dart SDK، REST/Native APIs، وتحديثات التسعير والشحن والمالية الأخيرة.
 
 ## الملخص التنفيذي
@@ -85,7 +85,7 @@ Content-Type: application/json
 
 ## التحقق المنفذ
 
-تم تشغيل `dart format lib test`، و`dart analyze lib test`، و`dart test` بعد تحديث الواجهات والنماذج. النتيجة: لا توجد مشاكل تحليل ونجحت جميع الاختبارات المحلية (`14 tests`).
+تمت مطابقة inventory الخادم مع manifest وOpenAPI الخاصين بالـ SDK: **137 عملية HTTP** عبر **85 ملف route**. يلزم تشغيل `dart format lib test` و`dart analyze lib test` و`dart test` في CI أو بيئة Dart قبل الدمج؛ لم تكن أداة Dart مثبتة في بيئة التنفيذ الحالية، لذلك لا أدرج نتيجة اختبار غير منفذة.
 
 ## مراجع
 
