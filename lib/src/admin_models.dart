@@ -9,14 +9,15 @@ class TaxonomyTranslations extends JsonModel {
 }
 
 class TaxonomyCreateRequest extends JsonModel {
-  const TaxonomyCreateRequest(
-      {required this.name,
-      this.slug,
-      this.description,
-      this.imageUrl,
-      this.logoUrl,
-      this.parentId,
-      this.translations});
+  const TaxonomyCreateRequest({
+    required this.name,
+    this.slug,
+    this.description,
+    this.imageUrl,
+    this.logoUrl,
+    this.parentId,
+    this.translations,
+  });
   final String name;
   final String? slug;
   final String? description;
@@ -32,25 +33,26 @@ class TaxonomyCreateRequest extends JsonModel {
         if (imageUrl != null) 'imageUrl': imageUrl,
         if (logoUrl != null) 'logoUrl': logoUrl,
         if (parentId != null) 'parentId': parentId,
-        if (translations != null) 'translations': translations!.toJson()
+        if (translations != null) 'translations': translations!.toJson(),
       };
   @override
   List<ValidationIssue> validate() => [
         if (name.trim().isEmpty)
-          const ValidationIssue(field: 'name', message: 'Cannot be empty')
+          const ValidationIssue(field: 'name', message: 'Cannot be empty'),
       ];
 }
 
 class TaxonomyUpdateRequest extends JsonModel {
-  const TaxonomyUpdateRequest(
-      {this.name,
-      this.slug,
-      this.description,
-      this.imageUrl,
-      this.logoUrl,
-      this.parentId,
-      this.isActive,
-      this.translations});
+  const TaxonomyUpdateRequest({
+    this.name,
+    this.slug,
+    this.description,
+    this.imageUrl,
+    this.logoUrl,
+    this.parentId,
+    this.isActive,
+    this.translations,
+  });
   final String? name;
   final String? slug;
   final String? description;
@@ -68,13 +70,17 @@ class TaxonomyUpdateRequest extends JsonModel {
         if (logoUrl != null) 'logoUrl': logoUrl,
         if (parentId != null) 'parentId': parentId,
         if (isActive != null) 'isActive': isActive,
-        if (translations != null) 'translations': translations!.toJson()
+        if (translations != null) 'translations': translations!.toJson(),
       };
 }
 
 class ProductImageInput extends JsonModel {
-  const ProductImageInput(
-      {required this.url, this.altText, this.isPrimary, this.sortOrder});
+  const ProductImageInput({
+    required this.url,
+    this.altText,
+    this.isPrimary,
+    this.sortOrder,
+  });
   final String url;
   final String? altText;
   final bool? isPrimary;
@@ -84,16 +90,17 @@ class ProductImageInput extends JsonModel {
         'url': url,
         if (altText != null) 'altText': altText,
         if (isPrimary != null) 'isPrimary': isPrimary,
-        if (sortOrder != null) 'sortOrder': sortOrder
+        if (sortOrder != null) 'sortOrder': sortOrder,
       };
 }
 
 class ProductContentTranslation extends JsonModel {
-  const ProductContentTranslation(
-      {required this.locale,
-      required this.name,
-      required this.description,
-      this.shortDescription});
+  const ProductContentTranslation({
+    required this.locale,
+    required this.name,
+    required this.description,
+    this.shortDescription,
+  });
   final AppLocale locale;
   final String name;
   final String description;
@@ -103,30 +110,31 @@ class ProductContentTranslation extends JsonModel {
         'locale': locale == AppLocale.ar ? 'ar' : 'en',
         'name': name,
         'description': description,
-        if (shortDescription != null) 'shortDescription': shortDescription
+        if (shortDescription != null) 'shortDescription': shortDescription,
       };
 }
 
 class AdminProductCreateRequest extends JsonModel {
-  const AdminProductCreateRequest(
-      {required this.name,
-      required this.sku,
-      required this.basePrice,
-      required this.categoryId,
-      this.slug,
-      this.description,
-      this.shortDescription,
-      this.compareAtPrice,
-      this.costPrice,
-      this.brandId,
-      this.status,
-      this.isFeatured = false,
-      this.imageUrl,
-      this.images = const [],
-      this.inventoryQuantity,
-      this.reorderPoint,
-      this.tagIds = const [],
-      this.translations = const []});
+  const AdminProductCreateRequest({
+    required this.name,
+    required this.sku,
+    required this.basePrice,
+    required this.categoryId,
+    this.slug,
+    this.description,
+    this.shortDescription,
+    this.compareAtPrice,
+    this.costPrice,
+    this.brandId,
+    this.status,
+    this.isFeatured = false,
+    this.imageUrl,
+    this.images = const [],
+    this.inventoryQuantity,
+    this.reorderPoint,
+    this.tagIds = const [],
+    this.translations = const [],
+  });
   final String name;
   final String sku;
   final num basePrice;
@@ -166,7 +174,7 @@ class AdminProductCreateRequest extends JsonModel {
         if (reorderPoint != null) 'reorderPoint': reorderPoint,
         'tagIds': tagIds,
         if (translations.isNotEmpty)
-          'translations': translations.map((item) => item.toJson()).toList()
+          'translations': translations.map((item) => item.toJson()).toList(),
       };
   @override
   List<ValidationIssue> validate() => [
@@ -182,33 +190,38 @@ class AdminProductCreateRequest extends JsonModel {
               field: 'categoryId', message: 'Cannot be empty'),
         if (inventoryQuantity != null && inventoryQuantity! < 0)
           const ValidationIssue(
-              field: 'inventoryQuantity', message: 'Cannot be negative'),
+            field: 'inventoryQuantity',
+            message: 'Cannot be negative',
+          ),
         if (reorderPoint != null && reorderPoint! < 0)
           const ValidationIssue(
-              field: 'reorderPoint', message: 'Cannot be negative')
+            field: 'reorderPoint',
+            message: 'Cannot be negative',
+          ),
       ];
 }
 
 class AdminProductUpdateRequest extends JsonModel {
-  const AdminProductUpdateRequest(
-      {required this.id,
-      this.name,
-      this.slug,
-      this.description,
-      this.shortDescription,
-      this.sku,
-      this.basePrice,
-      this.compareAtPrice,
-      this.costPrice,
-      this.categoryId,
-      this.brandId,
-      this.status,
-      this.isFeatured,
-      this.images,
-      this.inventoryQuantity,
-      this.reorderPoint,
-      this.tagIds,
-      this.translations});
+  const AdminProductUpdateRequest({
+    required this.id,
+    this.name,
+    this.slug,
+    this.description,
+    this.shortDescription,
+    this.sku,
+    this.basePrice,
+    this.compareAtPrice,
+    this.costPrice,
+    this.categoryId,
+    this.brandId,
+    this.status,
+    this.isFeatured,
+    this.images,
+    this.inventoryQuantity,
+    this.reorderPoint,
+    this.tagIds,
+    this.translations,
+  });
   final String id;
   final String? name;
   final String? slug;
@@ -248,7 +261,7 @@ class AdminProductUpdateRequest extends JsonModel {
         if (reorderPoint != null) 'reorderPoint': reorderPoint,
         if (tagIds != null) 'tagIds': tagIds,
         if (translations != null)
-          'translations': translations!.map((item) => item.toJson()).toList()
+          'translations': translations!.map((item) => item.toJson()).toList(),
       };
   @override
   List<ValidationIssue> validate() => [
@@ -256,26 +269,27 @@ class AdminProductUpdateRequest extends JsonModel {
           const ValidationIssue(field: 'id', message: 'Cannot be empty'),
         if (basePrice != null && basePrice! < 0)
           const ValidationIssue(
-              field: 'basePrice', message: 'Cannot be negative')
+              field: 'basePrice', message: 'Cannot be negative'),
       ];
 }
 
 class CouponRequest extends JsonModel {
-  const CouponRequest(
-      {this.code,
-      this.type,
-      this.value,
-      this.minOrderAmount,
-      this.maxDiscountAmount,
-      this.usageLimit,
-      this.perUserUsageLimit,
-      this.startsAt,
-      this.expiresAt,
-      this.scope,
-      this.applicableProductIds = const [],
-      this.applicableCategoryIds = const [],
-      this.isFreeShipping,
-      this.isActive});
+  const CouponRequest({
+    this.code,
+    this.type,
+    this.value,
+    this.minOrderAmount,
+    this.maxDiscountAmount,
+    this.usageLimit,
+    this.perUserUsageLimit,
+    this.startsAt,
+    this.expiresAt,
+    this.scope,
+    this.applicableProductIds = const [],
+    this.applicableCategoryIds = const [],
+    this.isFreeShipping,
+    this.isActive,
+  });
   final String? code;
   final CouponType? type;
   final num? value;
@@ -305,13 +319,18 @@ class CouponRequest extends JsonModel {
         'applicableProductIds': applicableProductIds,
         'applicableCategoryIds': applicableCategoryIds,
         if (isFreeShipping != null) 'isFreeShipping': isFreeShipping,
-        if (isActive != null) 'isActive': isActive
+        if (isActive != null) 'isActive': isActive,
       };
 }
 
 class WalletRequest extends JsonModel {
-  const WalletRequest(
-      {this.code, this.name, this.description, this.sortOrder, this.isActive});
+  const WalletRequest({
+    this.code,
+    this.name,
+    this.description,
+    this.sortOrder,
+    this.isActive,
+  });
   final String? code;
   final String? name;
   final String? description;
@@ -323,7 +342,7 @@ class WalletRequest extends JsonModel {
         if (name != null) 'name': name,
         if (description != null) 'description': description,
         if (sortOrder != null) 'sortOrder': sortOrder,
-        if (isActive != null) 'isActive': isActive
+        if (isActive != null) 'isActive': isActive,
       };
 }
 
@@ -336,13 +355,16 @@ class TagRequest extends JsonModel {
   JsonMap toJson() => {
         if (name != null) 'name': name,
         if (slug != null) 'slug': slug,
-        if (isActive != null) 'isActive': isActive
+        if (isActive != null) 'isActive': isActive,
       };
 }
 
 class OrderTransitionRequest extends JsonModel {
-  const OrderTransitionRequest(
-      {required this.orderId, required this.status, this.reason});
+  const OrderTransitionRequest({
+    required this.orderId,
+    required this.status,
+    this.reason,
+  });
   final String orderId;
   final OrderStatus status;
   final String? reason;
@@ -350,7 +372,34 @@ class OrderTransitionRequest extends JsonModel {
   JsonMap toJson() => {
         'orderId': orderId,
         'status': _adminOrderStatusValue(status),
-        if (reason != null) 'reason': reason
+        if (reason != null) 'reason': reason,
+      };
+}
+
+/// A historical order-line quantity being returned by an administrator.
+class ReturnLineRequest extends JsonModel {
+  const ReturnLineRequest({required this.orderItemId, required this.quantity});
+  final String orderItemId;
+  final int quantity;
+  @override
+  JsonMap toJson() => {'orderItemId': orderItemId, 'quantity': quantity};
+}
+
+/// Creates a return and corresponding refund from immutable order snapshots.
+class ReturnRefundRequest extends JsonModel {
+  const ReturnRefundRequest({
+    required this.items,
+    this.reason,
+    this.idempotencyKey,
+  });
+  final List<ReturnLineRequest> items;
+  final String? reason;
+  final String? idempotencyKey;
+  @override
+  JsonMap toJson() => {
+        'items': items.map((item) => item.toJson()).toList(),
+        if (reason != null) 'reason': reason,
+        if (idempotencyKey != null) 'idempotencyKey': idempotencyKey,
       };
 }
 
@@ -371,8 +420,11 @@ class AdminUserUpdateRequest extends JsonModel {
 }
 
 class RoleCreateRequest extends JsonModel {
-  const RoleCreateRequest(
-      {required this.name, this.description, this.permissions = const []});
+  const RoleCreateRequest({
+    required this.name,
+    this.description,
+    this.permissions = const [],
+  });
   final String name;
   final String? description;
   final List<String> permissions;
@@ -380,20 +432,21 @@ class RoleCreateRequest extends JsonModel {
   JsonMap toJson() => {
         'name': name,
         if (description != null) 'description': description,
-        'permissions': permissions
+        'permissions': permissions,
       };
 }
 
 class PaymentProviderSettingsRequest extends JsonModel {
-  const PaymentProviderSettingsRequest(
-      {required this.provider,
-      required this.environment,
-      this.isEnabled,
-      this.publicKey,
-      this.integrationId,
-      this.iframeId,
-      this.secretKey,
-      this.hmacSecret});
+  const PaymentProviderSettingsRequest({
+    required this.provider,
+    required this.environment,
+    this.isEnabled,
+    this.publicKey,
+    this.integrationId,
+    this.iframeId,
+    this.secretKey,
+    this.hmacSecret,
+  });
   final String provider;
   final String environment;
   final bool? isEnabled;
@@ -411,13 +464,16 @@ class PaymentProviderSettingsRequest extends JsonModel {
         if (integrationId != null) 'integrationId': integrationId,
         if (iframeId != null) 'iframeId': iframeId,
         if (secretKey != null) 'secretKey': secretKey,
-        if (hmacSecret != null) 'hmacSecret': hmacSecret
+        if (hmacSecret != null) 'hmacSecret': hmacSecret,
       };
 }
 
 class ShippingRuleInput extends JsonModel {
-  const ShippingRuleInput(
-      {required this.country, this.stateProvince, this.city});
+  const ShippingRuleInput({
+    required this.country,
+    this.stateProvince,
+    this.city,
+  });
   final String country;
   final String? stateProvince;
   final String? city;
@@ -425,18 +481,19 @@ class ShippingRuleInput extends JsonModel {
   JsonMap toJson() => {
         'country': country,
         if (stateProvince != null) 'stateProvince': stateProvince,
-        if (city != null) 'city': city
+        if (city != null) 'city': city,
       };
 }
 
 class ShippingMethodInput extends JsonModel {
-  const ShippingMethodInput(
-      {required this.name,
-      required this.cost,
-      this.currency = 'EGP',
-      this.minDeliveryDays = 1,
-      this.maxDeliveryDays = 3,
-      this.isCodAllowed = true});
+  const ShippingMethodInput({
+    required this.name,
+    required this.cost,
+    this.currency = 'EGP',
+    this.minDeliveryDays = 1,
+    this.maxDeliveryDays = 3,
+    this.isCodAllowed = true,
+  });
   final String name;
   final num cost;
   final String currency;
@@ -450,24 +507,25 @@ class ShippingMethodInput extends JsonModel {
         'currency': currency,
         'minDeliveryDays': minDeliveryDays,
         'maxDeliveryDays': maxDeliveryDays,
-        'isCodAllowed': isCodAllowed
+        'isCodAllowed': isCodAllowed,
       };
 }
 
 class ShippingZoneRequest extends JsonModel {
-  const ShippingZoneRequest(
-      {required this.name,
-      this.description,
-      this.isActive = true,
-      this.country,
-      this.stateProvince,
-      this.city,
-      this.cost,
-      this.currency = 'EGP',
-      this.minDeliveryDays = 1,
-      this.maxDeliveryDays = 3,
-      this.rules = const [],
-      this.methods = const []});
+  const ShippingZoneRequest({
+    required this.name,
+    this.description,
+    this.isActive = true,
+    this.country,
+    this.stateProvince,
+    this.city,
+    this.cost,
+    this.currency = 'EGP',
+    this.minDeliveryDays = 1,
+    this.maxDeliveryDays = 3,
+    this.rules = const [],
+    this.methods = const [],
+  });
   final String name;
   final String? description;
   final bool isActive;
@@ -493,23 +551,24 @@ class ShippingZoneRequest extends JsonModel {
         'minDeliveryDays': minDeliveryDays,
         'maxDeliveryDays': maxDeliveryDays,
         'rules': rules.map((item) => item.toJson()).toList(),
-        'methods': methods.map((item) => item.toJson()).toList()
+        'methods': methods.map((item) => item.toJson()).toList(),
       };
 }
 
 class ShippingCountryCreateRequest extends JsonModel {
-  const ShippingCountryCreateRequest(
-      {required this.code,
-      required this.name,
-      this.sortOrder = 0,
-      this.taxRate = 0,
-      this.paymentMethods,
-      this.isActive = true,
-      this.taxInclusive = false,
-      this.roundingMode = CurrencyRoundingMode.halfEven,
-      this.isStorefrontEnabled = true,
-      this.isSaleEnabled = true,
-      this.isDefault = false});
+  const ShippingCountryCreateRequest({
+    required this.code,
+    required this.name,
+    this.sortOrder = 0,
+    this.taxRate = 0,
+    this.paymentMethods,
+    this.isActive = true,
+    this.taxInclusive = false,
+    this.roundingMode = CurrencyRoundingMode.halfEven,
+    this.isStorefrontEnabled = true,
+    this.isSaleEnabled = true,
+    this.isDefault = false,
+  });
   final String code;
   final String name;
   final int sortOrder;
@@ -533,16 +592,17 @@ class ShippingCountryCreateRequest extends JsonModel {
         'roundingMode': _adminRoundingValue(roundingMode),
         'isStorefrontEnabled': isStorefrontEnabled,
         'isSaleEnabled': isSaleEnabled,
-        'isDefault': isDefault
+        'isDefault': isDefault,
       };
 }
 
 class ShippingGovernorateCreateRequest extends JsonModel {
-  const ShippingGovernorateCreateRequest(
-      {required this.countryCode,
-      required this.name,
-      this.sortOrder = 0,
-      this.isActive = true});
+  const ShippingGovernorateCreateRequest({
+    required this.countryCode,
+    required this.name,
+    this.sortOrder = 0,
+    this.isActive = true,
+  });
   final String countryCode;
   final String name;
   final int sortOrder;
@@ -552,16 +612,17 @@ class ShippingGovernorateCreateRequest extends JsonModel {
         'countryCode': countryCode,
         'name': name,
         'sortOrder': sortOrder,
-        'isActive': isActive
+        'isActive': isActive,
       };
 }
 
 class HeroButtonInput extends JsonModel {
-  const HeroButtonInput(
-      {required this.label,
-      required this.href,
-      this.variant = HeroButtonVariant.primary,
-      this.target = '_self'});
+  const HeroButtonInput({
+    required this.label,
+    required this.href,
+    this.variant = HeroButtonVariant.primary,
+    this.target = '_self',
+  });
   final String label;
   final String href;
   final HeroButtonVariant variant;
@@ -571,28 +632,29 @@ class HeroButtonInput extends JsonModel {
         'label': label,
         'href': href,
         'variant': _adminHeroVariantValue(variant),
-        'target': target
+        'target': target,
       };
 }
 
 class HeroSlideCreateRequest extends JsonModel {
-  const HeroSlideCreateRequest(
-      {required this.title,
-      this.badge,
-      this.highlightedTitle,
-      this.subtitle,
-      this.description,
-      this.desktopImage,
-      this.mobileImage,
-      this.imageAlt,
-      this.contentAlignment = HeroContentAlignment.left,
-      this.imagePosition = HeroImagePosition.center,
-      this.overlay = HeroOverlay.dark,
-      this.sortOrder = 0,
-      this.isActive = true,
-      this.startAt,
-      this.endAt,
-      this.buttons = const []});
+  const HeroSlideCreateRequest({
+    required this.title,
+    this.badge,
+    this.highlightedTitle,
+    this.subtitle,
+    this.description,
+    this.desktopImage,
+    this.mobileImage,
+    this.imageAlt,
+    this.contentAlignment = HeroContentAlignment.left,
+    this.imagePosition = HeroImagePosition.center,
+    this.overlay = HeroOverlay.dark,
+    this.sortOrder = 0,
+    this.isActive = true,
+    this.startAt,
+    this.endAt,
+    this.buttons = const [],
+  });
   final String title;
   final String? badge;
   final String? highlightedTitle;
@@ -626,7 +688,7 @@ class HeroSlideCreateRequest extends JsonModel {
         'isActive': isActive,
         if (startAt != null) 'startAt': startAt!.toIso8601String(),
         if (endAt != null) 'endAt': endAt!.toIso8601String(),
-        'buttons': buttons.map((item) => item.toJson()).toList()
+        'buttons': buttons.map((item) => item.toJson()).toList(),
       };
 }
 
@@ -645,8 +707,11 @@ class ContactStatusUpdateRequest extends JsonModel {
 }
 
 class AccountSecurityRequest extends JsonModel {
-  const AccountSecurityRequest(
-      {required this.action, this.currentPassword, this.newPassword});
+  const AccountSecurityRequest({
+    required this.action,
+    this.currentPassword,
+    this.newPassword,
+  });
   final AccountSecurityAction action;
   final String? currentPassword;
   final String? newPassword;
@@ -656,7 +721,7 @@ class AccountSecurityRequest extends JsonModel {
             ? 'changePassword'
             : 'revokeAllSessions',
         if (currentPassword != null) 'currentPassword': currentPassword,
-        if (newPassword != null) 'newPassword': newPassword
+        if (newPassword != null) 'newPassword': newPassword,
       };
 }
 

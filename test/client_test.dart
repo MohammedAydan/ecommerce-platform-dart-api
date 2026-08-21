@@ -12,7 +12,9 @@ void main() {
       throwsA(isA<ArgumentError>()),
     );
     expect(
-      () => EcommercePlatformClient(baseUrl: 'https://user:pass@api.example.test'),
+      () => EcommercePlatformClient(
+        baseUrl: 'https://user:pass@api.example.test',
+      ),
       throwsA(isA<ArgumentError>()),
     );
   });
@@ -26,70 +28,78 @@ void main() {
     transport.close();
   });
 
-  test('adds bearer and idempotency headers and parses success envelope',
-      () async {
-    late http.Request captured;
-    final httpClient = MockClient((request) async {
-      captured = request;
-      return http.Response(
-        jsonEncode({
-          'success': true,
-          'data': {'id': 'order-1'},
-          'pagination': {'page': 1, 'limit': 10, 'total': 1, 'totalPages': 1},
-        }),
-        200,
-        headers: {'content-type': 'application/json'},
+  test(
+    'adds bearer and idempotency headers and parses success envelope',
+    () async {
+      late http.Request captured;
+      final httpClient = MockClient((request) async {
+        captured = request;
+        return http.Response(
+          jsonEncode({
+            'success': true,
+            'data': {'id': 'order-1'},
+            'pagination': {'page': 1, 'limit': 10, 'total': 1, 'totalPages': 1},
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      });
+
+      final client = EcommercePlatformClient(
+        baseUrl: 'https://api.example.test',
+        authTokenProvider: const StaticAuthTokenProvider('token-123'),
       );
-    });
+      final transport = EcommerceApiClient(
+        baseUrl: 'https://api.example.test',
+        httpClient: httpClient,
+        authTokenProvider: const StaticAuthTokenProvider('token-123'),
+      );
+      final response = await transport.request<dynamic>(
+        'POST',
+        '/api/v1/orders',
+        body: const JsonBody({'items': []}),
+        idempotencyKey: 'idem-1',
+      );
 
-    final client = EcommercePlatformClient(
-      baseUrl: 'https://api.example.test',
-      authTokenProvider: const StaticAuthTokenProvider('token-123'),
-    );
-    final transport = EcommerceApiClient(
-      baseUrl: 'https://api.example.test',
-      httpClient: httpClient,
-      authTokenProvider: const StaticAuthTokenProvider('token-123'),
-    );
-    final response = await transport.request<dynamic>(
-      'POST',
-      '/api/v1/orders',
-      body: const JsonBody({'items': []}),
-      idempotencyKey: 'idem-1',
-    );
-
-    expect(response.success, isTrue);
-    expect(response.data, {'id': 'order-1'});
-    expect(response.pagination?.total, 1);
-    expect(captured.headers['authorization'], 'Bearer token-123');
-    expect(captured.headers['idempotency-key'], 'idem-1');
-    expect(captured.headers['content-type'], 'application/json');
-    expect(jsonDecode(captured.body), {'items': []});
-    client.close();
-    transport.close();
-  });
+      expect(response.success, isTrue);
+      expect(response.data, {'id': 'order-1'});
+      expect(response.pagination?.total, 1);
+      expect(captured.headers['authorization'], 'Bearer token-123');
+      expect(captured.headers['idempotency-key'], 'idem-1');
+      expect(captured.headers['content-type'], 'application/json');
+      expect(jsonDecode(captured.body), {'items': []});
+      client.close();
+      transport.close();
+    },
+  );
 
   test('throws ApiException for standard backend errors', () async {
     final transport = EcommerceApiClient(
       baseUrl: 'https://api.example.test',
-      httpClient: MockClient((_) async => http.Response(
-            jsonEncode({
-              'success': false,
-              'error': {
-                'code': 'PRODUCT_NOT_FOUND',
-                'message': 'Product not found',
-              },
-            }),
-            404,
-            headers: {'content-type': 'application/json'},
-          )),
+      httpClient: MockClient(
+        (_) async => http.Response(
+          jsonEncode({
+            'success': false,
+            'error': {
+              'code': 'PRODUCT_NOT_FOUND',
+              'message': 'Product not found',
+            },
+          }),
+          404,
+          headers: {'content-type': 'application/json'},
+        ),
+      ),
     );
 
     expect(
-      () => transport.request<dynamic>('GET', '/api/v1/products/missing',
-          authenticated: false),
-      throwsA(isA<ApiException>()
-          .having((e) => e.code, 'code', 'PRODUCT_NOT_FOUND')),
+      () => transport.request<dynamic>(
+        'GET',
+        '/api/v1/products/missing',
+        authenticated: false,
+      ),
+      throwsA(
+        isA<ApiException>().having((e) => e.code, 'code', 'PRODUCT_NOT_FOUND'),
+      ),
     );
     transport.close();
   });
@@ -103,7 +113,7 @@ void main() {
         return http.Response(
           jsonEncode({
             'success': true,
-            'data': {'id': 'p-1'}
+            'data': {'id': 'p-1'},
           }),
           200,
           headers: {'content-type': 'application/json'},
@@ -174,37 +184,93 @@ void main() {
     transport.close();
   });
 
-  test('persists Better Auth set-cookie and sends it on the next request',
-      () async {
-    final cookieStore = MemoryCookieStore();
-    var call = 0;
-    final transport = EcommerceApiClient(
-      baseUrl: 'https://api.example.test',
-      cookieStore: cookieStore,
-      httpClient: MockClient((request) async {
-        call++;
-        if (call == 1) {
+  test(
+    'typed finance client sends return/refund and reconciliation requests',
+    () async {
+      final paths = <String>[];
+      final bodies = <Map<String, dynamic>>[];
+      final transport = EcommerceApiClient(
+        baseUrl: 'https://api.example.test',
+        httpClient: MockClient((request) async {
+          paths.add(
+            '${request.method} ${request.url.path}?${request.url.query}',
+          );
+          if (request.body.isNotEmpty) {
+            bodies.add(
+              Map<String, dynamic>.from(jsonDecode(request.body) as Map),
+            );
+          }
           return http.Response(
             jsonEncode({'success': true, 'data': {}}),
             200,
-            headers: {
-              'content-type': 'application/json',
-              'set-cookie': 'better-auth.session_token=abc123; Path=/; HttpOnly'
-            },
+            headers: {'content-type': 'application/json'},
           );
-        }
-        expect(request.headers['cookie'], 'better-auth.session_token=abc123');
-        return http.Response(jsonEncode({'success': true, 'data': {}}), 200,
-            headers: {'content-type': 'application/json'});
-      }),
-    );
+        }),
+      );
+      final admin = AdminApiClient(transport);
 
-    await transport.request<dynamic>('POST', '/api/auth/sign-in/email',
-        body: const JsonBody({'email': 'a@b.com', 'password': 'password'}));
-    await transport.request<dynamic>('GET', '/api/auth/get-session');
-    expect(call, 2);
-    transport.close();
-  });
+      await admin.createReturnAndRefund(
+        'order-1',
+        const ReturnRefundRequest(
+          items: [ReturnLineRequest(orderItemId: 'line-1', quantity: 1)],
+          reason: 'Damaged on delivery',
+          idempotencyKey: 'return-request-0001',
+        ),
+      );
+      await admin.reconcileCommerce(orderId: 'order-1');
+
+      expect(paths.first, 'POST /api/v1/admin/orders/order-1/returns?');
+      expect(bodies.single['items'], [
+        {'orderItemId': 'line-1', 'quantity': 1},
+      ]);
+      expect(
+        paths.last,
+        'GET /api/v1/admin/commerce/reconciliation?orderId=order-1',
+      );
+      transport.close();
+    },
+  );
+
+  test(
+    'persists Better Auth set-cookie and sends it on the next request',
+    () async {
+      final cookieStore = MemoryCookieStore();
+      var call = 0;
+      final transport = EcommerceApiClient(
+        baseUrl: 'https://api.example.test',
+        cookieStore: cookieStore,
+        httpClient: MockClient((request) async {
+          call++;
+          if (call == 1) {
+            return http.Response(
+              jsonEncode({'success': true, 'data': {}}),
+              200,
+              headers: {
+                'content-type': 'application/json',
+                'set-cookie':
+                    'better-auth.session_token=abc123; Path=/; HttpOnly',
+              },
+            );
+          }
+          expect(request.headers['cookie'], 'better-auth.session_token=abc123');
+          return http.Response(
+            jsonEncode({'success': true, 'data': {}}),
+            200,
+            headers: {'content-type': 'application/json'},
+          );
+        }),
+      );
+
+      await transport.request<dynamic>(
+        'POST',
+        '/api/auth/sign-in/email',
+        body: const JsonBody({'email': 'a@b.com', 'password': 'password'}),
+      );
+      await transport.request<dynamic>('GET', '/api/auth/get-session');
+      expect(call, 2);
+      transport.close();
+    },
+  );
 
   test('typed public client decodes catalog products', () async {
     final transport = EcommerceApiClient(
@@ -213,27 +279,29 @@ void main() {
         expect(request.url.path, '/api/v1/products');
         expect(request.url.queryParameters['page'], '1');
         return http.Response(
-            jsonEncode({
-              'success': true,
-              'data': [
-                {
-                  'id': 'p-1',
-                  'name': 'Mouse',
-                  'slug': 'mouse',
-                  'price': 10,
-                  'images': [],
-                  'tags': [],
-                  'variants': []
-                }
-              ]
-            }),
-            200,
-            headers: {'content-type': 'application/json'});
+          jsonEncode({
+            'success': true,
+            'data': [
+              {
+                'id': 'p-1',
+                'name': 'Mouse',
+                'slug': 'mouse',
+                'price': 10,
+                'images': [],
+                'tags': [],
+                'variants': [],
+              },
+            ],
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
       }),
     );
     final client = PublicApiClient(transport);
     final response = await client.listProducts(
-        query: const CatalogQuery(page: 1, limit: 10));
+      query: const CatalogQuery(page: 1, limit: 10),
+    );
     expect(response.data?.single.id, 'p-1');
     expect(response.data?.single.name, 'Mouse');
     transport.close();
@@ -243,7 +311,10 @@ void main() {
     final transport = EcommerceApiClient(
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
-        expect(request.url.path, '/api/v1/shipping/countries/EG/payment-methods');
+        expect(
+          request.url.path,
+          '/api/v1/shipping/countries/EG/payment-methods',
+        );
         return http.Response(
           jsonEncode({
             'success': true,
@@ -260,7 +331,8 @@ void main() {
         );
       }),
     );
-    final response = await PublicApiClient(transport).paymentMethods(countryCode: 'EG');
+    final response =
+        await PublicApiClient(transport).paymentMethods(countryCode: 'EG');
     expect(response.data?['country'], 'EG');
     expect((response.data?['methods'] as List).length, 2);
     transport.close();
@@ -273,19 +345,22 @@ void main() {
       httpClient: MockClient((request) async {
         captured = request;
         return http.Response(
-            jsonEncode({
-              'user': {'id': 'u-1', 'email': 'a@b.com'}
-            }),
-            200,
-            headers: {'content-type': 'application/json'});
+          jsonEncode({
+            'user': {'id': 'u-1', 'email': 'a@b.com'},
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
       }),
     );
     final response = await AuthApiClient(transport)
         .signIn(const SignInRequest(email: 'a@b.com', password: 'password'));
     expect(response.success, isTrue);
     expect(captured.url.path, '/api/auth/sign-in/email');
-    expect(jsonDecode(captured.body),
-        {'email': 'a@b.com', 'password': 'password'});
+    expect(jsonDecode(captured.body), {
+      'email': 'a@b.com',
+      'password': 'password',
+    });
     transport.close();
   });
 
@@ -296,7 +371,10 @@ void main() {
       httpClient: MockClient((request) async {
         captured = request;
         return http.Response(
-          jsonEncode({'success': true, 'data': {'id': 'guest-1', 'items': []}}),
+          jsonEncode({
+            'success': true,
+            'data': {'id': 'guest-1', 'items': []},
+          }),
           200,
           headers: {'content-type': 'application/json'},
         );
@@ -310,12 +388,14 @@ void main() {
   });
 
   test('manifest and agent tool catalogs are complete and safe by default', () {
-    expect(ecommercePlatformOperations.length, 135);
+    expect(ecommercePlatformOperations.length, 137);
     expect(EcommerceAgentTools.safe.length, 9);
     expect(EcommerceAgentTools.safe.every((tool) => tool.readOnly), isTrue);
     expect(
-        EcommerceAgentTools.safe
-            .every((tool) => tool.inputSchema['additionalProperties'] == false),
-        isTrue);
+      EcommerceAgentTools.safe.every(
+        (tool) => tool.inputSchema['additionalProperties'] == false,
+      ),
+      isTrue,
+    );
   });
 }

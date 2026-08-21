@@ -1,5 +1,11 @@
 ## 0.2.0 - 2026-08-19
 
+## 0.3.0 - 2026-08-21
+
+Updated the SDK contract to the latest commerce backend revision. Added typed admin return/refund requests and the finance reconciliation facade; added raw/OpenAPI coverage for `POST /api/v1/admin/orders/{id}/returns` and `GET /api/v1/admin/commerce/reconciliation`; and expanded quote/order models with immutable financial snapshot fields. Updated checkout guidance so shipping is selected from server-returned methods after an address is provided, with no client-side free-shipping threshold.
+
+## 0.2.0 - 2026-08-19
+
 Rebuilt the package as a typed SDK. Added strict catalog, checkout, cart, auth, account, address, order, and administrative request/response models; local validation with `ModelValidationException`; ergonomic domain clients; Better Auth sign-in/sign-up/session/sign-out helpers; persistent cookie support; response headers; typed decoders; and bounded safe retries.
 
 Added complete machine-readable integration artifacts: `openapi.yaml`, `ai/agent-tools.json`, `ai/safe-tools.json`, `ai/openai-tools.json`, `ai/system-prompt.md`, `ai/README.md`, and `llms.txt`. Added an updated typed example and documented the human-confirmation policy for mutations.

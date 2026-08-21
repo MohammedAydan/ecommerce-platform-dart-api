@@ -1,12 +1,13 @@
 import 'types.dart';
 
 class AgentToolDefinition {
-  const AgentToolDefinition(
-      {required this.name,
-      required this.description,
-      required this.inputSchema,
-      this.readOnly = true,
-      this.requiresAuthentication = false});
+  const AgentToolDefinition({
+    required this.name,
+    required this.description,
+    required this.inputSchema,
+    this.readOnly = true,
+    this.requiresAuthentication = false,
+  });
 
   final String name;
   final String description;
@@ -36,7 +37,7 @@ class EcommerceAgentTools {
         'properties': {
           'locale': {
             'type': 'string',
-            'enum': ['en', 'ar']
+            'enum': ['en', 'ar'],
           },
           'category': {'type': 'string'},
           'brand': {'type': 'string'},
@@ -60,7 +61,7 @@ class EcommerceAgentTools {
           'idOrSlug': {'type': 'string', 'minLength': 1},
           'locale': {
             'type': 'string',
-            'enum': ['en', 'ar']
+            'enum': ['en', 'ar'],
           },
         },
         'required': ['idOrSlug'],
@@ -75,8 +76,8 @@ class EcommerceAgentTools {
         'properties': {
           'locale': {
             'type': 'string',
-            'enum': ['en', 'ar']
-          }
+            'enum': ['en', 'ar'],
+          },
         },
         'additionalProperties': false,
       },
@@ -89,8 +90,8 @@ class EcommerceAgentTools {
         'properties': {
           'locale': {
             'type': 'string',
-            'enum': ['en', 'ar']
-          }
+            'enum': ['en', 'ar'],
+          },
         },
         'additionalProperties': false,
       },
@@ -101,7 +102,7 @@ class EcommerceAgentTools {
       inputSchema: {
         'type': 'object',
         'properties': {},
-        'additionalProperties': false
+        'additionalProperties': false,
       },
     ),
     AgentToolDefinition(
@@ -110,7 +111,7 @@ class EcommerceAgentTools {
       inputSchema: {
         'type': 'object',
         'properties': {
-          'country': {'type': 'string', 'minLength': 2, 'maxLength': 2}
+          'country': {'type': 'string', 'minLength': 2, 'maxLength': 2},
         },
         'required': ['country'],
         'additionalProperties': false,
@@ -154,7 +155,7 @@ class EcommerceAgentTools {
       inputSchema: {
         'type': 'object',
         'properties': {},
-        'additionalProperties': false
+        'additionalProperties': false,
       },
       requiresAuthentication: false,
     ),
@@ -164,7 +165,7 @@ class EcommerceAgentTools {
       inputSchema: {
         'type': 'object',
         'properties': {},
-        'additionalProperties': false
+        'additionalProperties': false,
       },
       requiresAuthentication: true,
     ),

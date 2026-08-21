@@ -1545,6 +1545,68 @@ paths:
         "404": {description: Not found}
         "409": {description: Conflict}
         "500": {description: Internal server error}
+  "/api/v1/admin/orders/{id}/returns":
+    post:
+      operationId: postApiV1AdminOrdersIdReturns
+      summary: "POST /api/v1/admin/orders/{id}/returns"
+      description: "Create a return and corresponding refund from immutable order snapshots. Source route file: app/api/v1/admin/orders/[id]/returns/route.ts"
+      tags: [commerce, finance]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required: [orderItemId, quantity]
+                    properties:
+                      orderItemId: {type: string}
+                      quantity: {type: integer, minimum: 1}
+                reason: {type: string, maxLength: 500}
+                idempotencyKey: {type: string, minLength: 16, maxLength: 200}
+      responses:
+        "201":
+          description: Return and refund successfully recorded
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "400": {description: Invalid return payload}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "422": {description: Return or refund failed}
+  "/api/v1/admin/commerce/reconciliation":
+    get:
+      operationId: getApiV1AdminCommerceReconciliation
+      summary: "GET /api/v1/admin/commerce/reconciliation"
+      description: "Run server-side financial reconciliation checks for all orders or one order. Source route file: app/api/v1/admin/commerce/reconciliation/route.ts"
+      tags: [commerce, finance]
+      security: [{bearerAuth: []}, {betterAuthCookie: []}]
+      parameters:
+        - name: orderId
+          in: query
+          required: false
+          schema: {type: string}
+      responses:
+        "200":
+          description: Financial reconciliation report
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "401": {description: Unauthorized}
+        "403": {description: Forbidden}
+        "500": {description: Reconciliation failed}
   "/api/v1/admin/payment-providers":
     get:
       operationId: getApiV1AdminPaymentProviders

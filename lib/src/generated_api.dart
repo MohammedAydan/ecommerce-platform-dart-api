@@ -2488,4 +2488,37 @@ class EcommercePlatformApi {
         authenticated: authenticated,
         idempotencyKey: idempotencyKey,
       );
+
+  /// POST /api/v1/admin/orders/{id}/returns
+  Future<ApiResponse<dynamic>> postApiV1AdminOrdersIdReturns({
+    required String id,
+    Map<String, dynamic>? query,
+    dynamic body,
+    Map<String, String>? headers,
+    bool authenticated = true,
+    String? idempotencyKey,
+  }) =>
+      client.request<dynamic>(
+        'POST',
+        '/api/v1/admin/orders/${id}/returns',
+        query: query,
+        body: body is JsonModel ? body.toJson() : body,
+        headers: headers,
+        authenticated: authenticated,
+        idempotencyKey: idempotencyKey,
+      );
+
+  /// GET /api/v1/admin/commerce/reconciliation
+  Future<ApiResponse<dynamic>> getApiV1AdminCommerceReconciliation({
+    Map<String, dynamic>? query,
+    Map<String, String>? headers,
+    bool authenticated = true,
+  }) =>
+      client.request<dynamic>(
+        'GET',
+        '/api/v1/admin/commerce/reconciliation',
+        query: query,
+        headers: headers,
+        authenticated: authenticated,
+      );
 }
