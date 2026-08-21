@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-Synchronized the backend source reference to commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. Verified all **137 HTTP operations across 85 route files** against the generated SDK OpenAPI contract and operation manifest, added the complete `API_COVERAGE.md` reference, and documented the Better Auth wildcard normalization used during contract comparison.
+Synchronized the backend source reference to commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. Verified all **138 HTTP operations across 85 route files** against the generated SDK OpenAPI contract and operation manifest, added the complete `API_COVERAGE.md` reference, and documented the Better Auth wildcard normalization used during contract comparison.
 
 ## 0.3.0 - 2026-08-21
 

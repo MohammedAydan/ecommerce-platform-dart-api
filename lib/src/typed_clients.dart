@@ -24,6 +24,14 @@ class PublicApiClient {
   const PublicApiClient(this._client);
   final EcommerceApiClient _client;
 
+  Future<ApiResponse<StoreBrandingResponse>> storeBranding() =>
+      _client.request<StoreBrandingResponse>(
+        'GET',
+        '/api/v1/store/branding',
+        authenticated: false,
+        decoder: StoreBrandingResponse.fromJson,
+      );
+
   Future<ApiResponse<HealthStatus>> health() => _client.request<HealthStatus>(
         'GET',
         '/api/health',

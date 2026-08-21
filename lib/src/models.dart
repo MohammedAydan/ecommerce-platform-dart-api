@@ -330,6 +330,30 @@ class Review extends JsonModel {
   JsonMap toJson() => {...extra};
 }
 
+class StoreBrandingResponse extends JsonModel {
+  const StoreBrandingResponse({
+    required this.name,
+    this.logoUrl,
+  });
+
+  final String name;
+  final String? logoUrl;
+
+  factory StoreBrandingResponse.fromJson(dynamic value) {
+    final json = _map(value);
+    return StoreBrandingResponse(
+      name: _string(json['name']) ?? '',
+      logoUrl: _string(json['logoUrl']),
+    );
+  }
+
+  @override
+  JsonMap toJson() => {
+        'name': name,
+        if (logoUrl != null) 'logoUrl': logoUrl,
+      };
+}
+
 class HealthStatus {
   const HealthStatus(this.value);
   final JsonMap value;
