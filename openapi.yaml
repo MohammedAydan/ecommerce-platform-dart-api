@@ -3221,6 +3221,19 @@ paths:
         "404": {description: Not found}
         "409": {description: Conflict}
         "500": {description: Internal server error}
+  "/api/v1/store/branding":
+    get:
+      operationId: getApiV1StoreBranding
+      summary: "GET /api/v1/store/branding"
+      description: "Returns public store branding information (store name and logo)."
+      tags: [generated]
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/ApiSuccess"}
+        "500": {description: Internal server error}
   "/api/v1/locale":
     post:
       operationId: postApiV1Locale

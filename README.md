@@ -1,10 +1,10 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **137 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `b54db56f66ea6e3db2adcf08cf9e8c512f211801`.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `b54db56f66ea6e3db2adcf08cf9e8c512f211801`.
 
 ## الفكرة الأساسية
 
-المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 137، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 138، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
 
@@ -61,7 +61,7 @@ final currentSession = await client.auth.session();
 | `client.addresses` | list/create/update/delete/set-default. |
 | `client.orders` | create/list/get مع idempotency key. |
 | `client.admin` | typed product/taxonomy/coupon/wallet/tag/order/review/user/role/payment/shipping/hero operations، إضافة إلى returns/refunds وfinancial reconciliation. |
-| `client.api` | طبقة raw المولدة لكل العمليات الـ 137 عند الحاجة إلى route غير موجود في facade. |
+| `client.api` | طبقة raw المولدة لكل العمليات الـ 138 عند الحاجة إلى route غير موجود في facade. |
 
 ## أمثلة typed بدون Map يدوي
 
@@ -188,7 +188,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 137 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1. تم التحقق من التغطية مقابل 85 ملف route في backend عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`، مع تطبيع wildcard الخاص بمسارات Better Auth إلى `{...auth}`. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1. تم التحقق من التغطية مقابل 85 ملف route في backend عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`، مع تطبيع wildcard الخاص بمسارات Better Auth إلى `{...auth}`. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
@@ -214,7 +214,7 @@ dart pub publish --dry-run
 | `lib/src/models.dart` | models العامة، catalog، cart، checkout، auth، account، orders. |
 | `lib/src/admin_models.dart` | models الإدارية الصارمة. |
 | `lib/src/api_client.dart` | HTTP، auth، cookies، retries، headers، decoders، errors. |
-| `lib/src/generated_api.dart` | جميع العمليات الـ 137. |
+| `lib/src/generated_api.dart` | جميع العمليات الـ 138. |
 | `openapi.yaml` | contract كامل للـ API. |
 | `ai/` و`llms.txt` | تكامل LLMs وAI agents. |
 

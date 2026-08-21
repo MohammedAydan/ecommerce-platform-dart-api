@@ -2104,6 +2104,24 @@ class EcommercePlatformApi {
         idempotencyKey: idempotencyKey,
       );
 
+  /// GET /api/v1/store/branding
+  Future<ApiResponse<dynamic>> getApiV1StoreBranding({
+    Map<String, dynamic>? query,
+    dynamic body,
+    Map<String, String>? headers,
+    bool authenticated = true,
+    String? idempotencyKey,
+  }) =>
+      client.request<dynamic>(
+        'GET',
+        '/api/v1/store/branding',
+        query: query,
+        body: body is JsonModel ? body.toJson() : body,
+        headers: headers,
+        authenticated: authenticated,
+        idempotencyKey: idempotencyKey,
+      );
+
   /// POST /api/v1/locale
   Future<ApiResponse<dynamic>> postApiV1Locale({
     Map<String, dynamic>? query,

@@ -388,7 +388,7 @@ void main() {
   });
 
   test('manifest and agent tool catalogs are complete and safe by default', () {
-    expect(ecommercePlatformOperations.length, 137);
+    expect(ecommercePlatformOperations.length, 138);
     expect(EcommerceAgentTools.safe.length, 9);
     expect(EcommerceAgentTools.safe.every((tool) => tool.readOnly), isTrue);
     expect(

@@ -6,7 +6,7 @@
 
 ## الملخص التنفيذي
 
-توفّر الحزمة واجهة Dart typed فوق Ecommerce Platform API، بحيث يتعامل التطبيق مع domain clients وrequest models بدل بناء مسارات HTTP أو JSON يدويًا. يغطي الإصدار `0.3.0` عدد **137 عملية**، بما في ذلك عمليتا الاسترجاع/الرد المالي (`POST /api/v1/admin/orders/{id}/returns`) والتسوية المالية (`GET /api/v1/admin/commerce/reconciliation`). كما تعرض نماذج quote وorder الآن حقول snapshot المالية الضرورية لعرض الخصومات، الإيراد المعترف به، المبالغ المدفوعة والمستردة، COGS، والربح الإجمالي دون الرجوع إلى catalog الحالي.
+توفّر الحزمة واجهة Dart typed فوق Ecommerce Platform API، بحيث يتعامل التطبيق مع domain clients وrequest models بدل بناء مسارات HTTP أو JSON يدويًا. يغطي الإصدار `0.3.0` عدد **138 عملية**، بما في ذلك عمليتا الاسترجاع/الرد المالي (`POST /api/v1/admin/orders/{id}/returns`) والتسوية المالية (`GET /api/v1/admin/commerce/reconciliation`). كما تعرض نماذج quote وorder الآن حقول snapshot المالية الضرورية لعرض الخصومات، الإيراد المعترف به، المبالغ المدفوعة والمستردة، COGS، والربح الإجمالي دون الرجوع إلى catalog الحالي.
 
 > **قاعدة التشغيل:** يكون الخادم هو مصدر الحقيقة للسعر والشحن والضريبة والحالة المالية. لا ينبغي للتطبيق حساب الإجمالي أو تطبيق قاعدة شحن مجاني محلية.
 
@@ -85,7 +85,7 @@ Content-Type: application/json
 
 ## التحقق المنفذ
 
-تمت مطابقة inventory الخادم مع manifest وOpenAPI الخاصين بالـ SDK: **137 عملية HTTP** عبر **85 ملف route**. يلزم تشغيل `dart format lib test` و`dart analyze lib test` و`dart test` في CI أو بيئة Dart قبل الدمج؛ لم تكن أداة Dart مثبتة في بيئة التنفيذ الحالية، لذلك لا أدرج نتيجة اختبار غير منفذة.
+تمت مطابقة inventory الخادم مع manifest وOpenAPI الخاصين بالـ SDK: **138 عملية HTTP** عبر **85 ملف route**. يلزم تشغيل `dart format lib test` و`dart analyze lib test` و`dart test` في CI أو بيئة Dart قبل الدمج؛ لم تكن أداة Dart مثبتة في بيئة التنفيذ الحالية، لذلك لا أدرج نتيجة اختبار غير منفذة.
 
 ## مراجع
 

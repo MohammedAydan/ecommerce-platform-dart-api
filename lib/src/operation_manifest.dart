@@ -593,6 +593,11 @@ const ecommercePlatformOperations = <ApiOperation>[
     sourceFile: 'app/api/v1/hero/route.ts',
   ),
   ApiOperation(
+    method: 'GET',
+    path: '/api/v1/store/branding',
+    sourceFile: 'app/api/v1/store/branding/route.ts',
+  ),
+  ApiOperation(
     method: 'POST',
     path: '/api/v1/locale',
     sourceFile: 'app/api/v1/locale/route.ts',

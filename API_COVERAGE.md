@@ -1,6 +1,6 @@
 # Ecommerce Platform API v1
 
-> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **137 عملية HTTP** عبر **85 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
+> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **138 عملية HTTP** عبر **85 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
 
 ## البداية السريعة
 
@@ -156,6 +156,7 @@
 | GET | `/api/v1/shipping/countries/{code}/payment-methods` | `getApiV1ShippingCountriesCodePaymentMethods` | code | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/shipping/countries/[code]/payment-methods/route.ts` |
 | GET | `/api/v1/shipping/governorates` | `getApiV1ShippingGovernorates` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/shipping/governorates/route.ts` |
 | GET | `/api/v1/shipping/regions` | `getApiV1ShippingRegions` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/shipping/regions/route.ts` |
+| GET | `/api/v1/store/branding` | `getApiV1StoreBranding` | - | none | 200, 500 | `app/api/v1/store/branding/route.ts` |
 | GET | `/api/v1/wallets` | `getApiV1Wallets` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/wallets/route.ts` |
 | POST | `/api/v1/webhooks/{provider}` | `postApiV1WebhooksProvider` | provider | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/webhooks/[provider]/route.ts` |
 | DELETE | `/api/v1/wishlist` | `deleteApiV1Wishlist` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/wishlist/route.ts` |
@@ -235,6 +236,10 @@
 ### `shipping` (4 operations)
 
 `GET /api/v1/shipping/countries`، `GET /api/v1/shipping/countries/{code}/payment-methods`، `GET /api/v1/shipping/governorates`، `GET /api/v1/shipping/regions`
+
+### `store` (1 operations)
+
+`GET /api/v1/store/branding`
 
 ### `wallets` (1 operations)
 
