@@ -275,8 +275,10 @@ void main() {
   test('typed public client decodes catalog products', () async {
     final transport = EcommerceApiClient(
       baseUrl: 'https://api.example.test',
+      authTokenProvider: const StaticAuthTokenProvider('catalog-token'),
       httpClient: MockClient((request) async {
         expect(request.url.path, '/api/v1/products');
+        expect(request.headers['authorization'], 'Bearer catalog-token');
         expect(request.url.queryParameters['page'], '1');
         return http.Response(
           jsonEncode({
@@ -397,5 +399,29 @@ void main() {
       ),
       isTrue,
     );
+  });
+
+  test('anonymous sign-in is an unauthenticated session bootstrap', () async {
+    late http.Request captured;
+    final transport = EcommerceApiClient(
+      baseUrl: 'https://api.example.test',
+      authTokenProvider: const StaticAuthTokenProvider('stale-token'),
+      httpClient: MockClient((request) async {
+        captured = request;
+        return http.Response(
+          jsonEncode({'success': true, 'data': {}}),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }),
+    );
+    await transport.request<dynamic>(
+      'POST',
+      '/api/auth/sign-in/anonymous',
+      authenticated: false,
+    );
+    expect(captured.url.path, '/api/auth/sign-in/anonymous');
+    expect(captured.headers.containsKey('authorization'), isFalse);
+    transport.close();
   });
 }

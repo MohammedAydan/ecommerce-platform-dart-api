@@ -1,6 +1,6 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام يغطي كل العمليات التي تم التحقق منها من commit المصدر `b54db56f66ea6e3db2adcf08cf9e8c512f211801`.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل عمليات الأعمال، بما فيها storefront وquote، تتطلب جلسة Better Auth أو Bearer token صادرًا من الخادم.
 
 ## الفكرة الأساسية
 
@@ -40,10 +40,13 @@ final signedIn = await client.auth.signIn(
   ),
 );
 
+// For storefront access before user sign-in, obtain a server-issued session.
+final anonymous = await client.auth.signInAnonymous();
+
 final currentSession = await client.auth.session();
 ```
 
-يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage.
+يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage. لا تضع API key أو token ثابتًا داخل تطبيق Flutter؛ anonymous sign-in هو bootstrap مصادق عليه ومحدود، وليس مفتاحًا عامًا مشتركًا.
 
 ## Transport security
 
@@ -54,7 +57,7 @@ final currentSession = await client.auth.session();
 | Client | الاستخدام |
 |---|---|
 | `client.auth` | sign-in، sign-up، session، sign-out. |
-| `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews. |
+| `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews؛ كل هذه العمليات تحتاج session رغم اسم العميل التاريخي. |
 | `client.checkout` | quote authoritative للتسعير والخصومات والشحن والضرائب. |
 | `client.cart` | قراءة وإضافة وتعديل ومسح ودمج guest/authenticated cart. |
 | `client.account` | profile، settings، security، sessions، account orders، account reviews. |
@@ -188,7 +191,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1. تم التحقق من التغطية مقابل 85 ملف route في backend عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`، مع تطبيع wildcard الخاص بمسارات Better Auth إلى `{...auth}`. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1، ويصنف عمليات الأعمال على أنها session-required مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
