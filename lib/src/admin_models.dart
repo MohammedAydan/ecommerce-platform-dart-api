@@ -323,29 +323,6 @@ class CouponRequest extends JsonModel {
       };
 }
 
-class WalletRequest extends JsonModel {
-  const WalletRequest({
-    this.code,
-    this.name,
-    this.description,
-    this.sortOrder,
-    this.isActive,
-  });
-  final String? code;
-  final String? name;
-  final String? description;
-  final int? sortOrder;
-  final bool? isActive;
-  @override
-  JsonMap toJson() => {
-        if (code != null) 'code': code,
-        if (name != null) 'name': name,
-        if (description != null) 'description': description,
-        if (sortOrder != null) 'sortOrder': sortOrder,
-        if (isActive != null) 'isActive': isActive,
-      };
-}
-
 class TagRequest extends JsonModel {
   const TagRequest({this.name, this.slug, this.isActive});
   final String? name;

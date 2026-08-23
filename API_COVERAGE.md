@@ -1,6 +1,6 @@
 # Ecommerce Platform API v1
 
-> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **138 عملية HTTP** عبر **85 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
+> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **133 عملية HTTP** عبر **82 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
 
 ## البداية السريعة
 
@@ -121,10 +121,6 @@
 | GET | `/api/v1/admin/users` | `getApiV1AdminUsers` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/users/route.ts` |
 | GET | `/api/v1/admin/users/{id}` | `getApiV1AdminUsersId` | id | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/users/[id]/route.ts` |
 | PATCH | `/api/v1/admin/users/{id}` | `patchApiV1AdminUsersId` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/users/[id]/route.ts` |
-| GET | `/api/v1/admin/wallets` | `getApiV1AdminWallets` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/wallets/route.ts` |
-| POST | `/api/v1/admin/wallets` | `postApiV1AdminWallets` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/wallets/route.ts` |
-| DELETE | `/api/v1/admin/wallets/{id}` | `deleteApiV1AdminWalletsId` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/wallets/[id]/route.ts` |
-| PATCH | `/api/v1/admin/wallets/{id}` | `patchApiV1AdminWalletsId` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/wallets/[id]/route.ts` |
 | GET | `/api/v1/auth/{auth}` | `getApiV1AuthCatchAll` | - | none | 200, 400, 401, 403, 404, 409, 500 | `Generated/auth catch-all or contract-only route` |
 | POST | `/api/v1/auth/{auth}` | `postApiV1AuthCatchAll` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `Generated/auth catch-all or contract-only route` |
 | GET | `/api/v1/brands` | `getApiV1Brands` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/brands/route.ts` |
@@ -157,7 +153,6 @@
 | GET | `/api/v1/shipping/governorates` | `getApiV1ShippingGovernorates` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/shipping/governorates/route.ts` |
 | GET | `/api/v1/shipping/regions` | `getApiV1ShippingRegions` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/shipping/regions/route.ts` |
 | GET | `/api/v1/store/branding` | `getApiV1StoreBranding` | - | none | 200, 500 | `app/api/v1/store/branding/route.ts` |
-| GET | `/api/v1/wallets` | `getApiV1Wallets` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/wallets/route.ts` |
 | POST | `/api/v1/webhooks/{provider}` | `postApiV1WebhooksProvider` | provider | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/webhooks/[provider]/route.ts` |
 | DELETE | `/api/v1/wishlist` | `deleteApiV1Wishlist` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/wishlist/route.ts` |
 | GET | `/api/v1/wishlist` | `getApiV1Wishlist` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/wishlist/route.ts` |
@@ -175,7 +170,6 @@
 
 ### `admin` (77 operations)
 
-`GET /api/v1/admin/audit-logs`، `GET /api/v1/admin/brands`، `POST /api/v1/admin/brands`، `DELETE /api/v1/admin/brands/{id}`، `PATCH /api/v1/admin/brands/{id}`، `GET /api/v1/admin/categories`، `POST /api/v1/admin/categories`، `DELETE /api/v1/admin/categories/{id}`، `PATCH /api/v1/admin/categories/{id}`، `GET /api/v1/admin/commerce/reconciliation`، `GET /api/v1/admin/contact`، `PATCH /api/v1/admin/contact/{id}`، `GET /api/v1/admin/coupons`، `POST /api/v1/admin/coupons`، `DELETE /api/v1/admin/coupons/{id}`، `PATCH /api/v1/admin/coupons/{id}`، `POST /api/v1/admin/coupons/{id}/reset`، `GET /api/v1/admin/customers`، `GET /api/v1/admin/dashboard`، `GET /api/v1/admin/hero-slides`، `POST /api/v1/admin/hero-slides`، `PATCH /api/v1/admin/hero-slides/reorder`، `DELETE /api/v1/admin/hero-slides/{id}`، `GET /api/v1/admin/hero-slides/{id}`، `PATCH /api/v1/admin/hero-slides/{id}`، `POST /api/v1/admin/hero-slides/{id}/duplicate`، `GET /api/v1/admin/inventory`، `PATCH /api/v1/admin/inventory`، `GET /api/v1/admin/orders`، `PATCH /api/v1/admin/orders`، `GET /api/v1/admin/orders/{id}`، `PATCH /api/v1/admin/orders/{id}`، `POST /api/v1/admin/orders/{id}/returns`، `GET /api/v1/admin/payment-providers`، `POST /api/v1/admin/payment-providers`، `PATCH /api/v1/admin/payment-providers/{provider}`، `POST /api/v1/admin/payment-providers/{provider}/test`، `GET /api/v1/admin/payments`، `GET /api/v1/admin/price-lists`، `POST /api/v1/admin/price-lists`، `DELETE /api/v1/admin/price-lists/{id}`، `PATCH /api/v1/admin/price-lists/{id}`، `DELETE /api/v1/admin/products`، `GET /api/v1/admin/products`، `PATCH /api/v1/admin/products`، `POST /api/v1/admin/products`، `GET /api/v1/admin/reviews`، `PATCH /api/v1/admin/reviews`، `DELETE /api/v1/admin/reviews/{id}`، `PATCH /api/v1/admin/reviews/{id}`، `GET /api/v1/admin/roles`، `POST /api/v1/admin/roles`، `GET /api/v1/admin/settings`، `POST /api/v1/admin/settings`، `GET /api/v1/admin/shipping`، `POST /api/v1/admin/shipping`، `GET /api/v1/admin/shipping-countries`، `POST /api/v1/admin/shipping-countries`، `DELETE /api/v1/admin/shipping-countries/{id}`، `PATCH /api/v1/admin/shipping-countries/{id}`، `GET /api/v1/admin/shipping-governorates`، `POST /api/v1/admin/shipping-governorates`، `DELETE /api/v1/admin/shipping-governorates/{id}`، `PATCH /api/v1/admin/shipping-governorates/{id}`، `DELETE /api/v1/admin/shipping/{id}`، `PATCH /api/v1/admin/shipping/{id}`، `GET /api/v1/admin/tags`، `POST /api/v1/admin/tags`، `DELETE /api/v1/admin/tags/{id}`، `PATCH /api/v1/admin/tags/{id}`، `GET /api/v1/admin/users`، `GET /api/v1/admin/users/{id}`، `PATCH /api/v1/admin/users/{id}`، `GET /api/v1/admin/wallets`، `POST /api/v1/admin/wallets`، `DELETE /api/v1/admin/wallets/{id}`، `PATCH /api/v1/admin/wallets/{id}`
 
 ### `auth` (4 operations)
 
@@ -240,10 +234,6 @@
 ### `store` (1 operations)
 
 `GET /api/v1/store/branding`
-
-### `wallets` (1 operations)
-
-`GET /api/v1/wallets`
 
 ### `webhooks` (1 operations)
 

@@ -498,26 +498,6 @@ const ecommercePlatformOperations = <ApiOperation>[
     sourceFile: 'app/api/v1/admin/users/route.ts',
   ),
   ApiOperation(
-    method: 'PATCH',
-    path: '/api/v1/admin/wallets/{id}',
-    sourceFile: 'app/api/v1/admin/wallets/[id]/route.ts',
-  ),
-  ApiOperation(
-    method: 'DELETE',
-    path: '/api/v1/admin/wallets/{id}',
-    sourceFile: 'app/api/v1/admin/wallets/[id]/route.ts',
-  ),
-  ApiOperation(
-    method: 'GET',
-    path: '/api/v1/admin/wallets',
-    sourceFile: 'app/api/v1/admin/wallets/route.ts',
-  ),
-  ApiOperation(
-    method: 'POST',
-    path: '/api/v1/admin/wallets',
-    sourceFile: 'app/api/v1/admin/wallets/route.ts',
-  ),
-  ApiOperation(
     method: 'GET',
     path: '/api/v1/auth/{...auth}',
     sourceFile: 'app/api/v1/auth/[...auth]/route.ts',
@@ -676,11 +656,6 @@ const ecommercePlatformOperations = <ApiOperation>[
     method: 'GET',
     path: '/api/v1/shipping/regions',
     sourceFile: 'app/api/v1/shipping/regions/route.ts',
-  ),
-  ApiOperation(
-    method: 'GET',
-    path: '/api/v1/wallets',
-    sourceFile: 'app/api/v1/wallets/route.ts',
   ),
   ApiOperation(
     method: 'POST',
