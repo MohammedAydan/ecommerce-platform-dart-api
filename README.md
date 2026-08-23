@@ -1,10 +1,10 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل استدعاءات `/api/v1` تتطلب App-Key صالحًا يتحقق منه الخادم؛ أما عمليات storefront المصنفة public فتعمل بلا Better Auth session، بينما تبقى عمليات الحساب والسلة والطلب والدفع والإدارة محمية بجلسة المستخدم والصلاحيات.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **133 عملية HTTP** على **82 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل استدعاءات `/api/v1` تتطلب App-Key صالحًا يتحقق منه الخادم؛ أما عمليات storefront المصنفة public فتعمل بلا Better Auth session، بينما تبقى عمليات الحساب والسلة والطلب والدفع والإدارة محمية بجلسة المستخدم والصلاحيات.
 
 ## الفكرة الأساسية
 
-المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 138، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 133، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
 
@@ -77,8 +77,8 @@ final currentSession = await client.auth.session();
 | `client.account` | profile، settings، security، sessions، account orders، account reviews. |
 | `client.addresses` | list/create/update/delete/set-default. |
 | `client.orders` | create/list/get مع idempotency key. |
-| `client.admin` | typed product/taxonomy/coupon/wallet/tag/order/review/user/role/payment/shipping/hero operations، إضافة إلى returns/refunds وfinancial reconciliation. |
-| `client.api` | طبقة raw المولدة لكل العمليات الـ 138 عند الحاجة إلى route غير موجود في facade. |
+| `client.admin` | typed product/taxonomy/coupon/tag/order/review/user/role/payment/shipping/hero operations، إضافة إلى returns/refunds وfinancial reconciliation. |
+| `client.api` | طبقة raw المولدة لكل العمليات الـ 133 عند الحاجة إلى route غير موجود في facade. |
 
 ## أمثلة typed بدون Map يدوي
 
@@ -164,7 +164,7 @@ final product = await client.admin.createProduct(
 );
 ```
 
-النماذج الإدارية تشمل كذلك `TaxonomyCreateRequest`, `CouponRequest`, `WalletRequest`, `TagRequest`, `InventoryAdjustment`, `OrderTransitionRequest`, `ReturnLineRequest`, `ReturnRefundRequest`, `ReviewModerationRequest`, `PaymentProviderSettingsRequest`, `ShippingZoneRequest`, `ShippingCountryCreateRequest`, `ShippingGovernorateCreateRequest`, `HeroSlideCreateRequest`, و`HeroSlideReorderRequest`.
+النماذج الإدارية تشمل كذلك `TaxonomyCreateRequest`, `CouponRequest`, `TagRequest`, `InventoryAdjustment`, `OrderTransitionRequest`, `ReturnLineRequest`, `ReturnRefundRequest`, `ReviewModerationRequest`, `PaymentProviderSettingsRequest`, `ShippingZoneRequest`, `ShippingCountryCreateRequest`, `ShippingGovernorateCreateRequest`, `HeroSlideCreateRequest`, و`HeroSlideReorderRequest`.
 
 ### Admin returns, refunds, and reconciliation
 
@@ -205,7 +205,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1؛ App-Key مطلوب لكل `/api/v1` request، وBetter Auth session/authorization مطلوبة فقط للعمليات الحساسة، مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 133 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1؛ App-Key مطلوب لكل `/api/v1` request، وBetter Auth session/authorization مطلوبة فقط للعمليات الحساسة، مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
@@ -231,7 +231,7 @@ dart pub publish --dry-run
 | `lib/src/models.dart` | models العامة، catalog، cart، checkout، auth، account، orders. |
 | `lib/src/admin_models.dart` | models الإدارية الصارمة. |
 | `lib/src/api_client.dart` | HTTP، auth، cookies، retries، headers، decoders، errors. |
-| `lib/src/generated_api.dart` | جميع العمليات الـ 138. |
+| `lib/src/generated_api.dart` | جميع العمليات الـ 133. |
 | `openapi.yaml` | contract كامل للـ API. |
 | `ai/` و`llms.txt` | تكامل LLMs وAI agents. |
 

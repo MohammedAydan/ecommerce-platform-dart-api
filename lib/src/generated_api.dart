@@ -1758,79 +1758,6 @@ class EcommercePlatformApi {
         idempotencyKey: idempotencyKey,
       );
 
-  /// PATCH /api/v1/admin/wallets/{id}
-  Future<ApiResponse<dynamic>> patchApiV1AdminWalletsId({
-    required String id,
-    Map<String, dynamic>? query,
-    dynamic body,
-    Map<String, String>? headers,
-    bool authenticated = true,
-    String? idempotencyKey,
-  }) =>
-      client.request<dynamic>(
-        'PATCH',
-        '/api/v1/admin/wallets/${id}',
-        query: query,
-        body: body is JsonModel ? body.toJson() : body,
-        headers: headers,
-        authenticated: authenticated,
-        idempotencyKey: idempotencyKey,
-      );
-
-  /// DELETE /api/v1/admin/wallets/{id}
-  Future<ApiResponse<dynamic>> deleteApiV1AdminWalletsId({
-    required String id,
-    Map<String, dynamic>? query,
-    dynamic body,
-    Map<String, String>? headers,
-    bool authenticated = true,
-    String? idempotencyKey,
-  }) =>
-      client.request<dynamic>(
-        'DELETE',
-        '/api/v1/admin/wallets/${id}',
-        query: query,
-        body: body is JsonModel ? body.toJson() : body,
-        headers: headers,
-        authenticated: authenticated,
-        idempotencyKey: idempotencyKey,
-      );
-
-  /// GET /api/v1/admin/wallets
-  Future<ApiResponse<dynamic>> getApiV1AdminWallets({
-    Map<String, dynamic>? query,
-    dynamic body,
-    Map<String, String>? headers,
-    bool authenticated = true,
-    String? idempotencyKey,
-  }) =>
-      client.request<dynamic>(
-        'GET',
-        '/api/v1/admin/wallets',
-        query: query,
-        body: body is JsonModel ? body.toJson() : body,
-        headers: headers,
-        authenticated: authenticated,
-        idempotencyKey: idempotencyKey,
-      );
-
-  /// POST /api/v1/admin/wallets
-  Future<ApiResponse<dynamic>> postApiV1AdminWallets({
-    Map<String, dynamic>? query,
-    dynamic body,
-    Map<String, String>? headers,
-    bool authenticated = true,
-    String? idempotencyKey,
-  }) =>
-      client.request<dynamic>(
-        'POST',
-        '/api/v1/admin/wallets',
-        query: query,
-        body: body is JsonModel ? body.toJson() : body,
-        headers: headers,
-        authenticated: authenticated,
-        idempotencyKey: idempotencyKey,
-      );
 
   /// GET /api/v1/auth/{...auth}
   Future<ApiResponse<dynamic>> getApiV1AuthCatchAll({
@@ -2416,23 +2343,6 @@ class EcommercePlatformApi {
         idempotencyKey: idempotencyKey,
       );
 
-  /// GET /api/v1/wallets
-  Future<ApiResponse<dynamic>> getApiV1Wallets({
-    Map<String, dynamic>? query,
-    dynamic body,
-    Map<String, String>? headers,
-    bool authenticated = true,
-    String? idempotencyKey,
-  }) =>
-      client.request<dynamic>(
-        'GET',
-        '/api/v1/wallets',
-        query: query,
-        body: body is JsonModel ? body.toJson() : body,
-        headers: headers,
-        authenticated: authenticated,
-        idempotencyKey: idempotencyKey,
-      );
 
   /// POST /api/v1/webhooks/{provider}
   Future<ApiResponse<dynamic>> postApiV1WebhooksProvider({

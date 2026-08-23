@@ -22,7 +22,7 @@
 | Shipping | `GET /api/v1/shipping/governorates?country=EG` | `200` |
 | Shipping | `GET /api/v1/shipping/regions?country=EG` | `200` |
 | Payment methods | `GET /api/v1/shipping/countries/EG/payment-methods` | `200` |
-| Wallets | `GET /api/v1/wallets` | `200` |
+| Retired Wallet endpoint | `/api/v1/wallets` | Removed from the active contract; not a supported smoke check |
 | Commerce context | `GET /api/v1/commerce/country` | `200` |
 | Guest cart | `GET /api/v1/cart` | `200` |
 | Customer authorization | `GET /api/v1/account/profile` بدون auth | `401` متوقع |
@@ -33,7 +33,7 @@
 | Checkout validation | `POST /api/v1/checkout/quote` بمنتج غير حقيقي | `400` متوقع |
 | Checkout quote | `POST /api/v1/checkout/quote` بمنتج حقيقي وعنوان EG | `200` |
 
-النتيجة النهائية: **21/21 فحصًا ناجحًا**.
+النتيجة النهائية في السجل التاريخي السابق: **21/21 فحصًا ناجحًا** قبل إزالة Wallet endpoint. يجب إعادة تشغيل smoke checks بعد مزامنة هذا الفرع؛ لم تتوفر Dart في بيئة العمل الحالية.
 
 ## التسهيلات المضافة
 
@@ -45,12 +45,12 @@
 
 | الفحص | النتيجة |
 |---|---:|
-| `dart analyze` | نجح بدون أي issues |
-| `dart test` | 4/4 اختبارات ناجحة |
-| `dart pub publish --dry-run` | 0 warnings |
-| Generated operations | 135 |
-| Operation manifest entries | 135 |
-| Production smoke checks | 21/21 ناجحة |
+| `dart analyze` | لم يُعد تشغيله بعد تغييرات الدفع؛ Dart غير متوفر في بيئة العمل الحالية |
+| `dart test` | لم يُعد تشغيله بعد تغييرات الدفع؛ Dart غير متوفر في بيئة العمل الحالية |
+| `dart pub publish --dry-run` | لم يُعد تشغيله بعد تغييرات الدفع |
+| Generated operations | 133 في العقد المحدث؛ يحتاج تحقق Dart |
+| Operation manifest entries | 133 في العقد المحدث؛ يحتاج تحقق Dart |
+| Production smoke checks | لم تُعد بعد تغييرات الدفع |
 
 ## حدود الادعاء
 

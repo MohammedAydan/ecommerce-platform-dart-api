@@ -62,8 +62,6 @@ Future<void> main() async {
         query: {'country': 'EG'},
       ),
     ),
-    SmokeCheck(
-        'wallets', () => client.api.getApiV1Wallets(authenticated: false)),
     SmokeCheck('commerce country',
         () => client.api.getApiV1CommerceCountry(authenticated: false)),
     SmokeCheck(

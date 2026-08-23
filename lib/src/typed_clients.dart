@@ -550,36 +550,6 @@ class AdminApiClient {
         decoder: _decodeMap,
       );
 
-  Future<ApiResponse<List<JsonMap>>> wallets({
-    AdminPageQuery query = const AdminPageQuery(),
-  }) =>
-      _client.request<List<JsonMap>>(
-        'GET',
-        '/api/v1/admin/wallets',
-        queryModel: query,
-        decoder: (data) => _decodeMaps(data),
-      );
-  Future<ApiResponse<JsonMap>> createWallet(WalletRequest request) =>
-      _client.request<JsonMap>(
-        'POST',
-        '/api/v1/admin/wallets',
-        body: request,
-        decoder: _decodeMap,
-      );
-  Future<ApiResponse<JsonMap>> updateWallet(String id, WalletRequest request) =>
-      _client.request<JsonMap>(
-        'PATCH',
-        '/api/v1/admin/wallets/$id',
-        body: request,
-        decoder: _decodeMap,
-      );
-  Future<ApiResponse<JsonMap>> deleteWallet(String id) =>
-      _client.request<JsonMap>(
-        'DELETE',
-        '/api/v1/admin/wallets/$id',
-        decoder: _decodeMap,
-      );
-
   Future<ApiResponse<List<JsonMap>>> tags({
     AdminPageQuery query = const AdminPageQuery(),
   }) =>

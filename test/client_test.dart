@@ -153,7 +153,7 @@ void main() {
         city: 'Cairo',
         country: 'EG',
       ),
-      paymentMethod: 'cod',
+      paymentMethod: PaymentMethodCode.cod,
     );
 
     expect(input.toJson(), {
