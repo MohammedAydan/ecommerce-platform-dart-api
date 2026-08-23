@@ -8,11 +8,15 @@ import 'package:test/test.dart';
 void main() {
   test('requires HTTPS base URLs by default', () {
     expect(
-      () => EcommerceApiClient(baseUrl: 'http://api.example.test'),
+      () => EcommerceApiClient(
+        appKeyProvider: () async => 'test-only-key',
+        baseUrl: 'http://api.example.test',
+      ),
       throwsA(isA<ArgumentError>()),
     );
     expect(
       () => EcommercePlatformClient(
+        appKeyProvider: () async => 'test-only-key',
         baseUrl: 'https://user:pass@api.example.test',
       ),
       throwsA(isA<ArgumentError>()),
@@ -21,6 +25,7 @@ void main() {
 
   test('allows explicitly configured insecure HTTP for local development', () {
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'http://127.0.0.1:3000/',
       allowInsecureHttp: true,
     );
@@ -46,10 +51,12 @@ void main() {
       });
 
       final client = EcommercePlatformClient(
+        appKeyProvider: () async => 'test-only-key',
         baseUrl: 'https://api.example.test',
         authTokenProvider: const StaticAuthTokenProvider('token-123'),
       );
       final transport = EcommerceApiClient(
+        appKeyProvider: () async => 'test-only-key',
         baseUrl: 'https://api.example.test',
         httpClient: httpClient,
         authTokenProvider: const StaticAuthTokenProvider('token-123'),
@@ -75,6 +82,7 @@ void main() {
 
   test('throws ApiException for standard backend errors', () async {
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient(
         (_) async => http.Response(
@@ -107,6 +115,7 @@ void main() {
   test('generated endpoint builds path parameters correctly', () async {
     late Uri capturedUri;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
         capturedUri = request.url;
@@ -165,6 +174,7 @@ void main() {
   test('validates checkout requests before sending them', () async {
     var requests = 0;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((_) async {
         requests++;
@@ -190,6 +200,7 @@ void main() {
       final paths = <String>[];
       final bodies = <Map<String, dynamic>>[];
       final transport = EcommerceApiClient(
+        appKeyProvider: () async => 'test-only-key',
         baseUrl: 'https://api.example.test',
         httpClient: MockClient((request) async {
           paths.add(
@@ -237,6 +248,7 @@ void main() {
       final cookieStore = MemoryCookieStore();
       var call = 0;
       final transport = EcommerceApiClient(
+        appKeyProvider: () async => 'test-only-key',
         baseUrl: 'https://api.example.test',
         cookieStore: cookieStore,
         httpClient: MockClient((request) async {
@@ -274,6 +286,7 @@ void main() {
 
   test('typed public client decodes catalog products', () async {
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       authTokenProvider: const StaticAuthTokenProvider('catalog-token'),
       httpClient: MockClient((request) async {
@@ -311,6 +324,7 @@ void main() {
 
   test('public payment methods decode the country response object', () async {
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
         expect(
@@ -343,6 +357,7 @@ void main() {
   test('auth facade uses Better Auth email endpoint and typed body', () async {
     late http.Request captured;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
         captured = request;
@@ -369,6 +384,7 @@ void main() {
   test('typed cart client sends guest cart id on GET', () async {
     late http.Request captured;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
         captured = request;
@@ -404,6 +420,7 @@ void main() {
   test('anonymous sign-in is an unauthenticated session bootstrap', () async {
     late http.Request captured;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       authTokenProvider: const StaticAuthTokenProvider('stale-token'),
       httpClient: MockClient((request) async {

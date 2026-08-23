@@ -9,6 +9,7 @@ void main() {
   test('refreshes a protected request once after 401', () async {
     var calls = 0;
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       authTokenProvider: const StaticAuthTokenProvider('expired-token'),
       authTokenRefresher: () async => 'fresh-token',

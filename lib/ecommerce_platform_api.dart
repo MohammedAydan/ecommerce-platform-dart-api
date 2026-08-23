@@ -1,6 +1,7 @@
 library ecommerce_platform_api;
 
-export 'src/api_client.dart' show EcommerceApiClient;
+export 'src/api_client.dart'
+    show AppKeyProvider, ApiClientKind, EcommerceApiClient;
 export 'src/generated_api.dart' show EcommercePlatformApi;
 export 'src/models.dart';
 export 'src/admin_models.dart';
@@ -22,6 +23,8 @@ import 'src/types.dart';
 class EcommercePlatformClient {
   EcommercePlatformClient({
     required String baseUrl,
+    required AppKeyProvider appKeyProvider,
+    ApiClientKind appClientKind = ApiClientKind.mobile,
     AuthTokenProvider? authTokenProvider,
     Map<String, String>? defaultHeaders,
     String? cookie,
@@ -34,6 +37,8 @@ class EcommercePlatformClient {
     bool allowInsecureHttp = false,
   }) : transport = EcommerceApiClient(
           baseUrl: baseUrl,
+          appKeyProvider: appKeyProvider,
+          appClientKind: appClientKind,
           authTokenProvider: authTokenProvider,
           defaultHeaders: defaultHeaders,
           cookie: cookie,

@@ -8,10 +8,21 @@ import 'types.dart';
 typedef JsonDecoder<T> = T Function(dynamic value);
 typedef AuthTokenRefresher = Future<String?> Function();
 
+/// Resolves the application credential immediately before a request.
+///
+/// Keep the value out of source control and logs. The provider is deliberately
+/// asynchronous so mobile apps can load it from secure configuration and
+/// server-side integrations can rotate it without rebuilding typed clients.
+typedef AppKeyProvider = Future<String?> Function();
+
+enum ApiClientKind { web, mobile }
+
 class EcommerceApiClient {
   EcommerceApiClient({
     required String baseUrl,
     http.Client? httpClient,
+    required this.appKeyProvider,
+    this.appClientKind = ApiClientKind.mobile,
     this.authTokenProvider,
     this.authTokenRefresher,
     Map<String, String>? defaultHeaders,
@@ -32,6 +43,8 @@ class EcommerceApiClient {
 
   final String baseUrl;
   final http.Client _httpClient;
+  final AppKeyProvider appKeyProvider;
+  final ApiClientKind appClientKind;
   final AuthTokenProvider? authTokenProvider;
   final AuthTokenRefresher? authTokenRefresher;
   final Map<String, String> _defaultHeaders;
@@ -251,6 +264,21 @@ class EcommerceApiClient {
       ..._defaultHeaders,
       ...?headers,
     };
+    // The application credential is transport-owned. Do not let per-request
+    // or default headers spoof the client identity or bypass the provider.
+    result.removeWhere(
+      (name, _) =>
+          name.toLowerCase() == 'x-api-key' ||
+          name.toLowerCase() == 'x-api-client',
+    );
+    final appKey = (await appKeyProvider())?.trim();
+    if (appKey == null || appKey.isEmpty) {
+      throw const ApiConfigurationException(
+        'An application API key is required before making a request',
+      );
+    }
+    result['X-API-Key'] = appKey;
+    result['X-API-Client'] = appClientKind.name;
     if (hasJsonBody)
       result.putIfAbsent('Content-Type', () => 'application/json');
     final storedCookie = await cookieStore?.read();

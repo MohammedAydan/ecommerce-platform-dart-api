@@ -7,6 +7,7 @@ import 'package:test/test.dart';
 void main() {
   test('PublicApiClient.storeBranding returns typed response', () async {
     final transport = EcommerceApiClient(
+      appKeyProvider: () async => 'test-only-key',
       baseUrl: 'https://api.example.test',
       httpClient: MockClient((request) async {
         return http.Response(
