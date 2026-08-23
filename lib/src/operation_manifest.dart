@@ -9,7 +9,7 @@ class ApiOperation {
   final String sourceFile;
 }
 
-const backendSourceCommit = 'b54db56f66ea6e3db2adcf08cf9e8c512f211801';
+const backendSourceCommit = 'f072474468af80191a025f74c35b4ef92746ce11';
 
 const ecommercePlatformOperations = <ApiOperation>[
   ApiOperation(
