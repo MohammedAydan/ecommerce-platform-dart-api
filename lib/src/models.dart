@@ -1267,6 +1267,7 @@ class AuthUser extends JsonModel {
     this.image,
     this.role,
     this.status,
+    this.isAnonymous,
     this.firstName,
     this.lastName,
   });
@@ -1276,6 +1277,7 @@ class AuthUser extends JsonModel {
   final String? image;
   final UserRole? role;
   final String? status;
+  final bool? isAnonymous;
   final String? firstName;
   final String? lastName;
   factory AuthUser.fromJson(dynamic value) {
@@ -1286,6 +1288,7 @@ class AuthUser extends JsonModel {
       email: _string(json['email']),
       image: _string(json['image']),
       status: _string(json['status']),
+      isAnonymous: json['isAnonymous'] is bool ? json['isAnonymous'] as bool : null,
       firstName: _string(json['firstName']),
       lastName: _string(json['lastName']),
     );
@@ -1297,6 +1300,7 @@ class AuthUser extends JsonModel {
         if (email != null) 'email': email,
         if (image != null) 'image': image,
         if (status != null) 'status': status,
+        if (isAnonymous != null) 'isAnonymous': isAnonymous,
         if (firstName != null) 'firstName': firstName,
         if (lastName != null) 'lastName': lastName,
       };
