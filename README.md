@@ -1,10 +1,10 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **133 عملية HTTP** على **82 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل استدعاءات `/api/v1` تتطلب App-Key صالحًا يتحقق منه الخادم؛ أما عمليات storefront المصنفة public فتعمل بلا Better Auth session، بينما تبقى عمليات الحساب والسلة والطلب والدفع والإدارة محمية بجلسة المستخدم والصلاحيات.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **136 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل استدعاءات `/api/v1` تتطلب App-Key صالحًا يتحقق منه الخادم؛ أما عمليات storefront المصنفة public فتعمل بلا Better Auth session، بينما تبقى عمليات الحساب والسلة والطلب والدفع والإدارة محمية بجلسة المستخدم والصلاحيات.
 
 ## الفكرة الأساسية
 
-المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 133، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 136، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
 
@@ -74,11 +74,11 @@ final currentSession = await client.auth.session();
 | `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews؛ هذه قراءات storefront public وظيفيًا، ولا تحتاج user session، لكن App-Key إلزامي. |
 | `client.checkout` | quote authoritative للتسعير والخصومات والشحن والضرائب. |
 | `client.cart` | قراءة وإضافة وتعديل ومسح ودمج guest/authenticated cart. |
-| `client.account` | profile، settings، security، sessions، account orders، account reviews. |
+| `client.account` | profile، settings، security، sessions، account orders، account reviews، customer returns، receipts. |
 | `client.addresses` | list/create/update/delete/set-default. |
 | `client.orders` | create/list/get مع idempotency key. |
-| `client.admin` | typed product/taxonomy/coupon/tag/order/review/user/role/payment/shipping/hero operations، إضافة إلى returns/refunds وfinancial reconciliation. |
-| `client.api` | طبقة raw المولدة لكل العمليات الـ 133 عند الحاجة إلى route غير موجود في facade. |
+| `client.admin` | typed product/taxonomy/coupon/tag/order/review/user/role/payment/shipping/hero operations، وإدارة returns/refunds وshipments وfinancial reconciliation. |
+| `client.api` | طبقة raw المولدة لكل العمليات الـ 136 عند الحاجة إلى route غير موجود في facade. |
 
 ## أمثلة typed بدون Map يدوي
 
@@ -231,7 +231,7 @@ dart pub publish --dry-run
 | `lib/src/models.dart` | models العامة، catalog، cart، checkout، auth، account، orders. |
 | `lib/src/admin_models.dart` | models الإدارية الصارمة. |
 | `lib/src/api_client.dart` | HTTP، auth، cookies، retries، headers، decoders، errors. |
-| `lib/src/generated_api.dart` | جميع العمليات الـ 133. |
+| `lib/src/generated_api.dart` | العمليات المولدة الأساسية؛ العمليات الجديدة متاحة أيضاً عبر typed domain clients. |
 | `openapi.yaml` | contract كامل للـ API. |
 | `ai/` و`llms.txt` | تكامل LLMs وAI agents. |
 

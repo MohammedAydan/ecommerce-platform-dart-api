@@ -677,4 +677,19 @@ const ecommercePlatformOperations = <ApiOperation>[
     path: '/api/v1/wishlist',
     sourceFile: 'app/api/v1/wishlist/route.ts',
   ),
+  ApiOperation(
+    method: 'POST',
+    path: '/api/v1/account/orders/{id}/returns',
+    sourceFile: 'app/api/v1/account/orders/[id]/returns/route.ts',
+  ),
+  ApiOperation(
+    method: 'GET',
+    path: '/api/v1/account/orders/{id}/receipt',
+    sourceFile: 'app/api/v1/account/orders/[id]/receipt/route.ts',
+  ),
+  ApiOperation(
+    method: 'PATCH',
+    path: '/api/v1/admin/orders/{id}/shipments',
+    sourceFile: 'app/api/v1/admin/orders/[id]/shipments/route.ts',
+  ),
 ];

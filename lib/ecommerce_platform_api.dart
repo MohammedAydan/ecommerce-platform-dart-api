@@ -54,6 +54,7 @@ class EcommercePlatformClient {
     auth = AuthApiClient(transport);
     publicApi = PublicApiClient(transport);
     checkout = CheckoutApiClient(transport);
+    payments = PaymentsApiClient(transport);
     cart = CartApiClient(transport);
     account = AccountApiClient(transport);
     addresses = AddressesApiClient(transport);
@@ -66,6 +67,7 @@ class EcommercePlatformClient {
   late final AuthApiClient auth;
   late final PublicApiClient publicApi;
   late final CheckoutApiClient checkout;
+  late final PaymentsApiClient payments;
   late final CartApiClient cart;
   late final AccountApiClient account;
   late final AddressesApiClient addresses;

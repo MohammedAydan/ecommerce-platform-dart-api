@@ -1,6 +1,6 @@
 # Ecommerce Platform API v1
 
-> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **133 عملية HTTP** عبر **82 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
+> هذا هو المرجع الكامل للعقد عند commit `b54db56f66ea6e3db2adcf08cf9e8c512f211801`. يغطي **136 عملية HTTP** عبر **85 ملف route**، بينما يبقى الخادم مصدر الحقيقة النهائي عند اختلاف السلوك الفعلي.
 
 ## البداية السريعة
 
@@ -31,6 +31,8 @@
 | GET | `/api/v1/account/orders/{id}` | `getApiV1AccountOrdersId` | id | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/orders/[id]/route.ts` |
 | POST | `/api/v1/account/orders/{id}` | `postApiV1AccountOrdersId` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/orders/[id]/route.ts` |
 | POST | `/api/v1/account/orders/{id}/cancel` | `postApiV1AccountOrdersIdCancel` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/orders/[id]/cancel/route.ts` |
+| POST | `/api/v1/account/orders/{id}/returns` | `postApiV1AccountOrdersIdReturns` | id | required | 201, 400, 401, 404, 422 | `app/api/v1/account/orders/[id]/returns/route.ts` |
+| GET | `/api/v1/account/orders/{id}/receipt` | `getApiV1AccountOrdersIdReceipt` | id | none | 200, 401, 404, 500 | `app/api/v1/account/orders/[id]/receipt/route.ts` |
 | GET | `/api/v1/account/profile` | `getApiV1AccountProfile` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/profile/route.ts` |
 | PATCH | `/api/v1/account/profile` | `patchApiV1AccountProfile` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/profile/route.ts` |
 | GET | `/api/v1/account/reviews` | `getApiV1AccountReviews` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/account/reviews/route.ts` |
@@ -79,6 +81,7 @@
 | GET | `/api/v1/admin/orders` | `getApiV1AdminOrders` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/orders/route.ts` |
 | PATCH | `/api/v1/admin/orders` | `patchApiV1AdminOrders` | - | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/orders/route.ts` |
 | GET | `/api/v1/admin/orders/{id}` | `getApiV1AdminOrdersId` | id | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/orders/[id]/route.ts` |
+| PATCH | `/api/v1/admin/orders/{id}/shipments` | `patchApiV1AdminOrdersIdShipments` | id | required | 200, 400, 401, 403, 404, 422 | `app/api/v1/admin/orders/[id]/shipments/route.ts` |
 | PATCH | `/api/v1/admin/orders/{id}` | `patchApiV1AdminOrdersId` | id | optional | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/orders/[id]/route.ts` |
 | POST | `/api/v1/admin/orders/{id}/returns` | `postApiV1AdminOrdersIdReturns` | id | required | 201, 400, 401, 403, 422 | `app/api/v1/admin/orders/[id]/returns/route.ts` |
 | GET | `/api/v1/admin/payment-providers` | `getApiV1AdminPaymentProviders` | - | none | 200, 400, 401, 403, 404, 409, 500 | `app/api/v1/admin/payment-providers/route.ts` |
@@ -160,15 +163,15 @@
 
 ## تقسيم حسب المجال
 
-### `account` (14 operations)
+### `account` (16 operations)
 
-`GET /api/v1/account/orders/{id}`، `POST /api/v1/account/orders/{id}`، `POST /api/v1/account/orders/{id}/cancel`، `GET /api/v1/account/profile`، `PATCH /api/v1/account/profile`، `GET /api/v1/account/reviews`، `POST /api/v1/account/reviews`، `DELETE /api/v1/account/reviews/{id}`، `GET /api/v1/account/reviews/{id}`، `POST /api/v1/account/security`، `DELETE /api/v1/account/sessions`، `GET /api/v1/account/sessions`، `GET /api/v1/account/settings`، `PATCH /api/v1/account/settings`
+`GET /api/v1/account/orders/{id}`، `POST /api/v1/account/orders/{id}`، `POST /api/v1/account/orders/{id}/cancel`، `POST /api/v1/account/orders/{id}/returns`، `GET /api/v1/account/orders/{id}/receipt`، `GET /api/v1/account/profile`، `PATCH /api/v1/account/profile`، `GET /api/v1/account/reviews`، `POST /api/v1/account/reviews`، `DELETE /api/v1/account/reviews/{id}`، `GET /api/v1/account/reviews/{id}`، `POST /api/v1/account/security`، `DELETE /api/v1/account/sessions`، `GET /api/v1/account/sessions`، `GET /api/v1/account/settings`، `PATCH /api/v1/account/settings`
 
 ### `addresses` (6 operations)
 
 `DELETE /api/v1/addresses`، `GET /api/v1/addresses`، `POST /api/v1/addresses`، `DELETE /api/v1/addresses/{id}`، `PATCH /api/v1/addresses/{id}`، `PUT /api/v1/addresses/{id}/default`
 
-### `admin` (77 operations)
+### `admin` (78 operations)
 
 
 ### `auth` (4 operations)
