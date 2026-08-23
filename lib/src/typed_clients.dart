@@ -28,7 +28,6 @@ class PublicApiClient {
       _client.request<StoreBrandingResponse>(
         'GET',
         '/api/v1/store/branding',
-        authenticated: false,
         decoder: StoreBrandingResponse.fromJson,
       );
 
@@ -53,7 +52,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/products',
         queryModel: query,
-        authenticated: false,
         decoder: (data) => _decodeList(data, CatalogProduct.fromJson),
       );
   Future<ApiResponse<CatalogProduct>> getProduct(
@@ -64,7 +62,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/products/$idOrSlug',
         queryModel: LocaleQuery(locale: locale),
-        authenticated: false,
         decoder: CatalogProduct.fromJson,
       );
   Future<ApiResponse<List<CatalogTaxonomy>>> listCategories({
@@ -74,7 +71,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/categories',
         queryModel: LocaleQuery(locale: locale),
-        authenticated: false,
         decoder: (data) => _decodeList(data, CatalogTaxonomy.fromJson),
       );
   Future<ApiResponse<List<CatalogTaxonomy>>> listBrands({AppLocale? locale}) =>
@@ -82,7 +78,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/brands',
         queryModel: LocaleQuery(locale: locale),
-        authenticated: false,
         decoder: (data) => _decodeList(data, CatalogTaxonomy.fromJson),
       );
   Future<ApiResponse<List<JsonMap>>> hero({AppLocale? locale}) =>
@@ -90,20 +85,17 @@ class PublicApiClient {
         'GET',
         '/api/v1/hero',
         queryModel: LocaleQuery(locale: locale),
-        authenticated: false,
         decoder: (data) => _decodeMaps(data),
       );
   Future<ApiResponse<JsonMap>> commerceCountry() => _client.request<JsonMap>(
         'GET',
         '/api/v1/commerce/country',
-        authenticated: false,
         decoder: _decodeMap,
       );
   Future<ApiResponse<List<JsonMap>>> shippingCountries() =>
       _client.request<List<JsonMap>>(
         'GET',
         '/api/v1/shipping/countries',
-        authenticated: false,
         decoder: (data) => _decodeMaps(data),
       );
   Future<ApiResponse<List<String>>> shippingGovernorates({
@@ -113,7 +105,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/shipping/governorates',
         query: {'country': country},
-        authenticated: false,
         decoder: (data) => _decodeStrings(data),
       );
   Future<ApiResponse<List<JsonMap>>> shippingRegions({
@@ -123,14 +114,12 @@ class PublicApiClient {
         'GET',
         '/api/v1/shipping/regions',
         query: {'country': country},
-        authenticated: false,
         decoder: (data) => _decodeMaps(data),
       );
   Future<ApiResponse<JsonMap>> paymentMethods({required String countryCode}) =>
       _client.request<JsonMap>(
         'GET',
         '/api/v1/shipping/countries/$countryCode/payment-methods',
-        authenticated: false,
         decoder: _decodeMap,
       );
   Future<ApiResponse<List<Review>>> productReviews(
@@ -141,7 +130,6 @@ class PublicApiClient {
         'GET',
         '/api/v1/products/$productId/reviews',
         queryModel: query,
-        authenticated: false,
         decoder: (data) => _decodeList(data, Review.fromJson),
       );
 }
@@ -155,6 +143,13 @@ class AuthApiClient {
         'POST',
         '/api/auth/sign-in/email',
         body: request,
+        decoder: AuthSession.fromJson,
+      );
+  Future<ApiResponse<AuthSession>> signInAnonymous() =>
+      _client.request<AuthSession>(
+        'POST',
+        '/api/auth/sign-in/anonymous',
+        authenticated: false,
         decoder: AuthSession.fromJson,
       );
   Future<ApiResponse<AuthSession>> signUp(SignUpRequest request) =>
@@ -183,7 +178,6 @@ class CheckoutApiClient {
         '/api/v1/checkout/quote',
         body: request,
         decoder: CheckoutQuote.fromJson,
-        authenticated: false,
       );
 }
 

@@ -6,12 +6,14 @@ import 'models.dart';
 import 'types.dart';
 
 typedef JsonDecoder<T> = T Function(dynamic value);
+typedef AuthTokenRefresher = Future<String?> Function();
 
 class EcommerceApiClient {
   EcommerceApiClient({
     required String baseUrl,
     http.Client? httpClient,
     this.authTokenProvider,
+    this.authTokenRefresher,
     Map<String, String>? defaultHeaders,
     this.cookie,
     this.cookieStore,
@@ -31,6 +33,7 @@ class EcommerceApiClient {
   final String baseUrl;
   final http.Client _httpClient;
   final AuthTokenProvider? authTokenProvider;
+  final AuthTokenRefresher? authTokenRefresher;
   final Map<String, String> _defaultHeaders;
   final String? cookie;
   final CookieStore? cookieStore;
@@ -103,6 +106,8 @@ class EcommerceApiClient {
     final normalizedMethod = method.toUpperCase();
     final encodedBody = _encodeBody(body);
     Object? lastNetworkError;
+    var refreshedAfterUnauthorized = false;
+    String? refreshedToken;
 
     for (var attempt = 0; attempt <= maxRetries; attempt++) {
       final request = http.Request(normalizedMethod, uri);
@@ -112,6 +117,7 @@ class EcommerceApiClient {
           authenticated: authenticated,
           hasJsonBody: encodedBody != null,
           idempotencyKey: idempotencyKey,
+          tokenOverride: refreshedToken,
         ),
       );
       if (encodedBody != null) request.body = encodedBody;
@@ -119,6 +125,18 @@ class EcommerceApiClient {
       try {
         final response =
             await _httpClient.send(request).timeout(requestTimeout);
+        if (response.statusCode == 401 &&
+            authenticated &&
+            !refreshedAfterUnauthorized &&
+            authTokenRefresher != null) {
+          refreshedAfterUnauthorized = true;
+          await response.stream.drain<void>();
+          final nextToken = await authTokenRefresher!();
+          if (nextToken != null && nextToken.isNotEmpty) {
+            refreshedToken = nextToken;
+            continue;
+          }
+        }
         if (_shouldRetry(normalizedMethod, response.statusCode, attempt)) {
           await response.stream.drain<void>();
           await _waitBeforeRetry(attempt);
@@ -226,6 +244,7 @@ class EcommerceApiClient {
     required bool authenticated,
     required bool hasJsonBody,
     String? idempotencyKey,
+    String? tokenOverride,
   }) async {
     final result = <String, String>{
       'Accept': 'application/json',
@@ -240,7 +259,7 @@ class EcommerceApiClient {
       result.putIfAbsent('Cookie', () => requestCookie);
     }
     if (authenticated && !result.containsKey('Authorization')) {
-      final token = await authTokenProvider?.readToken();
+      final token = tokenOverride ?? await authTokenProvider?.readToken();
       if (token != null && token.isNotEmpty) {
         result['Authorization'] = 'Bearer $token';
       }
