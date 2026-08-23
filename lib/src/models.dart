@@ -204,7 +204,6 @@ class OrderInput extends JsonModel {
     this.couponCode,
     this.shippingMethodId,
     this.paymentMethod,
-    this.walletMethodId,
   });
 
   final List<CartItemInput> items;
@@ -212,8 +211,7 @@ class OrderInput extends JsonModel {
   final ShippingAddressInput? billingAddress;
   final String? couponCode;
   final String? shippingMethodId;
-  final String? paymentMethod;
-  final String? walletMethodId;
+  final PaymentMethodCode? paymentMethod;
 
   @override
   JsonMap toJson() => {
@@ -222,8 +220,7 @@ class OrderInput extends JsonModel {
         if (billingAddress != null) 'billingAddress': billingAddress!.toJson(),
         if (couponCode != null) 'couponCode': couponCode,
         if (shippingMethodId != null) 'shippingMethodId': shippingMethodId,
-        if (paymentMethod != null) 'paymentMethod': paymentMethod,
-        if (walletMethodId != null) 'walletMethodId': walletMethodId,
+        if (paymentMethod != null) 'paymentMethod': _paymentMethodValue(paymentMethod!),
       };
 }
 
@@ -546,7 +543,7 @@ enum ProductPriceSource {
   productBasePrice,
 }
 
-enum PaymentMethodCode { cod, paymob, wallet }
+enum PaymentMethodCode { cod, paymob }
 
 enum PaymentStatus {
   pending,

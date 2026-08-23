@@ -1502,71 +1502,6 @@
       "dartMethod": "getApiV1AdminUsers"
     },
     {
-      "name": "patchApiV1AdminWalletsId",
-      "description": "PATCH /api/v1/admin/wallets/{id}. Source: app/api/v1/admin/wallets/[id]/route.ts",
-      "method": "PATCH",
-      "path": "/api/v1/admin/wallets/{id}",
-      "pathParameters": [
-        "id"
-      ],
-      "queryParameters": [],
-      "headerParameters": [],
-      "cookieParameters": [],
-      "readOnly": false,
-      "requiresAuthentication": true,
-      "requiresHumanConfirmation": true,
-      "dartMethod": "patchApiV1AdminWalletsId"
-    },
-    {
-      "name": "deleteApiV1AdminWalletsId",
-      "description": "DELETE /api/v1/admin/wallets/{id}. Source: app/api/v1/admin/wallets/[id]/route.ts",
-      "method": "DELETE",
-      "path": "/api/v1/admin/wallets/{id}",
-      "pathParameters": [
-        "id"
-      ],
-      "queryParameters": [],
-      "headerParameters": [],
-      "cookieParameters": [],
-      "readOnly": false,
-      "requiresAuthentication": true,
-      "requiresHumanConfirmation": true,
-      "dartMethod": "deleteApiV1AdminWalletsId"
-    },
-    {
-      "name": "getApiV1AdminWallets",
-      "description": "GET /api/v1/admin/wallets. Source: app/api/v1/admin/wallets/route.ts",
-      "method": "GET",
-      "path": "/api/v1/admin/wallets",
-      "pathParameters": [],
-      "queryParameters": [
-        "active",
-        "limit",
-        "page",
-        "search"
-      ],
-      "headerParameters": [],
-      "cookieParameters": [],
-      "readOnly": true,
-      "requiresAuthentication": true,
-      "requiresHumanConfirmation": false,
-      "dartMethod": "getApiV1AdminWallets"
-    },
-    {
-      "name": "postApiV1AdminWallets",
-      "description": "POST /api/v1/admin/wallets. Source: app/api/v1/admin/wallets/route.ts",
-      "method": "POST",
-      "path": "/api/v1/admin/wallets",
-      "pathParameters": [],
-      "queryParameters": [],
-      "headerParameters": [],
-      "cookieParameters": [],
-      "readOnly": false,
-      "requiresAuthentication": true,
-      "requiresHumanConfirmation": true,
-      "dartMethod": "postApiV1AdminWallets"
-    },
-    {
       "name": "getApiV1AuthCatchAll",
       "description": "GET /api/v1/auth/{...auth}. Source: app/api/v1/auth/[...auth]/route.ts",
       "method": "GET",
@@ -2040,20 +1975,6 @@
       "requiresAuthentication": true,
       "requiresHumanConfirmation": false,
       "dartMethod": "getApiV1ShippingRegions"
-    },
-    {
-      "name": "getApiV1Wallets",
-      "description": "GET /api/v1/wallets. Source: app/api/v1/wallets/route.ts",
-      "method": "GET",
-      "path": "/api/v1/wallets",
-      "pathParameters": [],
-      "queryParameters": [],
-      "headerParameters": [],
-      "cookieParameters": [],
-      "readOnly": true,
-      "requiresAuthentication": true,
-      "requiresHumanConfirmation": false,
-      "dartMethod": "getApiV1Wallets"
     },
     {
       "name": "postApiV1WebhooksProvider",
