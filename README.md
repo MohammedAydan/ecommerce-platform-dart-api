@@ -4,7 +4,7 @@
 
 ## الفكرة الأساسية
 
-المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch لكل العمليات الـ 136، لكنها ليست المسار الموصى به للتطبيقات الجديدة.
+المستخدم العادي لا يحتاج إلى كتابة أسماء حقول JSON أو query parameters أو path parameters يدويًا. استخدم domain clients وrequest models؛ سيقوم Dart compiler بتحديد الحقول الصحيحة، ويقوم SDK بالتحقق من البيانات قبل إرسالها. توجد طبقة `client.api` كـ compatibility escape hatch للعمليات المولدة الأساسية، بينما أضيفت عمليات post-purchase الجديدة عبر typed domain clients؛ وهي ليست المسار الموصى به للتطبيقات الجديدة.
 
 ## التثبيت
 
@@ -78,7 +78,7 @@ final currentSession = await client.auth.session();
 | `client.addresses` | list/create/update/delete/set-default. |
 | `client.orders` | create/list/get مع idempotency key. |
 | `client.admin` | typed product/taxonomy/coupon/tag/order/review/user/role/payment/shipping/hero operations، وإدارة returns/refunds وshipments وfinancial reconciliation. |
-| `client.api` | طبقة raw المولدة لكل العمليات الـ 136 عند الحاجة إلى route غير موجود في facade. |
+| `client.api` | طبقة raw المولدة للعمليات الأساسية؛ استخدم typed clients للـ returns وreceipts وshipments وPaymob. |
 
 ## أمثلة typed بدون Map يدوي
 
@@ -205,7 +205,7 @@ try {
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 133 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1؛ App-Key مطلوب لكل `/api/v1` request، وBetter Auth session/authorization مطلوبة فقط للعمليات الحساسة، مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`. ملف `openapi.yaml` يقدم coverage كاملة بصيغة OpenAPI 3.1، بينما توفر typed domain clients العمليات الجديدة الخاصة بـ returns وreceipts وshipments وPaymob؛ App-Key مطلوب لكل `/api/v1` request، وBetter Auth session/authorization مطلوبة فقط للعمليات الحساسة، مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
