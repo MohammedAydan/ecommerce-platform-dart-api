@@ -181,6 +181,15 @@ class ApiException implements Exception {
   String toString() => 'ApiException($method $path): $error';
 }
 
+class ApiConfigurationException implements Exception {
+  const ApiConfigurationException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => 'ApiConfigurationException: $message';
+}
+
 class NetworkApiException implements Exception {
   const NetworkApiException(this.message, {this.uri, this.cause});
 

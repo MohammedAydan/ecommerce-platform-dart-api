@@ -1,6 +1,6 @@
 # ecommerce_platform_api
 
-مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل عمليات الأعمال، بما فيها storefront وquote، تتطلب جلسة Better Auth أو Bearer token صادرًا من الخادم.
+مكتبة Dart typed SDK شاملة للتعامل مع Ecommerce Platform backend. الإصدار الحالي يحوي **138 عملية HTTP** على **85 route files**، ويقدم طبقة typed سهلة للاستخدام فوق transport عام. كل استدعاءات `/api/v1` تتطلب App-Key صالحًا يتحقق منه الخادم؛ أما عمليات storefront المصنفة public فتعمل بلا Better Auth session، بينما تبقى عمليات الحساب والسلة والطلب والدفع والإدارة محمية بجلسة المستخدم والصلاحيات.
 
 ## الفكرة الأساسية
 
@@ -18,7 +18,19 @@ dependencies:
 
 ثم نفّذ `dart pub get`.
 
-## إنشاء العميل وAuth
+## إنشاء العميل وApp-Key وAuth
+
+يجب تمرير `AppKeyProvider` إلى العميل. يقرأ provider المفتاح من secret manager في server-to-server، أو من secure configuration في تطبيق mobile. لا تضع المفتاح داخل SDK نفسه أو source control، ولا تسجله في logs. يحقن transport تلقائيًا `X-API-Key` و`X-API-Client` في كل request ويزيل أي محاولة override من headers الخاصة بالعملية:
+
+```dart
+final client = EcommercePlatformClient(
+  baseUrl: 'https://ec-swart.vercel.app',
+  appKeyProvider: () async => loadFromSecretManager(),
+  appClientKind: ApiClientKind.web,
+);
+```
+
+في Flutter استخدم provider مبنيًا على إعداد secure dotenv الموضح في مستودع mobile، مع تذكر أن مفتاحًا موجودًا داخل APK/IPA قابل للاستخراج وإعادة الاستخدام؛ لذلك هو **app identifier/abuse-control credential** وليس سرًا حقيقيًا. لا تعتمد عليه بدل Better Auth أو rate limits أو device attestation عند الحاجة.
 
 يدعم backend Better Auth عبر bearer token أو cookies. لا تضع token أو cookie في model prompt أو tool arguments. في تطبيقات Dart server/mobile استخدم provider أو cookie store مناسبًا:
 
@@ -28,6 +40,8 @@ import 'package:ecommerce_platform_api/ecommerce_platform_api.dart';
 final cookieStore = MemoryCookieStore();
 final client = EcommercePlatformClient(
   baseUrl: 'https://ec-swart.vercel.app',
+  appKeyProvider: () async => loadFromSecretManager(),
+  appClientKind: ApiClientKind.web,
   cookieStore: cookieStore,
   requestTimeout: const Duration(seconds: 30),
   maxRetries: 2,
@@ -40,13 +54,13 @@ final signedIn = await client.auth.signIn(
   ),
 );
 
-// For storefront access before user sign-in, obtain a server-issued session.
-final anonymous = await client.auth.signInAnonymous();
+// Public catalog reads do not require this session; App-Key is still mandatory.
+final products = await client.publicApi.listProducts();
 
 final currentSession = await client.auth.session();
 ```
 
-يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage. لا تضع API key أو token ثابتًا داخل تطبيق Flutter؛ anonymous sign-in هو bootstrap مصادق عليه ومحدود، وليس مفتاحًا عامًا مشتركًا.
+يمكن بدل ذلك تمرير `StaticAuthTokenProvider` أو provider مخصص يقرأ token من secure storage. يحتفظ `MemoryCookieStore` تلقائيًا بـ `Set-Cookie` الناتج من Better Auth، ويمكن تنفيذ `CookieStore` خاص بالتطبيق لحفظ cookies في secure storage. لا تضع API key أو token ثابتًا في package أو source repository؛ public reads لا تحتاج anonymous session، لكن App-Key يبقى إلزاميًا.
 
 ## Transport security
 
@@ -57,7 +71,7 @@ final currentSession = await client.auth.session();
 | Client | الاستخدام |
 |---|---|
 | `client.auth` | sign-in، sign-up، session، sign-out. |
-| `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews؛ كل هذه العمليات تحتاج session رغم اسم العميل التاريخي. |
+| `client.publicApi` | products، categories، brands، hero، commerce country، shipping، payment methods، reviews؛ هذه قراءات storefront public وظيفيًا، ولا تحتاج user session، لكن App-Key إلزامي. |
 | `client.checkout` | quote authoritative للتسعير والخصومات والشحن والضرائب. |
 | `client.cart` | قراءة وإضافة وتعديل ومسح ودمج guest/authenticated cart. |
 | `client.account` | profile، settings، security، sessions، account orders، account reviews. |
@@ -187,11 +201,11 @@ try {
 
 ## Reliability وheaders
 
-يضيف transport تلقائيًا `Accept: application/json` و`Content-Type` عند JSON bodies و`Authorization: Bearer` عند توفر token، ويحفظ cookies، ويدعم `idempotency-key`، ويعيد المحاولة bounded للطلبات read-only عند أخطاء الشبكة و`408/425/429/5xx`. عمليات POST/PUT/PATCH/DELETE لا تُعاد تلقائيًا إلا عند تفعيل `retryUnsafeRequests` صراحةً.
+يضيف transport تلقائيًا `Accept: application/json` و`Content-Type` عند JSON bodies و`X-API-Key` و`X-API-Client` من provider، و`Authorization: Bearer` عند توفر token، ويحفظ cookies، ويدعم `idempotency-key`، ويعيد المحاولة bounded للطلبات read-only عند أخطاء الشبكة و`408/425/429/5xx`. إذا أعاد provider قيمة فارغة يرمي `ApiConfigurationException` قبل فتح network request. عمليات POST/PUT/PATCH/DELETE لا تُعاد تلقائيًا إلا عند تفعيل `retryUnsafeRequests` صراحةً.
 
 ## كل routes موجودة
 
-`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1، ويصنف عمليات الأعمال على أنها session-required مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
+`client.api` و`ecommercePlatformOperations` مبنيان من route inventory موثق. كل method مولد له path parameters مسماة typed مثل `id`, `code`, `provider`, و`paymentId`، وجميع العمليات الـ 138 موجودة في `lib/src/generated_api.dart`. ملف `openapi.yaml` يقدم نفس coverage بصيغة OpenAPI 3.1؛ App-Key مطلوب لكل `/api/v1` request، وBetter Auth session/authorization مطلوبة فقط للعمليات الحساسة، مع استثناءات auth bootstrap وhealth وsigned webhooks. راجع [`API_COVERAGE.md`](./API_COVERAGE.md) للحصول على جدول كل العمليات وتفاصيل parameters وresponses ومصدر route.
 
 ## LLM وAI-agent integration
 
