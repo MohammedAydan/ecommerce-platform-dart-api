@@ -182,6 +182,26 @@ class AuthApiClient {
       _client.request<dynamic>('POST', '/api/auth/sign-out');
 }
 
+class PaymentsApiClient {
+  const PaymentsApiClient(this._client);
+  final EcommerceApiClient _client;
+
+  Future<ApiResponse<JsonMap>> createPaymob(PaymobPaymentCreateRequest request) =>
+      _client.request<JsonMap>(
+        'POST',
+        '/api/v1/payments/paymob/create',
+        body: request,
+        decoder: _decodeMap,
+      );
+
+  Future<ApiResponse<JsonMap>> paymobStatus(String paymentId) =>
+      _client.request<JsonMap>(
+        'GET',
+        '/api/v1/payments/paymob/$paymentId',
+        decoder: _decodeMap,
+      );
+}
+
 class CheckoutApiClient {
   const CheckoutApiClient(this._client);
   final EcommerceApiClient _client;
@@ -315,6 +335,33 @@ class AccountApiClient {
         queryModel: query,
         decoder: (data) => _decodeList(data, Review.fromJson),
       );
+  Future<ApiResponse<JsonMap>> receipt(String orderId) =>
+      _client.request<JsonMap>(
+        'GET',
+        '/api/v1/account/orders/$orderId/receipt',
+        decoder: _decodeMap,
+      );
+
+  Future<ApiResponse<String>> printableReceipt(String orderId) =>
+      _client.request<String>(
+        'GET',
+        '/api/v1/account/orders/$orderId/receipt/print',
+        headers: const {'Accept': 'text/html'},
+        decoder: (data) => data is String ? data : '$data',
+      );
+
+  Future<ApiResponse<JsonMap>> requestReturn(
+    String orderId,
+    CustomerReturnRequest request,
+  ) =>
+      _client.request<JsonMap>(
+        'POST',
+        '/api/v1/account/orders/$orderId/returns',
+        body: request,
+        idempotencyKey: request.idempotencyKey,
+        decoder: _decodeMap,
+      );
+
   Future<ApiResponse<Review>> createReview(ReviewInput request) =>
       _client.request<Review>(
         'POST',
@@ -595,6 +642,17 @@ class AdminApiClient {
         body: request,
         decoder: _decodeMap,
       );
+  Future<ApiResponse<JsonMap>> updateShipment(
+    String orderId,
+    ShipmentUpdateRequest request,
+  ) =>
+      _client.request<JsonMap>(
+        'PATCH',
+        '/api/v1/admin/orders/$orderId/shipments',
+        body: request,
+        decoder: _decodeMap,
+      );
+
   Future<ApiResponse<JsonMap>> transitionOrderById(
     String id,
     OrderTransitionRequest request,

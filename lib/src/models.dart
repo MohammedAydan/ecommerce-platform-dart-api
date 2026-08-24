@@ -1781,3 +1781,78 @@ class DefaultAddressRequest extends JsonModel {
         'isDefaultBilling': isDefaultBilling,
       };
 }
+
+
+class CustomerReturnLineRequest extends JsonModel {
+  const CustomerReturnLineRequest({required this.orderItemId, required this.quantity});
+  final String orderItemId;
+  final int quantity;
+
+  @override
+  JsonMap toJson() => {'orderItemId': orderItemId, 'quantity': quantity};
+
+  @override
+  List<ValidationIssue> validate() => [
+        if (orderItemId.trim().isEmpty)
+          const ValidationIssue(field: 'orderItemId', message: 'Cannot be empty'),
+        if (quantity < 1)
+          const ValidationIssue(field: 'quantity', message: 'Must be positive'),
+      ];
+}
+
+class CustomerReturnRequest extends JsonModel {
+  const CustomerReturnRequest({required this.items, this.reason, this.idempotencyKey});
+  final List<CustomerReturnLineRequest> items;
+  final String? reason;
+  final String? idempotencyKey;
+
+  @override
+  JsonMap toJson() => {
+        'items': items.map((item) => item.toJson()).toList(),
+        if (reason != null) 'reason': reason,
+        if (idempotencyKey != null) 'idempotencyKey': idempotencyKey,
+      };
+
+  @override
+  List<ValidationIssue> validate() => [
+        if (items.isEmpty) const ValidationIssue(field: 'items', message: 'Cannot be empty'),
+        ...items.expand((item) => item.validate()),
+      ];
+}
+
+class ShipmentUpdateRequest extends JsonModel {
+  const ShipmentUpdateRequest({
+    required this.status,
+    this.shipmentId,
+    this.carrier,
+    this.trackingNumber,
+    this.trackingUrl,
+    this.notes,
+    this.failureReason,
+  });
+  final String status;
+  final String? shipmentId;
+  final String? carrier;
+  final String? trackingNumber;
+  final String? trackingUrl;
+  final String? notes;
+  final String? failureReason;
+
+  @override
+  JsonMap toJson() => {
+        'status': status,
+        if (shipmentId != null) 'shipmentId': shipmentId,
+        if (carrier != null) 'carrier': carrier,
+        if (trackingNumber != null) 'trackingNumber': trackingNumber,
+        if (trackingUrl != null) 'trackingUrl': trackingUrl,
+        if (notes != null) 'notes': notes,
+        if (failureReason != null) 'failureReason': failureReason,
+      };
+}
+
+class PaymobPaymentCreateRequest extends JsonModel {
+  const PaymobPaymentCreateRequest({required this.orderId});
+  final String orderId;
+  @override
+  JsonMap toJson() => {'orderId': orderId};
+}
