@@ -362,21 +362,31 @@ class ReturnLineRequest extends JsonModel {
   JsonMap toJson() => {'orderItemId': orderItemId, 'quantity': quantity};
 }
 
-/// Creates a return and corresponding refund from immutable order snapshots.
+enum ReturnDecision { approve, reject, receive, inspect, refund }
+
+String _returnDecisionValue(ReturnDecision decision) => decision.name.toUpperCase();
+
+/// Advances the same Return entity through the admin review lifecycle.
 class ReturnRefundRequest extends JsonModel {
   const ReturnRefundRequest({
-    required this.items,
+    this.returnId,
+    this.items = const [],
     this.reason,
     this.idempotencyKey,
+    this.decision = ReturnDecision.approve,
   });
+  final String? returnId;
   final List<ReturnLineRequest> items;
   final String? reason;
   final String? idempotencyKey;
+  final ReturnDecision decision;
   @override
   JsonMap toJson() => {
-        'items': items.map((item) => item.toJson()).toList(),
+        if (returnId != null) 'returnId': returnId,
+        if (items.isNotEmpty) 'items': items.map((item) => item.toJson()).toList(),
         if (reason != null) 'reason': reason,
         if (idempotencyKey != null) 'idempotencyKey': idempotencyKey,
+        'decision': _returnDecisionValue(decision),
       };
 }
 
