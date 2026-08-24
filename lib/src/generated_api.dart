@@ -139,6 +139,63 @@ class EcommercePlatformApi {
         idempotencyKey: idempotencyKey,
       );
 
+  /// POST /api/v1/account/orders/{id}/returns
+  Future<ApiResponse<dynamic>> postApiV1AccountOrdersIdReturns({
+    required String id,
+    Map<String, dynamic>? query,
+    dynamic body,
+    Map<String, String>? headers,
+    bool authenticated = true,
+    String? idempotencyKey,
+  }) =>
+      client.request<dynamic>(
+        'POST',
+        '/api/v1/account/orders/${id}/returns',
+        query: query,
+        body: body is JsonModel ? body.toJson() : body,
+        headers: headers,
+        authenticated: authenticated,
+        idempotencyKey: idempotencyKey,
+      );
+
+  /// GET /api/v1/account/orders/{id}/receipt
+  Future<ApiResponse<dynamic>> getApiV1AccountOrdersIdReceipt({
+    required String id,
+    Map<String, dynamic>? query,
+    dynamic body,
+    Map<String, String>? headers,
+    bool authenticated = true,
+    String? idempotencyKey,
+  }) =>
+      client.request<dynamic>(
+        'GET',
+        '/api/v1/account/orders/${id}/receipt',
+        query: query,
+        body: body is JsonModel ? body.toJson() : body,
+        headers: headers,
+        authenticated: authenticated,
+        idempotencyKey: idempotencyKey,
+      );
+
+  /// GET /api/v1/account/orders/{id}/receipt/print
+  Future<ApiResponse<dynamic>> getApiV1AccountOrdersIdReceiptPrint({
+    required String id,
+    Map<String, dynamic>? query,
+    dynamic body,
+    Map<String, String>? headers,
+    bool authenticated = true,
+    String? idempotencyKey,
+  }) =>
+      client.request<dynamic>(
+        'GET',
+        '/api/v1/account/orders/${id}/receipt/print',
+        query: query,
+        body: body is JsonModel ? body.toJson() : body,
+        headers: headers,
+        authenticated: authenticated,
+        idempotencyKey: idempotencyKey,
+      );
+
   /// GET /api/v1/account/profile
   Future<ApiResponse<dynamic>> getApiV1AccountProfile({
     Map<String, dynamic>? query,

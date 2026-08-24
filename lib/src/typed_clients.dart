@@ -342,6 +342,14 @@ class AccountApiClient {
         decoder: _decodeMap,
       );
 
+  Future<ApiResponse<String>> printableReceipt(String orderId) =>
+      _client.request<String>(
+        'GET',
+        '/api/v1/account/orders/$orderId/receipt/print',
+        headers: const {'Accept': 'text/html'},
+        decoder: (data) => data is String ? data : '$data',
+      );
+
   Future<ApiResponse<JsonMap>> requestReturn(
     String orderId,
     CustomerReturnRequest request,

@@ -406,7 +406,7 @@ void main() {
   });
 
   test('manifest and agent tool catalogs are complete and safe by default', () {
-    expect(ecommercePlatformOperations.length, 138);
+    expect(ecommercePlatformOperations.length, 137);
     expect(EcommerceAgentTools.safe.length, 9);
     expect(EcommerceAgentTools.safe.every((tool) => tool.readOnly), isTrue);
     expect(
@@ -439,6 +439,29 @@ void main() {
     );
     expect(captured.url.path, '/api/auth/sign-in/anonymous');
     expect(captured.headers.containsKey('authorization'), isFalse);
-    transport.close();
+        transport.close();
+  });
+  test('typed account client requests printable receipt as HTML', () async {
+    late http.Request captured;
+    final api = EcommercePlatformClient(
+      appKeyProvider: () async => 'test-only-key',
+      baseUrl: 'https://api.example.test',
+      httpClient: MockClient((request) async {
+        captured = request;
+        return http.Response(
+          '<html><body>receipt</body></html>',
+          200,
+          headers: {'content-type': 'text/html'},
+        );
+      }),
+    );
+
+    final response = await api.account.printableReceipt('order-1');
+
+    expect(response.success, isTrue);
+    expect(response.data, '<html><body>receipt</body></html>');
+    expect(captured.url.path, '/api/v1/account/orders/order-1/receipt/print');
+    expect(captured.headers['accept'], 'text/html');
+    api.close();
   });
 }
